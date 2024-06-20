@@ -1,5 +1,9 @@
 package h08;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Function;
+
 /**
  * Main entry point in executing the program.
  */
