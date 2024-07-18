@@ -6,9 +6,13 @@ public class BookingManagement {
     private Booking[] bookings;
     private int size = 100;
 
+    private FlightManagement flightManagement;
+
     // Constructor to initialize the booking management system with a capacity
-    public BookingManagement(int initialCapacity) {
+    public BookingManagement(int initialCapacity, FlightManagement flightManagement) {
         this.bookings = new Booking[initialCapacity];
+        this.size = 0;
+        this.flightManagement = flightManagement;
     }
 
     // Method to create a booking
@@ -25,10 +29,16 @@ public class BookingManagement {
 
             // Add the new booking
             bookings[size++] = new Booking(bookingId, flightNumber, passengerId);
+            // use the method of the flight to book a seat
+            flightManagement.getFlight(flightNumber).bookSeat();
+
+
         } catch (DuplicateBookingException e) {
             System.out.println("Booking already exists: " + e.getMessage());
         } catch (InvalidBookingException e) {
             System.out.println("Invalid booking details: " + e.getMessage());
+        } catch (NoSeatsAvailableException e) {
+            System.out.println("No seats available for flight: " + e.getMessage());
         }
     }
 
@@ -41,8 +51,8 @@ public class BookingManagement {
 
     //Method to check for duplicate booking
     private void checkForDuplicateBooking(String bookingId) throws DuplicateBookingException {
-        for (int i = 0; i < size; i++) {
-            if (bookings[i].getBookingId().equals(bookingId)) {
+        for (Booking booking : bookings) {
+            if (booking!=null && booking.getBookingId().equals(bookingId)) {
                 throw new DuplicateBookingException("Duplicate booking ID: " + bookingId);
             }
         }
@@ -50,9 +60,10 @@ public class BookingManagement {
 
     // Method to search for a booking by booking ID
     private Booking searchBooking(String bookingId) throws BookingNotFoundException {
-        for (int i = 0; i < size; i++) {
-            if (bookings[i].getBookingId().equals(bookingId)) {
-                return bookings[i];
+        for (Booking booking : bookings) {
+            // Check if booking exists and return it
+            if (booking!=null && booking.getBookingId().equals(bookingId)) {
+                return booking;
             }
         }
         throw new BookingNotFoundException("Booking not found: " + bookingId);
