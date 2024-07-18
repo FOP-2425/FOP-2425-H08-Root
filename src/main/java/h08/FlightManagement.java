@@ -2,10 +2,6 @@ package h08;
 
 import java.util.Arrays;
 
-import java.util.Arrays;
-
-import java.util.Arrays;
-
 public class FlightManagement {
     private Airport[] airports;
     private int size;
@@ -73,6 +69,21 @@ public class FlightManagement {
             System.out.println("Error retrieving flight: " + e.getMessage());
             return null;
         }
+    }
+
+    public Flight getFlight(String flightNumber){
+        for (int i = 0; i < size; i++) {
+            try {
+                return airports[i].getDepartingFlight(flightNumber);
+            } catch (FlightNotFoundException e) {
+                try {
+                    return airports[i].getArrivingFlight(flightNumber);
+                } catch (FlightNotFoundException ignored) {
+                }
+            }
+        }
+        System.out.println("Error retrieving flight: Flight not found: " + flightNumber);
+        return null;
     }
 
     // Helper method to search for an airport by airport code
