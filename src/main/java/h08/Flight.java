@@ -8,20 +8,26 @@ public class Flight {
     private String departure;
     private String destination;
     private LocalDateTime departureTime;
+    private final int initialSeats;
     private int availableSeats;
 
-
-    public Flight(String flightNumber, String departure, String destination, LocalDateTime departureTime, int availableSeats) {
-        assert flightNumber != null;
+    public Flight(String flightNumber, String departure, String destination, LocalDateTime departureTime, int initialSeats) {
+        validateFlightNumber(flightNumber);
         assert departure != null;
         assert destination != null;
         assert departureTime != null;
-        assert availableSeats >= 0;
+        assert initialSeats >= 0;
         this.flightNumber = flightNumber;
         this.departure = departure;
         this.destination = destination;
         this.departureTime = departureTime;
-        this.availableSeats = availableSeats;
+        this.initialSeats = initialSeats;
+        this.availableSeats = initialSeats;
+    }
+
+    private void validateFlightNumber(String flightNumber) {
+        String flightNumberFormat = "^[A-Z]{2}\\d{3,4}$";
+        assert flightNumber.matches(flightNumberFormat);
     }
 
     public String getFlightNumber() {
@@ -55,7 +61,9 @@ public class Flight {
 
     // Method to cancel a seat
     public void cancelSeat() {
-        availableSeats++;
+        if (availableSeats < initialSeats) {
+            availableSeats++;
+        }
     }
 
     @Override
