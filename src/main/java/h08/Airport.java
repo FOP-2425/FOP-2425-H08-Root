@@ -52,6 +52,7 @@ public class Airport {
      * Adds a departing flight.
      *
      * @param flight the departing flight to add
+     * @throws IllegalArgumentException if the flight's departure airport code doesn't match the airport's code
      */
     public void addDepartingFlight(Flight flight) throws IllegalArgumentException {
         if (!flight.getDeparture().equals(airportCode)) {
@@ -82,6 +83,7 @@ public class Airport {
      * Removes a departing flight by flight number.
      *
      * @param flightNumber the departing flight number
+     * @throws FlightNotFoundException if the departing flight is not found
      */
     public void removeDepartingFlight(String flightNumber) throws FlightNotFoundException {
         for (int i = 0; i < departingSize; i++) {
@@ -98,6 +100,7 @@ public class Airport {
      * Removes an arriving flight by flight number.
      *
      * @param flightNumber the arriving flight number
+     * @throws FlightNotFoundException if the arriving flight is not found
      */
     public void removeArrivingFlight(String flightNumber) throws FlightNotFoundException {
         for (int i = 0; i < arrivingSize; i++) {
@@ -114,6 +117,7 @@ public class Airport {
      * Returns a departing flight by flight number.
      *
      * @return a departing flight by flight number
+     * @throws FlightNotFoundException if the departing flight is not found
      */
     public Flight getDepartingFlight(String flightNumber) throws FlightNotFoundException {
         for (int i = 0; i < departingSize; i++) {
@@ -128,6 +132,7 @@ public class Airport {
      * Returns an arriving flight by flight number.
      *
      * @return an arriving flight by flight number
+     * @throws FlightNotFoundException if the arriving flight is not found
      */
     public Flight getArrivingFlight(String flightNumber) throws FlightNotFoundException {
         for (int i = 0; i < arrivingSize; i++) {
