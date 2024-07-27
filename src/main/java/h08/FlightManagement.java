@@ -2,17 +2,36 @@ package h08;
 
 import java.util.Arrays;
 
+/**
+ * Represents a flight management. A flight management oversees the management of flights and airports.
+ */
 public class FlightManagement {
+
+    /**
+     * The airports whose flights are managed.
+     */
     private Airport[] airports;
+
+    /**
+     * The current number of airports whose flights are managed.
+     */
     private int size;
 
-    // Constructor to initialize the flight management system with a capacity
+    /**
+     * Constructs a new flight management with the specified initial capacity.
+     *
+     * @param initialCapacity the initial capacity
+     */
     public FlightManagement(int initialCapacity) {
         this.airports = new Airport[initialCapacity];
         this.size = 0;
     }
 
-    // Method to add an airport
+    /**
+     * Adds an airport to the flight management.
+     *
+     * @param airport the airport to be added
+     */
     public void addAirport(Airport airport) {
         if (size >= airports.length) {
             airports = Arrays.copyOf(airports, airports.length * 2);
@@ -20,7 +39,13 @@ public class FlightManagement {
         airports[size++] = airport;
     }
 
-    // Method to add a flight to a specific airport
+    /**
+     * Adds a flight to a specific airport.
+     *
+     * @param airportCode the airport code to which the flight should be added
+     * @param flight      the flight to be added
+     * @throws IllegalArgumentException if the flight's airport codes do not match the provided airport code
+     */
     public void addFlight(String airportCode, Flight flight) {
         try {
             Airport airport = searchAirport(airportCode);
@@ -43,7 +68,13 @@ public class FlightManagement {
         }
     }
 
-    // Method to remove a flight from a specific airport
+    /**
+     * Removes a flight from a specific airport.
+     *
+     * @param airportCode  the airport code from which the flight should be removed
+     * @param flightNumber the flight number of the flight
+     * @throws FlightNotFoundException if the flight ist not found
+     */
     public void removeFlight(String airportCode, String flightNumber) {
         try {
             Airport airport = searchAirport(airportCode);
@@ -56,7 +87,14 @@ public class FlightManagement {
         }
     }
 
-    // Method to get a flight from a specific airport
+    /**
+     * Returns a flight from a specific airport.
+     *
+     * @param airportCode  the airport code from which the flight should be returned
+     * @param flightNumber the flight number of the flight
+     * @return a flight from a specific airport
+     * @throws FlightNotFoundException if the flight ist not found
+     */
     public Flight getFlight(String airportCode, String flightNumber) {
         try {
             Airport airport = searchAirport(airportCode);
@@ -71,6 +109,12 @@ public class FlightManagement {
         }
     }
 
+    /**
+     * Returns a flight with a specified flight number.
+     *
+     * @param flightNumber the flight number of the flight
+     * @return a flight with a specified flight number
+     */
     public Flight getFlight(String flightNumber){
         for (int i = 0; i < size; i++) {
             try {
@@ -86,7 +130,13 @@ public class FlightManagement {
         return null;
     }
 
-    // Helper method to search for an airport by airport code
+    /**
+     * Searches for an airport by airport code.
+     *
+     * @param airportCode the airport code
+     * @return an airport by airport code
+     * @throws Exception if the airport ist not found
+     */
     private Airport searchAirport(String airportCode) throws Exception {
         for (int i = 0; i < size; i++) {
             if (airports[i].getAirportCode().equals(airportCode)) {
@@ -96,7 +146,13 @@ public class FlightManagement {
         throw new Exception("Airport not found: " + airportCode);
     }
 
-    // Helper method to find a flight in departing or arriving flights
+    /**
+     * Searches for a flight in departing or arriving flights.
+     *
+     * @param airport      the airport in which the flight should be searched
+     * @param flightNumber the flight number of the flight
+     * @return a flight in departing or arriving flights
+     */
     private Flight findDepartingOrArrivingFlight(Airport airport, String flightNumber) {
         try {
             return airport.getDepartingFlight(flightNumber);
@@ -109,7 +165,13 @@ public class FlightManagement {
         }
     }
 
-    // Helper method to remove a flight from departing or arriving flights
+    /**
+     * Removes a flight from departing or arriving flights.
+     *
+     * @param airport      the airport from which the flight should be removed
+     * @param flightNumber the flight number of the flight
+     * @return {@code true} if the flight has been removed from departing or arriving flights
+     */
     private boolean removeDepartingOrArrivingFlight(Airport airport, String flightNumber) {
         try {
             airport.removeDepartingFlight(flightNumber);
@@ -124,6 +186,3 @@ public class FlightManagement {
         }
     }
 }
-
-
-
