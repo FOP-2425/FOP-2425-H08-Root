@@ -15,14 +15,13 @@ public class BookingManagement {
     /**
      * The current number of bookings.
      */
-    private int size = 100;
+    private int size;
 
     /**
      * The flight management for the bookings.
      */
     private FlightManagement flightManagement;
 
-    // Constructor to initialize the booking management system with a capacity
     /**
      * Constructs a new booking management with the specified initial capacity and flight management.
      *
