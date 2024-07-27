@@ -2,20 +2,46 @@ package h08;
 
 import java.util.Arrays;
 
+/**
+ * Represents a booking management. A booking management oversees booking operations, ensuring validity and handling duplicates.
+ */
 public class BookingManagement {
+
+    /**
+     * The bookings to be managed.
+     */
     private Booking[] bookings;
+
+    /**
+     * The current number of bookings.
+     */
     private int size = 100;
 
+    /**
+     * The flight management for the bookings.
+     */
     private FlightManagement flightManagement;
 
     // Constructor to initialize the booking management system with a capacity
+    /**
+     * Constructs a new booking management with the specified initial capacity and flight management.
+     *
+     * @param initialCapacity  the initial number of bookings that can be managed
+     * @param flightManagement the flight management for the bookings
+     */
     public BookingManagement(int initialCapacity, FlightManagement flightManagement) {
         this.bookings = new Booking[initialCapacity];
         this.size = 0;
         this.flightManagement = flightManagement;
     }
 
-    // Method to create a booking
+    /**
+     * Creates a booking.
+     *
+     * @param bookingId    the booking ID of the booking
+     * @param flightNumber the flight number of the booking
+     * @param passengerId  the passenger ID of the booking
+     */
     public void createBooking(String bookingId, String flightNumber, String passengerId) {
         try {
             // Validate booking details
@@ -26,13 +52,10 @@ public class BookingManagement {
             if (size >= bookings.length) {
                 bookings = Arrays.copyOf(bookings, bookings.length * 2);
             }
-
             // Add the new booking
             bookings[size++] = new Booking(bookingId, flightNumber, passengerId);
             // use the method of the flight to book a seat
             flightManagement.getFlight(flightNumber).bookSeat();
-
-
         } catch (DuplicateBookingException e) {
             System.out.println("Booking already exists: " + e.getMessage());
         } catch (InvalidBookingException e) {
@@ -42,14 +65,26 @@ public class BookingManagement {
         }
     }
 
-    // Method to validate booking details
+    /**
+     * Validates the booking details.
+     *
+     * @param bookingId    the booking ID of the booking
+     * @param flightNumber the flight number of the booking
+     * @param passengerId  the passenger ID of the booking
+     * @throws InvalidBookingException if the booking details are invalid
+     */
     private void validateBookingDetails(String bookingId, String flightNumber, String passengerId) throws InvalidBookingException {
         if (bookingId == null || bookingId.isEmpty() || flightNumber == null || flightNumber.isEmpty() || passengerId == null || passengerId.isEmpty()) {
             throw new InvalidBookingException("Invalid booking details");
         }
     }
 
-    //Method to check for duplicate booking
+    /**
+     * Checks for duplicate booking.
+     *
+     * @param bookingId the booking ID of the booking
+     * @throws DuplicateBookingException if the booking ID is duplicate
+     */
     private void checkForDuplicateBooking(String bookingId) throws DuplicateBookingException {
         for (Booking booking : bookings) {
             if (booking!=null && booking.getBookingId().equals(bookingId)) {
@@ -58,7 +93,13 @@ public class BookingManagement {
         }
     }
 
-    // Method to search for a booking by booking ID
+    /**
+     * Searches for a booking by booking ID.
+     *
+     * @param bookingId the booking ID of the booking
+     * @return the booking with the specified booking ID
+     * @throws BookingNotFoundException if the booking ist not found
+     */
     private Booking searchBooking(String bookingId) throws BookingNotFoundException {
         for (Booking booking : bookings) {
             // Check if booking exists and return it
@@ -69,7 +110,12 @@ public class BookingManagement {
         throw new BookingNotFoundException("Booking not found: " + bookingId);
     }
 
-    // Method to get a booking by booking ID
+    /**
+     * Returns a booking by booking ID.
+     *
+     * @param bookingId the booking ID of the booking
+     * @return the booking with the specified booking ID
+     */
     public Booking getBooking(String bookingId) {
         try {
             return searchBooking(bookingId);
@@ -79,7 +125,11 @@ public class BookingManagement {
         }
     }
 
-    // Method to cancel a booking by booking ID
+    /**
+     * Cancels a booking by booking ID.
+     *
+     * @param bookingId the booking ID of the booking
+     */
     public void cancelBooking(String bookingId) {
         try {
             Booking booking = searchBooking(bookingId);
@@ -90,7 +140,5 @@ public class BookingManagement {
         } catch (BookingNotFoundException e) {
             System.out.println("Error cancelling booking: " + e.getMessage());
         }
-
     }
 }
-
