@@ -4,14 +4,42 @@ import h08.Flight;
 
 import java.util.Arrays;
 
+/**
+ * Represents an airport. An airport manages departing and arriving flights, allowing for their addition, removal, and retrieval based on the airport code.
+ */
 public class Airport {
+
+    /**
+     * The code of the airport.
+     */
     private String airportCode;
+
+    /**
+     * The departing flights of the airport.
+     */
     private Flight[] departingFlights;
+
+    /**
+     * The arriving flights to the airport.
+     */
     private Flight[] arrivingFlights;
+
+    /**
+     * The number of departing flights of the airport.
+     */
     private int departingSize;
+
+    /**
+     * The number of arriving flights to the airport.
+     */
     private int arrivingSize;
 
-    // Constructor to initialize the airport attributes
+    /**
+     * Constructs a new airport with the specified airport code and initial capacity.
+     *
+     * @param airportCode     the code of the airport
+     * @param initialCapacity the initial capacity of the airport
+     */
     public Airport(String airportCode, int initialCapacity) {
         this.airportCode = airportCode;
         this.departingFlights = new Flight[initialCapacity];
@@ -20,7 +48,11 @@ public class Airport {
         this.arrivingSize = 0;
     }
 
-    // Method to add a departing flight
+    /**
+     * Adds a departing flight.
+     *
+     * @param flight the departing flight to add
+     */
     public void addDepartingFlight(Flight flight) throws IllegalArgumentException {
         if (!flight.getDeparture().equals(airportCode)) {
             throw new IllegalArgumentException("Flight's departure airport code does not match this airport's code");
@@ -31,7 +63,11 @@ public class Airport {
         departingFlights[departingSize++] = flight;
     }
 
-    // Method to add an arriving flight
+    /**
+     * Adds an arriving flight.
+     *
+     * @param flight the arrving flight to add
+     */
     public void addArrivingFlight(Flight flight){
         if (!flight.getDestination().equals(airportCode)) {
             throw new IllegalArgumentException("Flight's arrival airport code does not match this airport's code");
@@ -42,7 +78,11 @@ public class Airport {
         arrivingFlights[arrivingSize++] = flight;
     }
 
-    // Method to remove a departing flight by flight number
+    /**
+     * Removes a departing flight by flight number.
+     *
+     * @param flightNumber the departing flight number
+     */
     public void removeDepartingFlight(String flightNumber) throws FlightNotFoundException {
         for (int i = 0; i < departingSize; i++) {
             if (departingFlights[i].getFlightNumber().equals(flightNumber)) {
@@ -54,7 +94,11 @@ public class Airport {
         throw new FlightNotFoundException("Departing flight not found: " + flightNumber);
     }
 
-    // Method to remove an arriving flight by flight number
+    /**
+     * Removes an arriving flight by flight number.
+     *
+     * @param flightNumber the arriving flight number
+     */
     public void removeArrivingFlight(String flightNumber) throws FlightNotFoundException {
         for (int i = 0; i < arrivingSize; i++) {
             if (arrivingFlights[i].getFlightNumber().equals(flightNumber)) {
@@ -66,7 +110,11 @@ public class Airport {
         throw new FlightNotFoundException("Arriving flight not found: " + flightNumber);
     }
 
-    // Method to get a departing flight by flight number
+    /**
+     * Returns a departing flight by flight number.
+     *
+     * @return a departing flight by flight number
+     */
     public Flight getDepartingFlight(String flightNumber) throws FlightNotFoundException {
         for (int i = 0; i < departingSize; i++) {
             if (departingFlights[i].getFlightNumber().equals(flightNumber)) {
@@ -76,7 +124,11 @@ public class Airport {
         throw new FlightNotFoundException("Departing flight not found: " + flightNumber);
     }
 
-    // Method to get an arriving flight by flight number
+    /**
+     * Returns an arriving flight by flight number.
+     *
+     * @return an arriving flight by flight number
+     */
     public Flight getArrivingFlight(String flightNumber) throws FlightNotFoundException {
         for (int i = 0; i < arrivingSize; i++) {
             if (arrivingFlights[i].getFlightNumber().equals(flightNumber)) {
@@ -86,17 +138,29 @@ public class Airport {
         throw new FlightNotFoundException("Arriving flight not found: " + flightNumber);
     }
 
-    // Method to get all departing flights
+    /**
+     * Returns the departing flights of the airport.
+     *
+     * @return the departing flights of the airport
+     */
     public Flight[] getAllDepartingFlights() {
         return Arrays.copyOf(departingFlights, departingSize);
     }
 
-    // Method to get all arriving flights
+    /**
+     * Returns the arriving flights to the airport.
+     *
+     * @return the arriving flights to the airport
+     */
     public Flight[] getAllArrivingFlights() {
         return Arrays.copyOf(arrivingFlights, arrivingSize);
     }
 
-    // Getter for airport code
+    /**
+     * Returns the airport code.
+     *
+     * @return the airport code
+     */
     public String getAirportCode() {
         return airportCode;
     }
