@@ -121,7 +121,7 @@ public class Flight {
      * @throws NoSeatsAvailableException if no seats are available for the flight
      */
     public void bookSeat() throws NoSeatsAvailableException {
-        if (availableSeats <= 0) {
+        if (availableSeats == 0) {
             throw new NoSeatsAvailableException("No seats available for flight: " + flightNumber);
         }
         availableSeats--;
