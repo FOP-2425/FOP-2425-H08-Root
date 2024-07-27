@@ -1,5 +1,7 @@
 package h08;
 
+import h08.Exceptions.NoSeatsAvailableException;
+
 import java.time.LocalDateTime;
 
 /**

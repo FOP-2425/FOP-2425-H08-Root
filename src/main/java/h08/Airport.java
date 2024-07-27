@@ -1,6 +1,6 @@
 package h08;
 
-import h08.Flight;
+import h08.Exceptions.FlightNotFoundException;
 
 import java.util.Arrays;
 

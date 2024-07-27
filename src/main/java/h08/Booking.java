@@ -1,7 +1,9 @@
 package h08;
 
+import h08.Exceptions.BookingAlreadyCancelledException;
+
 /**
- * Represents a flight booking. A booking allows the reservation of a flight as long as managing its identification and its relevant information. 
+ * Represents a flight booking. A booking allows the reservation of a flight as long as managing its identification and its relevant information.
  */
 public class Booking {
 
