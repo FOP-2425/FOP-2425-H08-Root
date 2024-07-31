@@ -69,7 +69,7 @@ public class Airport {
      *
      * @param flight the arrving flight to add
      */
-    public void addArrivingFlight(Flight flight){
+    public void addArrivingFlight(Flight flight) throws IllegalArgumentException {
         if (!flight.getDestination().equals(airportCode)) {
             throw new IllegalArgumentException("Flight's arrival airport code does not match this airport's code");
         }
