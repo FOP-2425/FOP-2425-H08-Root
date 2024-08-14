@@ -53,11 +53,11 @@ public class FlightManagement {
             Airport airport = searchAirport(airportCode);
             boolean added = false;
             try {
-                airport.addDepartingFlight(flight);
+                airport.addFlight(flight,true);
                 added = true;
             } catch (Exception e1) {
                 try {
-                    airport.addArrivingFlight(flight);
+                    airport.addFlight(flight,false);
                     added = true;
                 } catch (Exception e2) {
                     if (!added) {
@@ -75,14 +75,22 @@ public class FlightManagement {
      *
      * @param airportCode  the airport code from which the flight should be removed
      * @param flightNumber the flight number of the flight
-     * @throws FlightNotFoundException if the flight ist not found
      */
     public void removeFlight(String airportCode, String flightNumber) {
         try {
             Airport airport = searchAirport(airportCode);
-            boolean removed = removeDepartingOrArrivingFlight(airport, flightNumber);
-            if (!removed) {
+            Flight flight = searchFlight(airport, flightNumber);
+            if (flight == null) {
                 throw new FlightNotFoundException("Flight not found: " + flightNumber);
+            }
+            try {
+                airport.removeFlight(flightNumber,true);
+            } catch (Exception e1) {
+                try {
+                    airport.removeFlight(flightNumber,false);
+                } catch (Exception e2) {
+                    System.out.println("Error removing flight: " + e2.getMessage());
+                }
             }
         } catch (Exception e) {
             System.out.println("Error removing flight: " + e.getMessage());
@@ -97,10 +105,10 @@ public class FlightManagement {
      * @return a flight from a specific airport
      * @throws FlightNotFoundException if the flight ist not found
      */
-    public Flight getFlight(String airportCode, String flightNumber) {
+    public Flight getFlight(String airportCode, String flightNumber) throws FlightNotFoundException {
         try {
             Airport airport = searchAirport(airportCode);
-            Flight flight = findDepartingOrArrivingFlight(airport, flightNumber);
+            Flight flight = searchFlight(airport, flightNumber);
             if (flight == null) {
                 throw new FlightNotFoundException("Flight not found: " + flightNumber);
             }
@@ -120,10 +128,10 @@ public class FlightManagement {
     public Flight getFlight(String flightNumber){
         for (int i = 0; i < size; i++) {
             try {
-                return airports[i].getDepartingFlight(flightNumber);
+                return airports[i].getFlight(flightNumber,true);
             } catch (FlightNotFoundException e) {
                 try {
-                    return airports[i].getArrivingFlight(flightNumber);
+                    return airports[i].getFlight(flightNumber,false);
                 } catch (FlightNotFoundException ignored) {
                 }
             }
@@ -155,35 +163,14 @@ public class FlightManagement {
      * @param flightNumber the flight number of the flight
      * @return a flight in departing or arriving flights
      */
-    private Flight findDepartingOrArrivingFlight(Airport airport, String flightNumber) {
+    private Flight searchFlight(Airport airport, String flightNumber) {
         try {
-            return airport.getDepartingFlight(flightNumber);
+            return airport.getFlight(flightNumber,true);
         } catch (FlightNotFoundException e) {
             try {
-                return airport.getArrivingFlight(flightNumber);
+                return airport.getFlight(flightNumber,false);
             } catch (FlightNotFoundException ignored) {
                 return null;
-            }
-        }
-    }
-
-    /**
-     * Removes a flight from departing or arriving flights.
-     *
-     * @param airport      the airport from which the flight should be removed
-     * @param flightNumber the flight number of the flight
-     * @return {@code true} if the flight has been removed from departing or arriving flights
-     */
-    private boolean removeDepartingOrArrivingFlight(Airport airport, String flightNumber) {
-        try {
-            airport.removeDepartingFlight(flightNumber);
-            return true;
-        } catch (FlightNotFoundException e) {
-            try {
-                airport.removeArrivingFlight(flightNumber);
-                return true;
-            } catch (FlightNotFoundException ignored) {
-                return false;
             }
         }
     }

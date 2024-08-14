@@ -49,98 +49,77 @@ public class Airport {
     }
 
     /**
-     * Adds a departing flight.
+     * Adds a flight.
      *
-     * @param flight the departing flight to add
-     * @throws IllegalArgumentException if the flight's departure airport code doesn't match the airport's code
+     * @param flight the flight to add
+     * @param isDeparting if true, adds to departing flights, otherwise to arriving flights
+     * @throws IllegalArgumentException if the flight's airport code doesn't match the airport's code
      */
-    public void addDepartingFlight(Flight flight) throws IllegalArgumentException {
-        if (!flight.getDeparture().equals(airportCode)) {
-            throw new IllegalArgumentException("Flight's departure airport code does not match this airport's code");
+    public void addFlight(Flight flight, boolean isDeparting) throws IllegalArgumentException {
+        if (isDeparting) {
+            if (!flight.getDeparture().equals(airportCode)) {
+                throw new IllegalArgumentException("Flight's departure airport code does not match this airport's code");
+            }
+            if (departingSize >= departingFlights.length) {
+                departingFlights = Arrays.copyOf(departingFlights, departingFlights.length * 2);
+            }
+            departingFlights[departingSize++] = flight;
+        } else {
+            if (!flight.getDestination().equals(airportCode)) {
+                throw new IllegalArgumentException("Flight's arrival airport code does not match this airport's code");
+            }
+            if (arrivingSize >= arrivingFlights.length) {
+                arrivingFlights = Arrays.copyOf(arrivingFlights, arrivingFlights.length * 2);
+            }
+            arrivingFlights[arrivingSize++] = flight;
         }
-        if (departingSize >= departingFlights.length) {
-            departingFlights = Arrays.copyOf(departingFlights, departingFlights.length * 2);
-        }
-        departingFlights[departingSize++] = flight;
     }
 
     /**
-     * Adds an arriving flight.
+     * Removes a flight by flight number.
      *
-     * @param flight the arrving flight to add
+     * @param flightNumber the flight number
+     * @param isDeparting if true, removes from departing flights, otherwise from arriving flights
+     * @throws FlightNotFoundException if the flight is not found
      */
-    public void addArrivingFlight(Flight flight) throws IllegalArgumentException {
-        if (!flight.getDestination().equals(airportCode)) {
-            throw new IllegalArgumentException("Flight's arrival airport code does not match this airport's code");
-        }
-        if (arrivingSize >= arrivingFlights.length) {
-            arrivingFlights = Arrays.copyOf(arrivingFlights, arrivingFlights.length * 2);
-        }
-        arrivingFlights[arrivingSize++] = flight;
-    }
+    public void removeFlight(String flightNumber, boolean isDeparting) throws FlightNotFoundException {
+        Flight[] flights = isDeparting ? departingFlights : arrivingFlights;
+        int size = isDeparting ? departingSize : arrivingSize;
 
-    /**
-     * Removes a departing flight by flight number.
-     *
-     * @param flightNumber the departing flight number
-     * @throws FlightNotFoundException if the departing flight is not found
-     */
-    public void removeDepartingFlight(String flightNumber) throws FlightNotFoundException {
-        for (int i = 0; i < departingSize; i++) {
-            if (departingFlights[i].getFlightNumber().equals(flightNumber)) {
-                departingFlights[i] = departingFlights[--departingSize];
-                departingFlights[departingSize] = null;
+        for (int i = 0; i < size; i++) {
+            if (flights[i].getFlightNumber().equals(flightNumber)) {
+                flights[i] = flights[--size];
+                flights[size] = null;
+
+                if (isDeparting) {
+                    departingSize = size;
+                } else {
+                    arrivingSize = size;
+                }
                 return;
             }
         }
-        throw new FlightNotFoundException("Departing flight not found: " + flightNumber);
+        throw new FlightNotFoundException((isDeparting ? "Departing" : "Arriving") + " flight not found: " + flightNumber);
     }
 
     /**
-     * Removes an arriving flight by flight number.
+     * Returns a flight by flight number.
      *
-     * @param flightNumber the arriving flight number
-     * @throws FlightNotFoundException if the arriving flight is not found
+     * @param flightNumber the flight number
+     * @param isDeparting if true, searches in departing flights, otherwise in arriving flights
+     * @return the flight with the specified flight number
+     * @throws FlightNotFoundException if the flight is not found
      */
-    public void removeArrivingFlight(String flightNumber) throws FlightNotFoundException {
-        for (int i = 0; i < arrivingSize; i++) {
-            if (arrivingFlights[i].getFlightNumber().equals(flightNumber)) {
-                arrivingFlights[i] = arrivingFlights[--arrivingSize];
-                arrivingFlights[arrivingSize] = null;
-                return;
-            }
-        }
-        throw new FlightNotFoundException("Arriving flight not found: " + flightNumber);
-    }
+    public Flight getFlight(String flightNumber, boolean isDeparting) throws FlightNotFoundException {
+        Flight[] flights = isDeparting ? departingFlights : arrivingFlights;
+        int size = isDeparting ? departingSize : arrivingSize;
 
-    /**
-     * Returns a departing flight by flight number.
-     *
-     * @return a departing flight by flight number
-     * @throws FlightNotFoundException if the departing flight is not found
-     */
-    public Flight getDepartingFlight(String flightNumber) throws FlightNotFoundException {
-        for (int i = 0; i < departingSize; i++) {
-            if (departingFlights[i].getFlightNumber().equals(flightNumber)) {
-                return departingFlights[i];
+        for (int i = 0; i < size; i++) {
+            if (flights[i].getFlightNumber().equals(flightNumber)) {
+                return flights[i];
             }
         }
-        throw new FlightNotFoundException("Departing flight not found: " + flightNumber);
-    }
-
-    /**
-     * Returns an arriving flight by flight number.
-     *
-     * @return an arriving flight by flight number
-     * @throws FlightNotFoundException if the arriving flight is not found
-     */
-    public Flight getArrivingFlight(String flightNumber) throws FlightNotFoundException {
-        for (int i = 0; i < arrivingSize; i++) {
-            if (arrivingFlights[i].getFlightNumber().equals(flightNumber)) {
-                return arrivingFlights[i];
-            }
-        }
-        throw new FlightNotFoundException("Arriving flight not found: " + flightNumber);
+        throw new FlightNotFoundException((isDeparting ? "Departing" : "Arriving") + " flight not found: " + flightNumber);
     }
 
     /**

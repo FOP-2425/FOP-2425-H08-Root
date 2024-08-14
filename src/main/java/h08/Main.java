@@ -32,10 +32,10 @@ public class Main {
         flightManagement.addAirport(airport2);
 
         // Add flights to the airport
-        airport1.addDepartingFlight(flight1);
-        airport1.addDepartingFlight(flight2);
-        airport2.addDepartingFlight(flight3);
-        airport2.addDepartingFlight(flight4);
+        airport1.addFlight(flight1,true);
+        airport1.addFlight(flight2,true);
+        airport2.addFlight(flight3,true);
+        airport2.addFlight(flight4,true);
 
         // Create a BookingManagement instance
         BookingManagement bookingManagement = new BookingManagement(2, flightManagement);
@@ -76,8 +76,8 @@ public class Main {
 
         // Remove departing flight
         try {
-            airport1.removeDepartingFlight("F1001");
-            airport1.removeDepartingFlight("F1001");  // This should throw FlightNotFoundException
+            airport1.removeFlight("F1001",true);
+            airport1.removeFlight("F1001",true);  // This should throw FlightNotFoundException
         } catch (FlightNotFoundException e) {
             System.out.println(e.getMessage());
         }
@@ -87,6 +87,7 @@ public class Main {
         for (Flight flight : remainingDepartingFlights) {
             System.out.println(flight);
         }
+        System.out.println(flightManagement.getFlight("F9875"));
 
     }
 }
