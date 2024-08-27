@@ -42,60 +42,51 @@ public class FlightManagement {
     }
 
     /**
-     * Adds a flight to a specific airport.
+     * Manages the addition or removal of a flight for a specific airport.
      *
-     * @param airportCode the airport code to which the flight should be added
-     * @param flight      the flight to be added
-     * @throws IllegalArgumentException if the flight's airport codes do not match the provided airport code
+     * @param airportCode the airport code where the flight should be managed
+     * @param flight      the flight to be added or removed
+     * @param isAddOperation if true, the flight will be added; if false, the flight will be removed
      */
-    public void addFlight(String airportCode, Flight flight) {
+    public void manageFlight(String airportCode, Flight flight, boolean isAddOperation) {
         try {
             Airport airport = searchAirport(airportCode);
-            boolean added = false;
-            try {
-                airport.addFlight(flight,true);
-                added = true;
-            } catch (Exception e1) {
+            String flightNumber = flight.getFlightNumber();
+            boolean operationSuccessful = false;
+            if (isAddOperation) {
                 try {
-                    airport.addFlight(flight,false);
-                    added = true;
-                } catch (Exception e2) {
-                    if (!added) {
-                        throw new IllegalArgumentException("Flight's airport codes do not match the provided airport code");
+                    airport.addFlight(flight, true);
+                    operationSuccessful = true;
+                } catch (Exception e1) {
+                    try {
+                        airport.addFlight(flight, false);
+                        operationSuccessful = true;
+                    } catch (Exception e2) {
+                        if (!operationSuccessful) {
+                            throw new IllegalArgumentException("Flight's airport codes do not match the provided airport code");
+                        }
+                    }
+                }
+            } else {
+                try {
+                    airport.removeFlight(flightNumber, true);
+                    operationSuccessful = true;
+                } catch (Exception e1) {
+                    try {
+                        airport.removeFlight(flightNumber, false);
+                        operationSuccessful = true;
+                    } catch (Exception e2) {
+                        if (!operationSuccessful) {
+                            System.out.println("Error removing flight: " + e2.getMessage());
+                        }
                     }
                 }
             }
         } catch (Exception e) {
-            System.out.println("Error adding flight: " + e.getMessage());
+            System.out.println("Error managing flight: " + e.getMessage());
         }
     }
 
-    /**
-     * Removes a flight from a specific airport.
-     *
-     * @param airportCode  the airport code from which the flight should be removed
-     * @param flightNumber the flight number of the flight
-     */
-    public void removeFlight(String airportCode, String flightNumber) {
-        try {
-            Airport airport = searchAirport(airportCode);
-            Flight flight = searchFlight(airport, flightNumber);
-            if (flight == null) {
-                throw new FlightNotFoundException("Flight not found: " + flightNumber);
-            }
-            try {
-                airport.removeFlight(flightNumber,true);
-            } catch (Exception e1) {
-                try {
-                    airport.removeFlight(flightNumber,false);
-                } catch (Exception e2) {
-                    System.out.println("Error removing flight: " + e2.getMessage());
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("Error removing flight: " + e.getMessage());
-        }
-    }
 
     /**
      * Returns a flight from a specific airport.
@@ -127,13 +118,9 @@ public class FlightManagement {
      */
     public Flight getFlight(String flightNumber){
         for (int i = 0; i < size; i++) {
-            try {
-                return airports[i].getFlight(flightNumber,true);
-            } catch (FlightNotFoundException e) {
-                try {
-                    return airports[i].getFlight(flightNumber,false);
-                } catch (FlightNotFoundException ignored) {
-                }
+            Flight flight = searchFlight(airports[i], flightNumber);
+            if (flight != null) {
+                return flight;
             }
         }
         System.out.println("Error retrieving flight: Flight not found: " + flightNumber);
