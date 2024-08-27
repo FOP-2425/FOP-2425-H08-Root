@@ -45,10 +45,8 @@ public class BookingManagement {
      */
     public void createBooking(String bookingId, String flightNumber, String passengerId) {
         try {
-            // Validate booking details
-            validateBookingDetails(bookingId, flightNumber, passengerId);
-            // Check for duplicate booking
-            checkForDuplicateBooking(bookingId);
+            //Check and validate booking details
+            validateAndCheckBooking(bookingId, flightNumber, passengerId);
             // Resize array if necessary
             if (size >= bookings.length) {
                 bookings = Arrays.copyOf(bookings, bookings.length * 2);
@@ -67,29 +65,21 @@ public class BookingManagement {
     }
 
     /**
-     * Validates the booking details.
+     * Validates the booking details and checks for duplicates.
      *
      * @param bookingId    the booking ID of the booking
      * @param flightNumber the flight number of the booking
      * @param passengerId  the passenger ID of the booking
      * @throws InvalidBookingException if the booking details are invalid
+     * @throws DuplicateBookingException if the booking ID is already in use
      */
-    private void validateBookingDetails(String bookingId, String flightNumber, String passengerId) throws InvalidBookingException {
+    private void validateAndCheckBooking(String bookingId, String flightNumber, String passengerId) throws InvalidBookingException, DuplicateBookingException {
         if (bookingId == null || bookingId.isEmpty() || flightNumber == null || flightNumber.isEmpty() || passengerId == null || passengerId.isEmpty()) {
-            throw new InvalidBookingException("Invalid booking details");
+            throw new InvalidBookingException("Invalid booking details provided.");
         }
-    }
-
-    /**
-     * Checks for duplicate booking.
-     *
-     * @param bookingId the booking ID of the booking
-     * @throws DuplicateBookingException if the booking ID is duplicate
-     */
-    private void checkForDuplicateBooking(String bookingId) throws DuplicateBookingException {
         for (Booking booking : bookings) {
-            if (booking!=null && booking.getBookingId().equals(bookingId)) {
-                throw new DuplicateBookingException("Duplicate booking ID: " + bookingId);
+            if (booking != null && booking.getBookingId().equals(bookingId)) {
+                throw new DuplicateBookingException("A booking with this ID already exists.");
             }
         }
     }
