@@ -83,23 +83,25 @@ public class Airport {
      * @throws FlightNotFoundException if the flight is not found
      */
     public void removeFlight(String flightNumber, boolean isDeparting) throws FlightNotFoundException {
-        Flight[] flights = isDeparting ? departingFlights : arrivingFlights;
-        int size = isDeparting ? departingSize : arrivingSize;
-
-        for (int i = 0; i < size; i++) {
-            if (flights[i].getFlightNumber().equals(flightNumber)) {
-                flights[i] = flights[--size];
-                flights[size] = null;
-
-                if (isDeparting) {
-                    departingSize = size;
-                } else {
-                    arrivingSize = size;
+        if (isDeparting) {
+            for (int i = 0; i < departingSize; i++) {
+                if (departingFlights[i].getFlightNumber().equals(flightNumber)) {
+                    departingFlights[i] = departingFlights[--departingSize];
+                    departingFlights[departingSize] = null;
+                    return;
                 }
-                return;
             }
+            throw new FlightNotFoundException("Departing flight not found: " + flightNumber);
+        } else {
+            for (int i = 0; i < arrivingSize; i++) {
+                if (arrivingFlights[i].getFlightNumber().equals(flightNumber)) {
+                    arrivingFlights[i] = arrivingFlights[--arrivingSize];
+                    arrivingFlights[arrivingSize] = null;
+                    return;
+                }
+            }
+            throw new FlightNotFoundException("Arriving flight not found: " + flightNumber);
         }
-        throw new FlightNotFoundException((isDeparting ? "Departing" : "Arriving") + " flight not found: " + flightNumber);
     }
 
     /**
