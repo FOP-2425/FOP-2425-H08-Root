@@ -41,10 +41,10 @@ public class Main {
         BookingManagement bookingManagement = new BookingManagement(2, flightManagement);
 
         // Create passengers
-        Passenger passenger1 = new Passenger("Ahmed", "Chouchane", LocalDate.of(2002,6,6));
-        System.out.println("Ahmed1 ID: "+passenger1.getPassengerID());
-        Passenger passenger2 = new Passenger("Khalil", "Ben Dhief", LocalDate.of(2003,7,9));
-        System.out.println("Ahmed2 ID: "+passenger2.getPassengerID());
+        Passenger passenger1 = new Passenger("Max", "Mustermann", LocalDate.of(2002,6,6));
+        System.out.println("Passenger1 ID: "+passenger1.getPassengerID());
+        Passenger passenger2 = new Passenger("Erika", "Mustermann ", LocalDate.of(2003,7,9));
+        System.out.println("Passenger2 ID: "+passenger2.getPassengerID());
         // Create bookings
         bookingManagement.createBooking("B001", "F1001", passenger1.getPassengerID());
         bookingManagement.createBooking("B002", "F1001", passenger2.getPassengerID());
