@@ -47,6 +47,14 @@ public class BookingManagement {
         try {
             //Check and validate booking details
             validateAndCheckBooking(bookingId, flightNumber, passengerId);
+            // Get the flight (returns null if not found)
+            Flight flight = flightManagement.getFlight(flightNumber);
+            // Check if flight is null and handle it
+            if (flight == null) {
+                throw new FlightNotFoundException("Flight not found: " + flightNumber);
+            }
+            // Try to book a seat on the flight
+            flight.bookSeat();
             // Resize array if necessary
             if (size >= bookings.length) {
                 bookings = Arrays.copyOf(bookings, bookings.length * 2);
@@ -54,13 +62,14 @@ public class BookingManagement {
             // Add the new booking
             bookings[size++] = new Booking(bookingId, flightNumber, passengerId);
             // use the method of the flight to book a seat
-            flightManagement.getFlight(flightNumber).bookSeat();
         } catch (DuplicateBookingException e) {
             System.out.println("Booking already exists: " + e.getMessage());
         } catch (InvalidBookingException e) {
             System.out.println("Invalid booking details: " + e.getMessage());
         } catch (NoSeatsAvailableException e) {
-            System.out.println("No seats available for flight: " + e.getMessage());
+            System.out.println(e.getMessage());
+        } catch (FlightNotFoundException e) {
+            System.out.println("Flight not found with number " + flightNumber);
         }
     }
 
