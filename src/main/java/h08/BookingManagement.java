@@ -136,7 +136,7 @@ public class BookingManagement {
             booking.cancelBooking();
             System.out.println("Booking cancelled successfully: " + bookingId);
         } catch (BookingAlreadyCancelledException e) {
-            System.out.println("Already cancelled booking: " + e.getMessage());
+            System.out.println("Already cancelled booking: " + bookingId);
         } catch (BookingNotFoundException e) {
             System.out.println("Error cancelling booking: " + e.getMessage());
         }
