@@ -63,7 +63,7 @@ public class BookingManagement {
             bookings[size++] = new Booking(bookingId, flightNumber, passengerId);
             // use the method of the flight to book a seat
         } catch (DuplicateBookingException e) {
-            System.out.println("Booking already exists: " + e.getMessage());
+            System.out.println("Booking already exists: " + bookingId);
         } catch (InvalidBookingException e) {
             System.out.println("Invalid booking details: " + e.getMessage());
         } catch (NoSeatsAvailableException e) {
