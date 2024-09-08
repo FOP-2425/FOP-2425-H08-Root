@@ -113,7 +113,7 @@ public class Flight {
      *
      * @return the number of available seats of the flight
      */
-    public int getavailableSeats() {
+    public int getAvailableSeats() {
         return availableSeats;
     }
 
