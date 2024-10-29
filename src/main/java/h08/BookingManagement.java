@@ -42,8 +42,9 @@ public class BookingManagement {
      * @param bookingId    the booking ID of the booking
      * @param flightNumber the flight number of the booking
      * @param passengerId  the passenger ID of the booking
+     * @throws FlightNotFoundException if the flight is not found
      */
-    public void createBooking(String bookingId, String flightNumber, String passengerId) {
+    public void createBooking(String bookingId, String flightNumber, String passengerId) throws FlightNotFoundException {
         try {
             //Check and validate booking details
             validateAndCheckBooking(bookingId, flightNumber, passengerId);
