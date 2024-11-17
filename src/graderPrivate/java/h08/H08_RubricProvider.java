@@ -148,7 +148,7 @@ public class H08_RubricProvider implements RubricProvider {
             )
             .build();
 
-    private static Criterion H8_5 = Criterion.builder()
+    private static final Criterion H8_5 = Criterion.builder()
             .shortDescription("H8.5 | Booking and Flight Management")
             .maxPoints(14)
             .addChildCriteria(
