@@ -35,3 +35,7 @@ jagr {
         }
     }
 }
+
+application {
+    applicationDefaultJvmArgs += "-ea"
+}
