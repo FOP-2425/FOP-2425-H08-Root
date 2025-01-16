@@ -25,11 +25,6 @@ public class Main {
         Flight flight2 = new Flight("FR1002", "JFK", "ORD", LocalDateTime.of(2024, 7, 20, 14, 0), 2);
         Flight flight3 = new Flight("FR1003", "LAX", "ORD", LocalDateTime.of(2024, 7, 20, 14, 0), 2);
         Flight flight4 = new Flight("FR1004", "LAX", "JFK", LocalDateTime.of(2024, 7, 20, 14, 0), 2);
-        // Create a FlightManagement instance
-        FlightManagement flightManagement = new FlightManagement(2);
-        // Add airports to the flight management system
-        flightManagement.addAirport(airport1);
-        flightManagement.addAirport(airport2);
 
         // Add flights to the airport
         airport1.addFlight(flight1,true);
@@ -37,14 +32,21 @@ public class Main {
         airport2.addFlight(flight3,true);
         airport2.addFlight(flight4,true);
 
-        // Create a BookingManagement instance
-        BookingManagement bookingManagement = new BookingManagement(2, flightManagement);
+        // Create a FlightManagement instance
+        FlightManagement flightManagement = new FlightManagement(2);
+        // Add airports to the flight management system
+        flightManagement.addAirport(airport1);
+        flightManagement.addAirport(airport2);
 
         // Create passengers
         Passenger passenger1 = new Passenger("Max", "Mustermann", LocalDate.of(2002,6,6));
         System.out.println("Passenger1 ID: "+passenger1.getPassengerID());
         Passenger passenger2 = new Passenger("Erika", "Mustermann ", LocalDate.of(2003,7,9));
         System.out.println("Passenger2 ID: "+passenger2.getPassengerID());
+
+        // Create a BookingManagement instance
+        BookingManagement bookingManagement = new BookingManagement(2, flightManagement);
+
         // Create bookings
         bookingManagement.createBooking("B001", "FR1001", passenger1.getPassengerID());
         bookingManagement.createBooking("B002", "FR1001", passenger2.getPassengerID());
@@ -63,9 +65,9 @@ public class Main {
         }
 
         // Cancel a booking
-            bookingManagement.cancelBooking("B001");
-            bookingManagement.cancelBooking("B001");  // This should throw BookingAlreadyCancelledException
-            bookingManagement.cancelBooking("B005");  // This should throw BookingNotFoundException
+        bookingManagement.cancelBooking("B001");
+        bookingManagement.cancelBooking("B001");  // This should throw BookingAlreadyCancelledException
+        bookingManagement.cancelBooking("B005");  // This should throw BookingNotFoundException
 
         // Try to get a non-existing booking
         try {
