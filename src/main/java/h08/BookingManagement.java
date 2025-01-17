@@ -66,9 +66,10 @@ public class BookingManagement {
             System.out.println("Booking already exists: " + bookingId);
         } catch (InvalidBookingException e) {
             System.out.println("Invalid booking details: " + e.getMessage());
-        } catch (NoSeatsAvailableException e) {
-            System.out.println(e.getMessage());
+        } catch (NoSeatsAvailableException ignored) {
         } catch (FlightNotFoundException e) {
+            // We decided to catch the exception and then print out the following message.
+            // However, delegating it using throws is also okay.
             System.out.println("Flight not found with number " + flightNumber);
         }
     }
