@@ -7,11 +7,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * An implementation of a {@link CompositeTask}.
+ *
+ * @param description the description of the composite task
+ * @param subtasks    the subtasks of the composite task that must be completed to complete the task
+ *
+ * @author Nhan Huynh
+ */
 record CompositeTaskImpl(String description, List<Subtask> subtasks) implements CompositeTask {
 
     @Override
     public Criterion getCriterion() {
-        return Criterion.builder().shortDescription(description).addChildCriteria(subtasks.stream().map(Subtask::getCriterion).toArray(Criterion[]::new)).build();
+        return Criterion.builder()
+            .shortDescription(description)
+            .addChildCriteria(
+                subtasks.stream()
+                    .map(Subtask::getCriterion)
+                    .toArray(Criterion[]::new)
+            )
+            .build();
     }
 
     @Override
@@ -27,10 +42,19 @@ record CompositeTaskImpl(String description, List<Subtask> subtasks) implements 
         return Objects.hash(description, subtasks);
     }
 
+    /**
+     * A builder for {@link CompositeTask}.
+     */
     static class CompositeTaskBuilderImpl implements CompositeTaskBuilder {
 
+        /**
+         * The description of the composite task.
+         */
         private @NotNull String description = "";
 
+        /**
+         * The subtasks of the composite task that must be completed to complete the task.
+         */
         private final List<Subtask> criteria = new ArrayList<>();
 
         @Override
