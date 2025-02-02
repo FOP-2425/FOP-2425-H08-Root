@@ -66,37 +66,83 @@ public interface AtomicTask extends Task {
          * Adds a criterion to the atomic task.
          *
          * @param description          the description of the criterion
-         * @param publicTest           whether the test is public
+         * @param privateTest          whether the test is private or public
          * @param testMethodsSignature the signature of the test methods
          *
          * @return this builder instance with the criterion added
          */
         AtomicTaskBuilder<T> criterion(
             String description,
-            boolean publicTest,
+            boolean privateTest,
             Map<String, List<Class<?>>> testMethodsSignature
         );
 
+        /**
+         * Adds a private criterion to the atomic task.
+         *
+         * @param description          the description of the criterion
+         * @param testMethodsSignature the signature of the test methods
+         *
+         * @return this builder instance with the criterion added
+         */
         default AtomicTaskBuilder<T> criterion(String description, Map<String, List<Class<?>>> testMethodsSignature) {
             return criterion(description, true, testMethodsSignature);
         }
 
+        /**
+         * Adds a criterion to the atomic task.
+         *
+         * @param description          the description of the criterion
+         * @param privateTest          whether the test is private or public
+         * @param testMethodName       the name of the test method
+         * @param testMethodParameters the signature of the test method
+         *
+         * @return this builder instance with the criterion added
+         */
         default AtomicTaskBuilder<T> criterion(
             String description,
-            boolean publicTest,
+            boolean privateTest,
             String testMethodName,
             Class<?>... testMethodParameters
         ) {
-            return criterion(description, publicTest, Map.of(testMethodName, List.of(testMethodParameters)));
+            return criterion(description, privateTest, Map.of(testMethodName, List.of(testMethodParameters)));
         }
 
-        default AtomicTaskBuilder<T> criterion(String description, String testMethodName, Class<?>... testMethodSignature) {
+        /**
+         * Adds a private criterion to the atomic task.
+         *
+         * @param description         the description of the criterion
+         * @param testMethodName      the name of the test method
+         * @param testMethodSignature the signature of the test method
+         *
+         * @return this builder instance with the criterion added
+         */
+        default AtomicTaskBuilder<T> criterion(String description, String testMethodName,
+                                               Class<?>... testMethodSignature) {
             return criterion(description, true, testMethodName, testMethodSignature);
         }
 
+        /**
+         * Adds a requirement to the atomic task.
+         *
+         * @param description          the description of the requirement
+         * @param testMethodsSignature the signature of the test methods
+         *
+         * @return this builder instance with the requirement added
+         */
         AtomicTaskBuilder<T> requirement(String description, Map<String, List<Class<?>>> testMethodsSignature);
 
-        default AtomicTaskBuilder<T> requirement(String description, String testMethodName, Class<?>... testMethodParameters) {
+        /**
+         * Adds a requirement to the atomic task.
+         *
+         * @param description          the description of the requirement
+         * @param testMethodName       the name of the test method
+         * @param testMethodParameters the signature of the test method
+         *
+         * @return this builder instance with the requirement added
+         */
+        default AtomicTaskBuilder<T> requirement(String description, String testMethodName,
+                                                 Class<?>... testMethodParameters) {
             return requirement(description, Map.of(testMethodName, List.of(testMethodParameters)));
         }
     }

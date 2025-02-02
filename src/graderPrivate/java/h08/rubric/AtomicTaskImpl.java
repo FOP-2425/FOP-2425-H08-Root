@@ -136,13 +136,13 @@ class AtomicTaskImpl implements AtomicTask {
         @Override
         public AtomicTaskBuilder<A> criterion(
             String description,
-            boolean publicTest,
+            boolean privateTest,
             Map<String, List<Class<?>>> testMethodsSignature
         ) {
             criteria.add(
                 Rubrics.criterion(
                     description,
-                    testClassName + (publicTest ? "Public" : "Private"),
+                    testClassName + (privateTest ? "Private" : "Public"),
                     testMethodsSignature,
                     () -> 1
                 )
