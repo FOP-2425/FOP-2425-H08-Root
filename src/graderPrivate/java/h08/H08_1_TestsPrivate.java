@@ -82,7 +82,8 @@ public class H08_1_TestsPrivate extends H08_Tests {
     }
 
     /**
-     * Returns the test information for better test reporting.
+     * Returns the test information for better test reporting containing the pre-state, post-state, and actual state
+     * for the method generatePassengerID.
      *
      * @param parameters the test input and expected output parameters
      * @param instance   the instance of the Passenger class

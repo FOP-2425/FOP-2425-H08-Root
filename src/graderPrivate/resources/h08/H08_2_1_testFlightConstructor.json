@@ -1,0 +1,56 @@
+[
+  {
+    "flightNumber": "YF0802",
+    "departure": "Germany",
+    "destination": "London",
+    "departureTime": "2025-02-02 12:00",
+    "initialSeats": 2,
+    "expectedException": false,
+    "exceptionCause": null
+  },
+  {
+    "flightNumber": "YF080",
+    "departure": "Germany",
+    "destination": "London",
+    "departureTime": "2025-02-02 12:00",
+    "initialSeats": 22,
+    "expectedException": false,
+    "exceptionCause": null
+  },
+  {
+    "flightNumber": "YF0802",
+    "departure": null,
+    "destination": "London",
+    "departureTime": "2025-02-02 12:00",
+    "initialSeats": 2,
+    "expectedException": true,
+    "exceptionCause": "departure"
+  },
+  {
+    "flightNumber": "YF0802",
+    "departure": "Germany",
+    "destination": null,
+    "departureTime": "2025-02-02 12:00",
+    "initialSeats": 2,
+    "expectedException": true,
+    "exceptionCause": "destination"
+  },
+  {
+    "flightNumber": "YF0802",
+    "departure": "Germany",
+    "destination": "London",
+    "departureTime": null,
+    "initialSeats": 2,
+    "expectedException": true,
+    "exceptionCause": "departure"
+  },
+  {
+    "flightNumber": "YF0802",
+    "departure": "Germany",
+    "destination": "London",
+    "departureTime": "2025-02-02 12:00",
+    "initialSeats": -2,
+    "expectedException": true,
+    "exceptionCause": "initialSeats"
+  }
+]

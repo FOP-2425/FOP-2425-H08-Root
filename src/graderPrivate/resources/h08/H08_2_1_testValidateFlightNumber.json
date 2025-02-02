@@ -1,0 +1,17 @@
+[
+  {
+    "flightNumber": "YB0802",
+    "expectedException": false,
+    "exceptionCause": null
+  },
+  {
+    "flightNumber": "Y0802",
+    "expectedException": true,
+    "exceptionCause": "flightNumber"
+  },
+  {
+    "flightNumber": "YB08",
+    "expectedException": true,
+    "exceptionCause": "flightNumber"
+  }
+]

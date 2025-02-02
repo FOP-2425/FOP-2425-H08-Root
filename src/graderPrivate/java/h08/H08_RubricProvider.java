@@ -33,8 +33,8 @@ public class H08_RubricProvider extends TaskRubricProvider {
     private static final Subtask H08_2_1 = Subtask.builder()
         .description("H8.2.1 | Let’s get in shape.")
         .testClassName("h08.H08_2_1_Tests")
-        .criterion("Die Methode validateFlightNumber überprüft die Flugnummer korrekt.", "testValidateFlightNumber")
-        .criterion("Der Konstruktor der Klasse Flight enthält assert-Anweisungen, die die Eingaben überprüfen.", "testFlightConstructor")
+        .criterion("Die Methode validateFlightNumber überprüft die Flugnummer korrekt.", "testValidateFlightNumber", JsonParameterSet.class)
+        .criterion("Der Konstruktor der Klasse Flight enthält assert-Anweisungen, die die Eingaben überprüfen.", "testFlightConstructor", JsonParameterSet.class)
         .build();
 
     /**
