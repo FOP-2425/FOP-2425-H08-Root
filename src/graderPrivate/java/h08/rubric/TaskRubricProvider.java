@@ -26,19 +26,19 @@ public abstract class TaskRubricProvider implements RubricProvider {
     /**
      * Whether the tests are public or private.
      */
-    private final boolean publicTests;
+    private final boolean privateTests;
 
     /**
      * Creates a new TaskRubricProvider with the given task number, title, and whether the tests are public or private.
      *
      * @param taskNumber  the task number of the assignment
      * @param title       the title of the assignment
-     * @param publicTests whether the tests are public or private
+     * @param privateTests whether the tests are public or private
      */
-    public TaskRubricProvider(int taskNumber, String title, boolean publicTests) {
+    public TaskRubricProvider(int taskNumber, String title, boolean privateTests) {
         this.taskNumber = taskNumber;
         this.title = title;
-        this.publicTests = publicTests;
+        this.privateTests = privateTests;
     }
 
     /**
@@ -51,7 +51,7 @@ public abstract class TaskRubricProvider implements RubricProvider {
     @Override
     public Rubric getRubric() {
         return Rubric.builder()
-            .title("H%02d | %s - %s Tests".formatted(taskNumber, title, publicTests ? "Public" : "Private"))
+            .title("H%02d | %s - %s Tests".formatted(taskNumber, title, privateTests ? "Private" : "Public"))
             .addChildCriteria(
                 getTasks().stream()
                     .map(Task::getCriterion)
