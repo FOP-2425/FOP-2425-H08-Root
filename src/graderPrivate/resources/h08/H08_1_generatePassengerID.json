@@ -1,0 +1,18 @@
+[
+  {
+    "firstName": "Felix",
+    "lastName": "Lee",
+    "dateOfBirth": "2000-09-15",
+    "passengerID": "FL4096591",
+    "expectedInitials": "FL",
+    "expectedHash": "4096591"
+  },
+  {
+    "firstName": "Kim",
+    "lastName": "Min-Jeong",
+    "dateOfBirth": "2001-01-01",
+    "passengerID": "KM0101011",
+    "expectedInitials": "KM",
+    "expectedHash": "4098113"
+  }
+]
