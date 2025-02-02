@@ -32,6 +32,13 @@ jagr {
             parent(graderPublic)
             graderName.set("FOP-2425-H08-Private")
             rubricProviderName.set("h08.H08_RubricProvider")
+            config.set(
+                org.sourcegrade.jagr.launcher.env.Config(
+                    executor = org.sourcegrade.jagr.launcher.env.Executor(
+                        jvmArgs = listOf("-ea"),
+                    )
+                )
+            )
         }
     }
 }
