@@ -81,7 +81,6 @@ public class H08_1_TestsPrivate extends H08_Tests {
         generatePassengerID = Links.getMethod(passenger, "generatePassengerID", String.class, String.class, LocalDate.class);
     }
 
-
     /**
      * Returns pre-setup test information for the given parameters and instance to test the generatePassengerID method.
      *
@@ -100,8 +99,7 @@ public class H08_1_TestsPrivate extends H08_Tests {
             .input(builder -> builder.add("firstName", firstName)
                 .add("lastName", lastName)
                 .add("dateOfBirth", dateOfBirth)
-            )
-            .expect(builder -> builder.add("passengerID", passengerID))
+            ).expect(builder -> builder.add("passengerID", passengerID))
             .actual(builder -> builder.add("passengerID", this.passengerID.get(instance)))
             .build();
     }
@@ -134,11 +132,6 @@ public class H08_1_TestsPrivate extends H08_Tests {
     @ParameterizedTest
     @JsonParameterSetTest(value = "H08_1_generatePassengerID.json", customConverters = CUSTOM_CONVERTERS)
     void testGeneratePassengerIDNameInitials(JsonParameterSet parameters) throws Throwable {
-        // Test setup
-        String firstName = parameters.getString("firstName");
-        String lastName = parameters.getString("lastName");
-        LocalDate dateOfBirth = parameters.get("dateOfBirth");
-
         // Test execution
         Map.Entry<Passenger, String> result = invokeGeneratePassengerID(parameters);
         Passenger passenger = result.getKey();
