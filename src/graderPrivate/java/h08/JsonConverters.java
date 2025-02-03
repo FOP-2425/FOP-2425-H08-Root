@@ -16,12 +16,12 @@ public final class JsonConverters extends org.tudalgo.algoutils.tutor.general.js
     /**
      * The date formatter for the date of birth.
      */
-    private final static DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     /**
      * The date time formatter for the departure time.
      */
-    private final static DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     /**
      * Prevent instantiation of this utility class.

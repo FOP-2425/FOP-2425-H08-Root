@@ -13,13 +13,19 @@ import org.tudalgo.algoutils.tutor.general.annotation.SkipAfterFirstFailedTest;
 import org.tudalgo.algoutils.tutor.general.assertions.Assertions2;
 import org.tudalgo.algoutils.tutor.general.json.JsonParameterSet;
 import org.tudalgo.algoutils.tutor.general.json.JsonParameterSetTest;
+import org.tudalgo.algoutils.tutor.general.match.Matcher;
+import org.tudalgo.algoutils.tutor.general.reflections.BasicConstructorLink;
+import org.tudalgo.algoutils.tutor.general.reflections.BasicTypeLink;
+import org.tudalgo.algoutils.tutor.general.reflections.ConstructorLink;
 import org.tudalgo.algoutils.tutor.general.reflections.FieldLink;
 import org.tudalgo.algoutils.tutor.general.reflections.MethodLink;
 import org.tudalgo.algoutils.tutor.general.reflections.TypeLink;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.stream.Stream;
 
 /**
  * Defines the private tests for the subtask H08.2.1.
@@ -109,8 +115,8 @@ public class H08_2_1_TestsPrivate extends H08_Tests {
         // Test verification
         TestInformation info = TestInformation.builder()
             .subject(validateFlightNumber)
-            .preState(TestInformation.builder().add("flight", flight).build())
-            .postState(TestInformation.builder().add("Exception cause", exceptionCause).build())
+            .input(builder -> builder.add("flightNumber", flightNumber))
+            .expect(builder -> builder.cause(expectedException ? AssertionError.class : null))
             .build();
 
         if (expectedException) {
@@ -140,18 +146,20 @@ public class H08_2_1_TestsPrivate extends H08_Tests {
         boolean expectedException = parameters.getBoolean("expectedException");
         String exceptionCause = parameters.get("exceptionCause");
 
+        List<TypeLink> parameterTypes = Stream.of(String.class, String.class, String.class, LocalDateTime.class, int.class)
+            .<TypeLink>map(BasicTypeLink::of)
+            .toList();
+        ConstructorLink constructor = flight.getConstructor(Matcher.of(m -> m.typeList().equals(parameterTypes)));
         // Test verification
         TestInformation info = TestInformation.builder()
-            .subject(flight)
-            .preState(
-                TestInformation.builder()
-                    .add("flightNumber", flightNumber)
-                    .add("departure", departure)
-                    .add("destination", destination)
-                    .add("departureTime", departureTime)
-                    .add("initialSeats", initialSeats)
-                    .build()
-            ).postState(TestInformation.builder().add("Exception cause", exceptionCause).build())
+            .subject(constructor)
+            .input(builder -> builder
+                .add("flightNumber", flightNumber)
+                .add("departure", departure)
+                .add("destination", destination)
+                .add("departureTime", departureTime)
+                .add("initialSeats", initialSeats)
+            ).expect(builder -> builder.cause(expectedException ? AssertionError.class : null))
             .build();
 
         if (expectedException) {

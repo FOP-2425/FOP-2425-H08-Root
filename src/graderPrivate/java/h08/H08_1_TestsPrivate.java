@@ -81,44 +81,29 @@ public class H08_1_TestsPrivate extends H08_Tests {
         generatePassengerID = Links.getMethod(passenger, "generatePassengerID", String.class, String.class, LocalDate.class);
     }
 
+
     /**
-     * Returns the test information for better test reporting containing the pre-state, post-state, and actual state
-     * for the method generatePassengerID.
+     * Returns pre-setup test information for the given parameters and instance to test the generatePassengerID method.
      *
      * @param parameters the test input and expected output parameters
      * @param instance   the instance of the Passenger class
      *
-     * @return the test information for better test reporting
+     * @return pre-setup test information for the given parameters and instance
      */
-    private TestInformation.TestInformationBuilder testInformation(JsonParameterSet parameters, Passenger instance) {
+    private TestInformation testInformation(JsonParameterSet parameters, Passenger instance) {
         String firstName = parameters.getString("firstName");
         String lastName = parameters.getString("lastName");
         LocalDate dateOfBirth = parameters.get("dateOfBirth");
         String passengerID = parameters.getString("passengerID");
         return TestInformation.builder()
             .subject(passengerID)
-            .preState(
-                TestInformation.builder()
-                    .add("firstName", "Not set yet")
-                    .add("lastName", "Not set yet")
-                    .add("dateOfBirth", "Not set yet")
-                    .add("passengerID", "Not set yet")
-                    .build()
-            ).postState(
-                TestInformation.builder()
-                    .add("firstName", firstName)
-                    .add("lastName", lastName)
-                    .add("dateOfBirth", dateOfBirth)
-                    .add("passengerID", passengerID)
-                    .build()
-            ).actualState(
-                TestInformation.builder()
-                    .add("firstName", this.firstName.get(instance))
-                    .add("lastName", this.lastName.get(instance))
-                    .add("dateOfBirth", this.dateOfBirth.get(instance))
-                    .add("passengerID", this.passengerID.get(instance))
-                    .build()
-            );
+            .input(builder -> builder.add("firstName", firstName)
+                .add("lastName", lastName)
+                .add("dateOfBirth", dateOfBirth)
+            )
+            .expect(builder -> builder.add("passengerID", passengerID))
+            .actual(builder -> builder.add("passengerID", this.passengerID.get(instance)))
+            .build();
     }
 
     /**
@@ -149,15 +134,19 @@ public class H08_1_TestsPrivate extends H08_Tests {
     @ParameterizedTest
     @JsonParameterSetTest(value = "H08_1_generatePassengerID.json", customConverters = CUSTOM_CONVERTERS)
     void testGeneratePassengerIDNameInitials(JsonParameterSet parameters) throws Throwable {
+        // Test setup
+        String firstName = parameters.getString("firstName");
+        String lastName = parameters.getString("lastName");
+        LocalDate dateOfBirth = parameters.get("dateOfBirth");
+
         // Test execution
         Map.Entry<Passenger, String> result = invokeGeneratePassengerID(parameters);
         Passenger passenger = result.getKey();
         String actual = result.getValue();
 
         // Test verification
-        TestInformation info = testInformation(parameters, passenger).build();
         String expected = parameters.getString("expectedInitials");
-        Assertions2.assertEquals(expected, actual.substring(0, 2), info,
+        Assertions2.assertEquals(expected, actual.substring(0, 2), testInformation(parameters, passenger),
             comment -> "The two first characters of the passenger ID should be the initials of the first and last name.");
     }
 
@@ -170,9 +159,8 @@ public class H08_1_TestsPrivate extends H08_Tests {
         String actual = result.getValue();
 
         // Test verification
-        TestInformation info = testInformation(parameters, passenger).build();
         String expected = parameters.getString("expectedHash");
-        Assertions2.assertEquals(expected, actual.substring(2), info,
+        Assertions2.assertEquals(expected, actual.substring(2), testInformation(parameters, passenger),
             comment -> "The rest of the passenger ID should be the hash code of the date of birth.");
     }
 }

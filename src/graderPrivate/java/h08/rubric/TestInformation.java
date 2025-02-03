@@ -4,16 +4,13 @@ import org.jetbrains.annotations.Nullable;
 import org.tudalgo.algoutils.tutor.general.assertions.Assertions2;
 import org.tudalgo.algoutils.tutor.general.assertions.Context;
 import org.tudalgo.algoutils.tutor.general.assertions.Property;
-import org.tudalgo.algoutils.tutor.general.assertions.basic.BasicProperty;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.function.Function;
 
 /**
- * Context information for a test. THis class extends the {@link Context} interface and provide optional pre-, post- and
- * actual states of the test.
+ * Test information provides more context to the test results by adding information about the input, expected output
+ * and actual output of the test.
  *
  * @author Nhan Huynh
  */
@@ -22,7 +19,7 @@ public class TestInformation implements Context {
     /**
      * The subject of the test.
      */
-    private final @Nullable Object subject;
+    private final Object subject;
 
     /**
      * The properties of the test.
@@ -30,65 +27,60 @@ public class TestInformation implements Context {
     private final Collection<Property> properties;
 
     /**
-     * Constructs new test information with the specified subject and properties.
+     * Constructs new test information with the given subject and properties.
      *
-     * @param subject     the subject of the test
-     * @param preState    the pre-state of the test
-     * @param postState   the post-state of the test
-     * @param actualState the actual state of the test
-     * @param properties  the properties of the test
+     * @param subject the subject of the test
+     * @param require the input of the test
+     * @param ensure  the expected output of the test
+     * @param actual  the actual output of the test
      */
     public TestInformation(
-        @Nullable Object subject,
-        @Nullable TestInformation preState,
-        @Nullable TestInformation postState,
-        @Nullable TestInformation actualState,
-        Collection<Property> properties) {
-
-
+            Object subject,
+            @Nullable SubTestInformation require,
+            @Nullable SubTestInformation ensure,
+            @Nullable SubTestInformation actual) {
         Context.Builder<?> builder = Assertions2.contextBuilder()
-            .subject(subject);
+                .subject(subject);
 
-        if (preState != null) {
-            addState(builder, "Pre state", preState);
+        if (require != null) {
+            addState(builder, "Input", require);
         }
-        if (postState != null) {
-            addState(builder, "Post state", postState);
+        if (ensure != null) {
+            addState(builder, "Expected output", ensure);
         }
-        if (actualState != null) {
-            addState(builder, "Actual state", actualState);
+        if (actual != null) {
+            addState(builder, "Actual output", actual);
         }
-        builder.add(properties.toArray(Property[]::new));
         Context context = builder.build();
         this.subject = context.subject();
         this.properties = context.properties();
     }
 
     /**
-     * Adds the state to the builder.
-     *
-     * @param builder the builder to add the sotate to
-     * @param name    the name of the state
-     * @param state   the state to add
-     */
-    private void addState(Builder<?> builder, String name, TestInformation state) {
-        if (state != null) {
-            builder.add(
-                name,
-                Assertions2.contextBuilder()
-                    .add(state.properties.toArray(Property[]::new))
-                    .build()
-            );
-        }
-    }
-
-    /**
-     * Returns a new test information builder.
+     * Creates a new test information builder.
      *
      * @return a new test information builder
      */
     public static TestInformationBuilder builder() {
         return new TestInformationBuilderImpl();
+    }
+
+    /**
+     * Adds the given state to the builder with the given name.
+     *
+     * @param builder the builder to add the state to
+     * @param name    the name of the state
+     * @param state   the state to add
+     */
+    private void addState(Builder<?> builder, String name, SubTestInformation state) {
+        if (state != null) {
+            builder.add(
+                    name,
+                    Assertions2.contextBuilder()
+                            .add(state.properties().toArray(Property[]::new))
+                            .build()
+            );
+        }
     }
 
     @Override
@@ -102,7 +94,7 @@ public class TestInformation implements Context {
     }
 
     /**
-     * Builder for {@link TestInformation}.
+     * A builder for {@link TestInformation}.
      */
     public interface TestInformationBuilder extends h08.rubric.Builder<TestInformation> {
 
@@ -111,50 +103,73 @@ public class TestInformation implements Context {
          *
          * @param subject the subject of the test
          *
-         * @return this builder after setting the subject
+         * @return this builder instance after setting the subject
          */
         TestInformationBuilder subject(Object subject);
 
         /**
-         * Sets the pre-state of the test.
+         * Sets the input of the test.
          *
-         * @param preState the pre-state of the test
+         * @param input the input of the test
          *
-         * @return this builder after setting the pre-state
+         * @return this builder instance after setting the input
          */
-        TestInformationBuilder preState(TestInformation preState);
+        TestInformationBuilder input(SubTestInformation input);
 
         /**
-         * Sets the post-state of the test.
+         * Sets the input of the test.
          *
-         * @param postState the post-state of the test
+         * @param input the input of the test
          *
-         * @return this builder after setting the post-state
+         * @return this builder instance after setting the input
          */
-        TestInformationBuilder postState(TestInformation postState);
+        TestInformationBuilder input(
+                Function<SubTestInformation.InputTestInformationBuilder, SubTestInformation.InputTestInformationBuilder> input
+        );
 
         /**
-         * Sets the actual state of the test.
+         * Sets the expected output of the test.
          *
-         * @param actualState the actual state of the test
+         * @param expect the expected output of the test
          *
-         * @return this builder after setting the actual state
+         * @return this builder instance after setting the expected output
          */
-        TestInformationBuilder actualState(TestInformation actualState);
+        TestInformationBuilder expect(SubTestInformation expect);
 
         /**
-         * Adds a property to the test which provides context information.
+         * Sets the expected output of the test.
          *
-         * @param key   the key of the property
-         * @param value the value of the property
+         * @param expect the expected output of the test
          *
-         * @return this builder after adding the property
+         * @return this builder instance after setting the expected output
          */
-        TestInformationBuilder add(String key, Object value);
+        TestInformationBuilder expect(
+                Function<SubTestInformation.OutputTestInformationBuilder, SubTestInformation.OutputTestInformationBuilder> expect
+        );
+
+        /**
+         * Sets the actual output of the test.
+         *
+         * @param actual the actual output of the test
+         *
+         * @return this builder instance after setting the actual output
+         */
+        TestInformationBuilder actual(SubTestInformation actual);
+
+        /**
+         * Sets the actual output of the test.
+         *
+         * @param actual the actual output of the test
+         *
+         * @return this builder instance after setting the actual output
+         */
+        TestInformationBuilder actual(
+                Function<SubTestInformation.OutputTestInformationBuilder, SubTestInformation.OutputTestInformationBuilder> actual
+        );
     }
 
     /**
-     * Implementation of the {@link TestInformationBuilder} interface.
+     * An implementation of {@link TestInformationBuilder}.
      */
     private static class TestInformationBuilderImpl implements TestInformationBuilder {
 
@@ -164,24 +179,19 @@ public class TestInformation implements Context {
         private @Nullable Object subject;
 
         /**
-         * The pre-state of the test.
+         * The input of the test.
          */
-        private @Nullable TestInformation preState = null;
+        private @Nullable SubTestInformation input;
 
         /**
-         * The post-state of the test.
+         * The expected output of the test.
          */
-        private @Nullable TestInformation postState = null;
+        private @Nullable SubTestInformation expect;
 
         /**
-         * The actual state of the test.
+         * The actual output of the test.
          */
-        private @Nullable TestInformation actualState = null;
-
-        /**
-         * The properties of the test.
-         */
-        private final List<Property> properties = new ArrayList<>();
+        private @Nullable SubTestInformation actual;
 
         @Override
         public TestInformationBuilder subject(Object subject) {
@@ -190,45 +200,47 @@ public class TestInformation implements Context {
         }
 
         @Override
-        public TestInformationBuilder preState(TestInformation preState) {
-            this.preState = preState;
+        public TestInformationBuilder input(SubTestInformation input) {
+            this.input = input;
             return this;
         }
 
         @Override
-        public TestInformationBuilder postState(TestInformation postState) {
-            this.postState = postState;
+        public TestInformationBuilder input(
+                Function<SubTestInformation.InputTestInformationBuilder, SubTestInformation.InputTestInformationBuilder> input
+        ) {
+            return input(input.apply(new SubTestInformation.InputTestInformationBuilderImpl()).build());
+        }
+
+        @Override
+        public TestInformationBuilder expect(SubTestInformation expect) {
+            this.expect = expect;
             return this;
         }
 
         @Override
-        public TestInformationBuilder actualState(TestInformation actualState) {
-            this.actualState = actualState;
+        public TestInformationBuilder expect(
+                Function<SubTestInformation.OutputTestInformationBuilder, SubTestInformation.OutputTestInformationBuilder> expect
+        ) {
+            return expect(expect.apply(new SubTestInformation.OutputTestInformationBuilderImpl()).build());
+        }
+
+        @Override
+        public TestInformationBuilder actual(SubTestInformation actual) {
+            this.actual = actual;
             return this;
         }
 
         @Override
-        public TestInformationBuilder add(String key, Object value) {
-            ListIterator<Property> iterator = properties.listIterator();
-            while (iterator.hasNext()) {
-                Property property = iterator.next();
-                if (property.key().equals(key)) {
-                    iterator.set(new BasicProperty(key, value));
-                    return this;
-                }
-            }
-            properties.add(new BasicProperty(key, value));
-            return this;
+        public TestInformationBuilder actual(
+                Function<SubTestInformation.OutputTestInformationBuilder, SubTestInformation.OutputTestInformationBuilder> actual
+        ) {
+            return actual(actual.apply(new SubTestInformation.OutputTestInformationBuilderImpl()).build());
         }
 
         @Override
         public TestInformation build() {
-            return new TestInformation(
-                subject,
-                preState,
-                postState,
-                actualState,
-                properties);
+            return new TestInformation(subject, input, expect, actual);
         }
     }
 }
