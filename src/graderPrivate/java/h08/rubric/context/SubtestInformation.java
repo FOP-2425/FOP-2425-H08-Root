@@ -4,6 +4,7 @@ import org.tudalgo.algoutils.tutor.general.assertions.Context;
 import org.tudalgo.algoutils.tutor.general.assertions.Property;
 
 import java.util.Collection;
+import java.util.function.Function;
 
 /**
  * Contains sub information about a test case which divides the main information into structured parts.

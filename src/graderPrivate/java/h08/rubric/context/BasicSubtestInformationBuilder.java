@@ -6,6 +6,7 @@ import org.tudalgo.algoutils.tutor.general.assertions.basic.BasicProperty;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.function.Function;
 
 public abstract class BasicSubtestInformationBuilder<B extends SubtestInformation.SubtestInformationBuilder<B>>
     implements SubtestInformation.SubtestInformationBuilder<B> {

@@ -80,7 +80,7 @@ public class H08_RubricProvider extends TaskRubricProvider {
         .description("H08.4.1 | Adding a Flight")
         .testClassName("h08.H08_4_1_Tests")
         .criterion("Die Methode addFlight fügt Flüge korrekt zu abgehenden oder ankommenden Flügen hinzu.", "testAddFlight")
-        .criterion("Die Methode prüft und behandelt korrekt falsche Flughafencodes.", "testAddFlightInvalidAirportCode")
+        .criterion("Die Methode prüft und behandelt korrekt falsche Flughafencodes.", "testAddFlightInvalidAirportCode", JsonParameterSet.class)
         .build();
 
     /**

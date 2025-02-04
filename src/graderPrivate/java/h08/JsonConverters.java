@@ -1,6 +1,8 @@
 package h08;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import h08.mock.MockAirport;
+import org.mockito.Mockito;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -55,5 +57,43 @@ public final class JsonConverters extends org.tudalgo.algoutils.tutor.general.js
             throw new IllegalArgumentException("Expected a textual value");
         }
         return LocalDateTime.parse(node.asText(), DATE_TIME_FORMATTER);
+    }
+
+    /**
+     * Converts a JSON node to a flight.
+     *
+     * @param node the JSON node to convert
+     *
+     * @return the flight represented by the JSON node
+     */
+    public static Flight toFlight(JsonNode node) {
+        if (!node.isObject()) {
+            throw new IllegalArgumentException("Expected an object");
+        }
+        Flight instance = Mockito.mock(Flight.class);
+        Mockito.when(instance.getFlightNumber()).thenReturn(node.get("flightNumber").asText());
+        Mockito.when(instance.getDeparture()).thenReturn(node.get("departure").asText());
+        Mockito.when(instance.getDestination()).thenReturn(node.get("destination").asText());
+        Mockito.when(instance.getDepartureTime()).thenReturn(toLocalDateTime(node.get("departureTime")).toString());
+        return instance;
+    }
+
+    /**
+     * Converts a JSON node to an airport.
+     *
+     * @param node the JSON node to convert
+     *
+     * @return the airport represented by the JSON node
+     */
+    public static MockAirport toAirport(JsonNode node) {
+        if (!node.isObject()) {
+            throw new IllegalArgumentException("Expected an object");
+        }
+        return new MockAirport(
+            node.get("airportCode").asText(),
+            node.get("initialCapacity").asInt(),
+            toList(node.get("departingFlights"), JsonConverters::toFlight),
+            toList(node.get("arrivingFlights"), JsonConverters::toFlight)
+        );
     }
 }
