@@ -2,6 +2,7 @@ package h08;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import h08.rubric.context.TestInformation;
+import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -71,7 +72,7 @@ public class H08_1_TestsPrivate extends H08_Tests {
     /**
      * The instance of the Passenger class to test.
      */
-    private Passenger instance;
+    private @Nullable Passenger instance;
 
     /**
      * Sets up the global test environment.

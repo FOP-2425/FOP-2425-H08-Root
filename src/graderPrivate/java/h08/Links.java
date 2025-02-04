@@ -40,7 +40,20 @@ public final class Links {
      * @throws AssertionFailedError if the class does not exist
      */
     public static TypeLink getType(Class<?> clazz) {
-        return Assertions3.assertTypeExists(BasicPackageLink.of(clazz.getPackageName()), STRING_MATCHER_FACTORY.matcher(clazz.getSimpleName()));
+        return getType(clazz.getPackageName(), clazz.getSimpleName());
+    }
+
+    /**
+     * Returns the link to the class with the given name.
+     *
+     * @param packageName the package name of the class
+     * @param className   the name of the class
+     *
+     * @return the link to the class with the given name
+     * @throws AssertionFailedError if the class does not exist
+     */
+    public static TypeLink getType(String packageName, String className) {
+        return Assertions3.assertTypeExists(BasicPackageLink.of(packageName), STRING_MATCHER_FACTORY.matcher(className));
     }
 
     /**

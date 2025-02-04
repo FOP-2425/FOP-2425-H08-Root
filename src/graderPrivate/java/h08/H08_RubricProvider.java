@@ -43,8 +43,8 @@ public class H08_RubricProvider extends TaskRubricProvider {
     private static final Subtask H08_2_2 = Subtask.builder()
         .description("H08.2.2 | Fasten your seatbelts")
         .testClassName("h08.H08_2_2_Tests")
-        .criterion("Die Methode bookSeat() reserviert korrekt Sitzplätze.", "testBookSeat")
-        .criterion("Die Methode wirft korrekt eine NoSeatsAvailableException, wenn keine Plätze mehr verfügbar sind.", "testBookSeatNoSeatsAvailableException")
+        .criterion("Die Methode bookSeat() reserviert korrekt Sitzplätze.", "testBookSeat", JsonParameterSet.class)
+        .criterion("Die Methode wirft korrekt eine NoSeatsAvailableException, wenn keine Plätze mehr verfügbar sind.", "testBookSeatNoSeatsAvailableException", JsonParameterSet.class)
         .build();
 
     /**

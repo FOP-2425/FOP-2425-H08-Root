@@ -1,0 +1,20 @@
+[
+  {
+    "flightNumber": "GG1234",
+    "initialSeats": 10,
+    "availableSeats": 10,
+    "availableSeatsAfterBooking": 9
+  },
+  {
+    "flightNumber": "WP1234",
+    "initialSeats": 5,
+    "availableSeats": 2,
+    "availableSeatsAfterBooking": 1
+  },
+  {
+    "flightNumber": "GG1234",
+    "initialSeats": 22,
+    "availableSeats": 1,
+    "availableSeatsAfterBooking": 0
+  }
+]

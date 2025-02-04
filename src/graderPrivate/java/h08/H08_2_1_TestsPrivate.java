@@ -16,7 +16,6 @@ import org.tudalgo.algoutils.tutor.general.json.JsonParameterSetTest;
 import org.tudalgo.algoutils.tutor.general.match.Matcher;
 import org.tudalgo.algoutils.tutor.general.reflections.BasicTypeLink;
 import org.tudalgo.algoutils.tutor.general.reflections.ConstructorLink;
-import org.tudalgo.algoutils.tutor.general.reflections.FieldLink;
 import org.tudalgo.algoutils.tutor.general.reflections.MethodLink;
 import org.tudalgo.algoutils.tutor.general.reflections.TypeLink;
 
@@ -41,7 +40,7 @@ public class H08_2_1_TestsPrivate extends H08_Tests {
      * The converters used for the test cases using JSON files to read the test data.
      */
     public static final Map<String, Function<JsonNode, ?>> CONVERTERS = Map.of(
-        "flightNumber", node -> node.asText(),
+        "flightNumber", node -> node.isNull() ? null : node.asText(),
         "departure", node -> node.isNull() ? null : node.asText(),
         "destination", node -> node.isNull() ? null : node.asText(),
         "departureTime", node -> node.isNull() ? null : JsonConverters.toLocalDateTime(node),
@@ -52,39 +51,9 @@ public class H08_2_1_TestsPrivate extends H08_Tests {
     );
 
     /**
-     * The flight class.
+     * The link to the flight class.
      */
-    private TypeLink flight;
-
-    /**
-     * The flight number field of the Flight class.
-     */
-    private FieldLink flightNumber;
-
-    /**
-     * The departure field of the Flight class.
-     */
-    private FieldLink departure;
-
-    /**
-     * The destination field of the Flight class.
-     */
-    private FieldLink destination;
-
-    /**
-     * The departure time field of the Flight class.
-     */
-    private FieldLink departureTime;
-
-    /**
-     * The initial seats field of the Flight class.
-     */
-    private FieldLink initialSeats;
-
-    /**
-     * The available seats field of the Flight class.
-     */
-    private FieldLink availableSeats;
+    private TypeLink flightLink;
 
     /**
      * Sets up the global test environment.
@@ -92,26 +61,17 @@ public class H08_2_1_TestsPrivate extends H08_Tests {
     @BeforeAll
     protected void globalSetup() {
         super.globalSetup();
-        flight = Links.getType(Flight.class);
-        flightNumber = Links.getField(flight, "flightNumber");
-        departure = Links.getField(flight, "departure");
-        destination = Links.getField(flight, "destination");
-        departureTime = Links.getField(flight, "departureTime");
-        initialSeats = Links.getField(flight, "initialSeats");
-        availableSeats = Links.getField(flight, "availableSeats");
+        flightLink = Links.getType(Flight.class);
     }
 
     @ParameterizedTest
     @JsonParameterSetTest(value = "H08_2_1_testValidateFlightNumber.json", customConverters = CUSTOM_CONVERTERS)
     void testValidateFlightNumber(JsonParameterSet parameters) throws Throwable {
-        // Test setup
         String flightNumber = parameters.get("flightNumber");
         boolean expectedException = parameters.getBoolean("expectedException");
-        String exceptionCause = parameters.get("exceptionCause");
         Flight flight = Mockito.mock(Flight.class);
-        MethodLink validateFlightNumber = Links.getMethod(this.flight, "validateFlightNumber", String.class);
+        MethodLink validateFlightNumber = Links.getMethod(this.flightLink, "validateFlightNumber", String.class);
 
-        // Test verification
         TestInformation info = TestInformation.builder()
             .subject(validateFlightNumber)
             .input(builder -> builder.add("flightNumber", flightNumber))
@@ -136,7 +96,6 @@ public class H08_2_1_TestsPrivate extends H08_Tests {
     @ParameterizedTest
     @JsonParameterSetTest(value = "H08_2_1_testFlightConstructor.json", customConverters = CUSTOM_CONVERTERS)
     void testFlightConstructor(JsonParameterSet parameters) {
-        // Test setup
         String flightNumber = parameters.get("flightNumber");
         String departure = parameters.get("departure");
         String destination = parameters.get("destination");
@@ -148,8 +107,8 @@ public class H08_2_1_TestsPrivate extends H08_Tests {
         List<TypeLink> parameterTypes = Stream.of(String.class, String.class, String.class, LocalDateTime.class, int.class)
             .<TypeLink>map(BasicTypeLink::of)
             .toList();
-        ConstructorLink constructor = flight.getConstructor(Matcher.of(m -> m.typeList().equals(parameterTypes)));
-        // Test verification
+        ConstructorLink constructor = flightLink.getConstructor(Matcher.of(m -> m.typeList().equals(parameterTypes)));
+
         TestInformation info = TestInformation.builder()
             .subject(constructor)
             .input(builder -> builder

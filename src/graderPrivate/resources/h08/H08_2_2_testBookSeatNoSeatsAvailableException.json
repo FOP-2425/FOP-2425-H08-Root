@@ -1,0 +1,14 @@
+[
+  {
+    "flightNumber": "KS1234",
+    "initialSeats": 1,
+    "availableSeats": 0,
+    "message": "No seats available for flight KS1234"
+  },
+  {
+    "flightNumber": "GC1234",
+    "initialSeats": 22,
+    "availableSeats": 0,
+    "message": "No seats available for flight GC1234"
+  }
+]
