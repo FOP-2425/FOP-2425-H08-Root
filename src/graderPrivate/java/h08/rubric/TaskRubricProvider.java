@@ -1,5 +1,6 @@
 package h08.rubric;
 
+import h08.rubric.task.Task;
 import org.sourcegrade.jagr.api.rubric.Criterion;
 import org.sourcegrade.jagr.api.rubric.Rubric;
 import org.sourcegrade.jagr.api.rubric.RubricProvider;

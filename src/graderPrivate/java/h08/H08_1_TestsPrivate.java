@@ -1,8 +1,9 @@
 package h08;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import h08.rubric.TestInformation;
+import h08.rubric.context.TestInformation;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -43,29 +44,34 @@ public class H08_1_TestsPrivate extends H08_Tests {
     );
 
     /**
-     * The passenger ID field of the Passenger class.
+     * The link to the passenger ID field of the Passenger class.
      */
-    private FieldLink passengerID;
+    private FieldLink passengerIDLink;
 
     /**
-     * The first name field of the Passenger class.
+     * The link to the first name field of the Passenger class.
      */
-    private FieldLink firstName;
+    private FieldLink firstNameLink;
 
     /**
-     * The last name field of the Passenger class.
+     * The link to the last name field of the Passenger class.
      */
-    private FieldLink lastName;
+    private FieldLink lastNameLink;
 
     /**
-     * The date of birth field of the Passenger class.
+     * The link to the date of birth field of the Passenger class.
      */
-    private FieldLink dateOfBirth;
+    private FieldLink dateOfBirthLink;
 
     /**
-     * The generatePassengerID method of the Passenger class.
+     * The link to the generatePassengerID method of the Passenger class.
      */
-    private MethodLink generatePassengerID;
+    private MethodLink generatePassengerIDLink;
+
+    /**
+     * The instance of the Passenger class to test.
+     */
+    private Passenger instance;
 
     /**
      * Sets up the global test environment.
@@ -74,22 +80,29 @@ public class H08_1_TestsPrivate extends H08_Tests {
     protected void globalSetup() {
         super.globalSetup();
         TypeLink passenger = Links.getType(Passenger.class);
-        passengerID = Links.getField(passenger, "passengerID");
-        firstName = Links.getField(passenger, "firstName");
-        lastName = Links.getField(passenger, "lastName");
-        dateOfBirth = Links.getField(passenger, "dateOfBirth");
-        generatePassengerID = Links.getMethod(passenger, "generatePassengerID", String.class, String.class, LocalDate.class);
+        passengerIDLink = Links.getField(passenger, "passengerID");
+        firstNameLink = Links.getField(passenger, "firstName");
+        lastNameLink = Links.getField(passenger, "lastName");
+        dateOfBirthLink = Links.getField(passenger, "dateOfBirth");
+        generatePassengerIDLink = Links.getMethod(passenger, "generatePassengerID", String.class, String.class, LocalDate.class);
+    }
+
+    /**
+     * Sets up the test environment before each test.
+     */
+    @BeforeEach
+    void setup() {
+        instance = null;
     }
 
     /**
      * Returns pre-setup test information for the given parameters and instance to test the generatePassengerID method.
      *
      * @param parameters the test input and expected output parameters
-     * @param instance   the instance of the Passenger class
      *
      * @return pre-setup test information for the given parameters and instance
      */
-    private TestInformation testInformation(JsonParameterSet parameters, Passenger instance) {
+    private TestInformation testInformation(JsonParameterSet parameters) {
         String firstName = parameters.getString("firstName");
         String lastName = parameters.getString("lastName");
         LocalDate dateOfBirth = parameters.get("dateOfBirth");
@@ -100,7 +113,7 @@ public class H08_1_TestsPrivate extends H08_Tests {
                 .add("lastName", lastName)
                 .add("dateOfBirth", dateOfBirth)
             ).expect(builder -> builder.add("passengerID", passengerID))
-            .actual(builder -> builder.add("passengerID", this.passengerID.get(instance)))
+            .actual(builder -> builder.add("passengerID", this.passengerIDLink.get(instance)))
             .build();
     }
 
@@ -109,23 +122,23 @@ public class H08_1_TestsPrivate extends H08_Tests {
      *
      * @param parameters the test input and expected output parameters
      *
-     * @return the passenger instance and the generated passenger ID
+     * @return the generated passenger ID
      * @throws Throwable if an error occurs during the test execution
      */
-    private Map.Entry<Passenger, String> invokeGeneratePassengerID(JsonParameterSet parameters) throws Throwable {
+    private String invokeMethod(JsonParameterSet parameters) throws Throwable {
         // Test setup
         String firstName = parameters.getString("firstName");
         String lastName = parameters.getString("lastName");
         LocalDate dateOfBirth = parameters.get("dateOfBirth");
 
         // Test execution
-        Passenger passenger = Mockito.mock(Passenger.class);
-        this.firstName.set(passenger, firstName);
-        this.lastName.set(passenger, lastName);
-        this.dateOfBirth.set(passenger, dateOfBirth);
-        String actual = generatePassengerID.invoke(passenger, firstName, lastName, dateOfBirth);
-        this.passengerID.set(passenger, actual);
-        return Map.entry(passenger, actual);
+        instance = Mockito.mock(Passenger.class);
+        this.firstNameLink.set(instance, firstName);
+        this.lastNameLink.set(instance, lastName);
+        this.dateOfBirthLink.set(instance, dateOfBirth);
+        String result = generatePassengerIDLink.invoke(instance, firstName, lastName, dateOfBirth);
+        this.passengerIDLink.set(instance, result);
+        return result;
     }
 
     @DisplayName("Die Methode generatePassengerID stellt sicher, dass die ersten zwei Zeichen der ID die Initialen des Vornamens und Nachnamens sind.")
@@ -133,13 +146,11 @@ public class H08_1_TestsPrivate extends H08_Tests {
     @JsonParameterSetTest(value = "H08_1_generatePassengerID.json", customConverters = CUSTOM_CONVERTERS)
     void testGeneratePassengerIDNameInitials(JsonParameterSet parameters) throws Throwable {
         // Test execution
-        Map.Entry<Passenger, String> result = invokeGeneratePassengerID(parameters);
-        Passenger passenger = result.getKey();
-        String actual = result.getValue();
+        String actual = invokeMethod(parameters);
 
         // Test verification
         String expected = parameters.getString("expectedInitials");
-        Assertions2.assertEquals(expected, actual.substring(0, 2), testInformation(parameters, passenger),
+        Assertions2.assertEquals(expected, actual.substring(0, 2), testInformation(parameters),
             comment -> "The two first characters of the passenger ID should be the initials of the first and last name.");
     }
 
@@ -147,13 +158,11 @@ public class H08_1_TestsPrivate extends H08_Tests {
     @JsonParameterSetTest(value = "H08_1_generatePassengerID.json", customConverters = CUSTOM_CONVERTERS)
     void testGeneratePassengerIDDateHash(JsonParameterSet parameters) throws Throwable {
         // Test execution
-        Map.Entry<Passenger, String> result = invokeGeneratePassengerID(parameters);
-        Passenger passenger = result.getKey();
-        String actual = result.getValue();
+        String actual = invokeMethod(parameters);
 
         // Test verification
         String expected = parameters.getString("expectedHash");
-        Assertions2.assertEquals(expected, actual.substring(2), testInformation(parameters, passenger),
+        Assertions2.assertEquals(expected, actual.substring(2), testInformation(parameters),
             comment -> "The rest of the passenger ID should be the hash code of the date of birth.");
     }
 }

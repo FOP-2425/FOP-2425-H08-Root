@@ -1,5 +1,6 @@
-package h08.rubric;
+package h08.rubric.task;
 
+import h08.rubric.Rubrics;
 import h08.util.TriFunction;
 import org.jetbrains.annotations.NotNull;
 import org.sourcegrade.jagr.api.rubric.Criterion;

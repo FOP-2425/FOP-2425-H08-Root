@@ -1,4 +1,4 @@
-package h08.rubric;
+package h08.rubric.task;
 
 import org.sourcegrade.jagr.api.rubric.Criterion;
 

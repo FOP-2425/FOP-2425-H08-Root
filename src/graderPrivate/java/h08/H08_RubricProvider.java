@@ -1,9 +1,9 @@
 package h08;
 
-import h08.rubric.AtomicTask;
-import h08.rubric.CompositeTask;
-import h08.rubric.Subtask;
-import h08.rubric.Task;
+import h08.rubric.task.AtomicTask;
+import h08.rubric.task.CompositeTask;
+import h08.rubric.task.Subtask;
+import h08.rubric.task.Task;
 import h08.rubric.TaskRubricProvider;
 import org.tudalgo.algoutils.tutor.general.json.JsonParameterSet;
 

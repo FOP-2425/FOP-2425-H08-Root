@@ -1,4 +1,6 @@
-package h08.rubric;
+package h08.rubric.task;
+
+import h08.rubric.Builder;
 
 import java.util.List;
 

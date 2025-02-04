@@ -1,4 +1,4 @@
-package h08.rubric;
+package h08.rubric.task;
 
 /**
  * Represents a subtask in a rubric. A subtask is an atomic task that is part of a composite task.

@@ -1,7 +1,7 @@
 package h08;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import h08.rubric.TestInformation;
+import h08.rubric.context.TestInformation;
 import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -14,7 +14,6 @@ import org.tudalgo.algoutils.tutor.general.assertions.Assertions2;
 import org.tudalgo.algoutils.tutor.general.json.JsonParameterSet;
 import org.tudalgo.algoutils.tutor.general.json.JsonParameterSetTest;
 import org.tudalgo.algoutils.tutor.general.match.Matcher;
-import org.tudalgo.algoutils.tutor.general.reflections.BasicConstructorLink;
 import org.tudalgo.algoutils.tutor.general.reflections.BasicTypeLink;
 import org.tudalgo.algoutils.tutor.general.reflections.ConstructorLink;
 import org.tudalgo.algoutils.tutor.general.reflections.FieldLink;
@@ -128,7 +127,7 @@ public class H08_2_1_TestsPrivate extends H08_Tests {
             }
             Assertions2.assertNotNull(throwable, info, comment -> "Invalid flight number");
         } else {
-            Assertions2.call(() -> validateFlightNumber.invoke(flight, flightNumber), info,
+            Assertions2.call(() -> validateFlightNumber.invoke(flight, flightNumber), Assertions2.emptyContext(),
                 comment -> "Valid flight number");
         }
     }
