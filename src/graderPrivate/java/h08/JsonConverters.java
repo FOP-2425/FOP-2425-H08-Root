@@ -2,6 +2,7 @@ package h08;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import h08.mock.MockAirport;
+import h08.mock.MockFlight;
 import org.mockito.Mockito;
 
 import java.time.LocalDate;
@@ -66,15 +67,16 @@ public final class JsonConverters extends org.tudalgo.algoutils.tutor.general.js
      *
      * @return the flight represented by the JSON node
      */
-    public static Flight toFlight(JsonNode node) {
+    public static MockFlight toFlight(JsonNode node) {
         if (!node.isObject()) {
             throw new IllegalArgumentException("Expected an object");
         }
-        Flight instance = Mockito.mock(Flight.class);
+        MockFlight instance = Mockito.mock(MockFlight.class, Mockito.CALLS_REAL_METHODS);
         Mockito.when(instance.getFlightNumber()).thenReturn(node.get("flightNumber").asText());
         Mockito.when(instance.getDeparture()).thenReturn(node.get("departure").asText());
         Mockito.when(instance.getDestination()).thenReturn(node.get("destination").asText());
         Mockito.when(instance.getDepartureTime()).thenReturn(toLocalDateTime(node.get("departureTime")).toString());
+        Mockito.when(instance.getAvailableSeats()).thenReturn(node.get("availableSeats").asInt());
         return instance;
     }
 

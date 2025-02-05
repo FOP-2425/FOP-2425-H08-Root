@@ -44,7 +44,12 @@ public class MockAirport extends Airport {
      * @param airportCode     the code of the airport
      * @param initialCapacity the initial capacity of the airport
      */
-    public MockAirport(String airportCode, int initialCapacity, List<Flight> departingFlights, List<Flight> arrivingFlights) {
+    public MockAirport(
+        String airportCode,
+        int initialCapacity,
+        List<MockFlight> departingFlights,
+        List<MockFlight> arrivingFlights
+    ) {
         super(airportCode, initialCapacity);
         TypeLink type = BasicTypeLink.of(Airport.class);
         departingFlightsLink = type.getField(Matcher.of(field -> field.name().equals("departingFlights")));
@@ -52,10 +57,23 @@ public class MockAirport extends Airport {
         departingSize = type.getField(Matcher.of(field -> field.name().equals("departingSize")));
         arrivingSize = type.getField(Matcher.of(field -> field.name().equals("arrivingSize")));
 
-        Flight[] departing = departingFlightsLink.get(this);
-        System.arraycopy(departingFlights.toArray(Flight[]::new), 0, departing, 0, departingFlights.size());
-        Flight[] arriving = arrivingFlightsLink.get(this);
-        System.arraycopy(arrivingFlights.toArray(Flight[]::new), 0, arriving, 0, arrivingFlights.size());
+        copyFlights(departingFlightsLink, departingFlights);
+        copyFlights(arrivingFlightsLink, arrivingFlights);
+    }
+
+    /**
+     * Copies the flights to the specified field link.
+     *
+     * @param link    the field link to copy the flights to
+     * @param flights the flights to copy
+     */
+    private void copyFlights(FieldLink link, List<MockFlight> flights) {
+        Flight[] actual = link.get(this);
+        if (flights.size() > actual.length) {
+            actual = new Flight[flights.size()];
+        }
+        link.set(this, actual);
+        System.arraycopy(flights.toArray(Flight[]::new), 0, actual, 0, flights.size());
     }
 
     /**
@@ -94,7 +112,6 @@ public class MockAirport extends Airport {
         return arrivingSize.get(this);
     }
 
-
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;
@@ -111,13 +128,24 @@ public class MockAirport extends Airport {
         return Objects.hash(departingFlightsLink, arrivingFlightsLink, getDepartingSize(), getArrivingSize());
     }
 
+    /**
+     * Converts the flights to a string representation.
+     *
+     * @param flights the flights to convert
+     *
+     * @return the string representation of the flights
+     */
+    private String flightsToString(Flight[] flights) {
+        return Arrays.stream(flights).map(it -> it == null ? null : it.getFlightNumber()).toList().toString();
+    }
+
     @Override
     public String toString() {
         return "Airport{"
             + "departingFlights="
-            + Arrays.stream(getDepartingFlights()).map(it -> it == null ? null : it.getFlightNumber()).toList()
+            + flightsToString(getDepartingFlights())
             + ", arrivingFlights="
-            + Arrays.stream(getArrivingFlights()).map(it -> it == null ? null : it.getFlightNumber()).toList()
+            + flightsToString(getArrivingFlights())
             + '}';
     }
 }
