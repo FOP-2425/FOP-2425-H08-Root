@@ -8,14 +8,16 @@
           "departure": "LAX",
           "destination": "SFO",
           "departureTime": "2020-12-01 08:00",
-          "initialSeats": 100
+          "initialSeats": 100,
+          "availableSeats": 50
         },
         {
           "flightNumber": "AA124",
           "departure": "LAX",
           "destination": "SFO",
           "departureTime": "2020-12-01 09:00",
-          "initialSeats": 100
+          "initialSeats": 100,
+          "availableSeats": 50
         }
       ],
       "arrivingFlights": [
@@ -24,21 +26,24 @@
           "departure": "SFO",
           "destination": "LAX",
           "departureTime": "2020-12-01 10:00",
-          "initialSeats": 100
+          "initialSeats": 100,
+          "availableSeats": 50
         },
         {
           "flightNumber": "AA126",
           "departure": "SFO",
           "destination": "LAX",
           "departureTime": "2020-12-01 11:00",
-          "initialSeats": 100
+          "initialSeats": 100,
+          "availableSeats": 50
         },
         {
           "flightNumber": "AA127",
           "departure": "SFO",
           "destination": "LAX",
           "departureTime": "2020-12-01 12:00",
-          "initialSeats": 100
+          "initialSeats": 100,
+          "availableSeats": 50
         }
       ],
       "initialCapacity": 5
@@ -48,7 +53,8 @@
       "departure": "VAN",
       "destination": "SFO",
       "departureTime": "2020-12-01 08:00",
-      "initialSeats": 100
+      "initialSeats": 100,
+      "availableSeats": 50
     },
     "isDeparting": true,
     "message": "Flight's departure airport code does not match this airport's code"
@@ -62,14 +68,16 @@
           "departure": "LAX",
           "destination": "SFO",
           "departureTime": "2020-12-01 08:00",
-          "initialSeats": 100
+          "initialSeats": 100,
+          "availableSeats": 50
         },
         {
           "flightNumber": "AA124",
           "departure": "LAX",
           "destination": "SFO",
           "departureTime": "2020-12-01 09:00",
-          "initialSeats": 100
+          "initialSeats": 100,
+          "availableSeats": 50
         }
       ],
       "arrivingFlights": [
@@ -78,21 +86,24 @@
           "departure": "SFO",
           "destination": "LAX",
           "departureTime": "2020-12-01 10:00",
-          "initialSeats": 100
+          "initialSeats": 100,
+          "availableSeats": 50
         },
         {
           "flightNumber": "AA126",
           "departure": "SFO",
           "destination": "LAX",
           "departureTime": "2020-12-01 11:00",
-          "initialSeats": 100
+          "initialSeats": 100,
+          "availableSeats": 50
         },
         {
           "flightNumber": "AA127",
           "departure": "SFO",
           "destination": "LAX",
           "departureTime": "2020-12-01 12:00",
-          "initialSeats": 100
+          "initialSeats": 100,
+          "availableSeats": 50
         }
       ],
       "initialCapacity": 5
@@ -102,7 +113,8 @@
       "departure": "VAN",
       "destination": "SFO",
       "departureTime": "2020-12-01 08:00",
-      "initialSeats": 100
+      "initialSeats": 100,
+      "availableSeats": 50
     },
     "isDeparting": false,
     "message": "Flight's arrival airport code does not match this airport's code"

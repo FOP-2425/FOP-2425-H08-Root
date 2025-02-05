@@ -75,7 +75,7 @@ public final class JsonConverters extends org.tudalgo.algoutils.tutor.general.js
         if (!node.isObject()) {
             throw new IllegalArgumentException("Expected an object");
         }
-        MockFlight instance = Mockito.mock(MockFlight.class, Mockito.CALLS_REAL_METHODS);
+        MockFlight instance = Mockito.mock(MockFlight.class);
         TypeLink type = BasicTypeLink.of(Flight.class);
         FieldLink initialSeatsLink = type.getField(Matcher.of(field -> field.name().equals("initialSeats")));
         initialSeatsLink.set(instance, node.get("initialSeats").asInt());
