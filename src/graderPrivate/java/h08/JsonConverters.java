@@ -4,6 +4,10 @@ import com.fasterxml.jackson.databind.JsonNode;
 import h08.mock.MockAirport;
 import h08.mock.MockFlight;
 import org.mockito.Mockito;
+import org.tudalgo.algoutils.tutor.general.match.Matcher;
+import org.tudalgo.algoutils.tutor.general.reflections.BasicTypeLink;
+import org.tudalgo.algoutils.tutor.general.reflections.FieldLink;
+import org.tudalgo.algoutils.tutor.general.reflections.TypeLink;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -72,6 +76,9 @@ public final class JsonConverters extends org.tudalgo.algoutils.tutor.general.js
             throw new IllegalArgumentException("Expected an object");
         }
         MockFlight instance = Mockito.mock(MockFlight.class, Mockito.CALLS_REAL_METHODS);
+        TypeLink type = BasicTypeLink.of(Flight.class);
+        FieldLink initialSeatsLink = type.getField(Matcher.of(field -> field.name().equals("initialSeats")));
+        initialSeatsLink.set(instance, node.get("initialSeats").asInt());
         Mockito.when(instance.getFlightNumber()).thenReturn(node.get("flightNumber").asText());
         Mockito.when(instance.getDeparture()).thenReturn(node.get("departure").asText());
         Mockito.when(instance.getDestination()).thenReturn(node.get("destination").asText());
