@@ -49,7 +49,7 @@ public class H08_4_1_TestsPrivate extends H08_Tests {
     /**
      * The builder for the test information.
      */
-    private @Nullable TestInformation.TestInformationBuilder builder;
+    private TestInformation.TestInformationBuilder builder;
 
        /**
      * Sets up the global test environment.
@@ -95,7 +95,6 @@ public class H08_4_1_TestsPrivate extends H08_Tests {
         Flight flight = parameters.get("flight");
         boolean isDeparting = parameters.get("isDeparting");
 
-        assert builder != null;
         TestInformation info = builder.build();
         Exception exception = Assertions2.assertThrows(
             IllegalArgumentException.class,

@@ -2,7 +2,6 @@ package h08;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import h08.rubric.context.TestInformation;
-import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -66,12 +65,12 @@ public class H08_2_2_TestsPrivate extends H08_Tests {
     /**
      * The flight instance used for testing.
      */
-    private @Nullable Flight instance;
+    private Flight instance;
 
     /**
      * The builder for the test information.
      */
-    private @Nullable TestInformation.TestInformationBuilder builder;
+    private TestInformation.TestInformationBuilder builder;
 
     /**
      * Sets up the global test environment.
@@ -123,13 +122,12 @@ public class H08_2_2_TestsPrivate extends H08_Tests {
     @JsonParameterSetTest(value = "H08_2_2_testBookSeat.json", customConverters = CUSTOM_CONVERTERS)
     void testBookSeat(JsonParameterSet parameters) {
         initTest(parameters);
-        assert builder != null;
+
         int availableSeatsAfterBooking = parameters.getInt("availableSeatsAfterBooking");
         builder.expect(builder -> builder
             .add("availableSeats", availableSeatsAfterBooking)
             .cause(null)
         );
-        assert instance != null;
         Assertions2.call(() -> instance.bookSeat(), builder.build(), comment -> "Seats are available!");
     }
 
@@ -139,12 +137,11 @@ public class H08_2_2_TestsPrivate extends H08_Tests {
     @SuppressWarnings("unchecked")
     void testBookSeatNoSeatsAvailableException(JsonParameterSet parameters) {
         initTest(parameters);
-        assert builder != null;
         TypeLink exception = Links.getType("h08.Exceptions", "NoSeatsAvailableException");
         Class<? extends Exception> exceptionClass = (Class<? extends Exception>) exception.reflection();
         builder.expect(builder -> builder.cause(exceptionClass));
         TestInformation info = builder.build();
-        assert instance != null;
+
         Exception e = Assertions2.assertThrows(
             exceptionClass,
             () -> instance.bookSeat(),
