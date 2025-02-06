@@ -19,6 +19,7 @@ import org.tudalgo.algoutils.tutor.general.reflections.MethodLink;
 import org.tudalgo.algoutils.tutor.general.reflections.TypeLink;
 
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 
 /**
@@ -96,12 +97,14 @@ public class H08_4_3_TestsPrivate extends H08_Tests {
         Flight flight = parameters.get("flight");
         boolean isDeparting = parameters.get("isDeparting");
 
-        TestInformation info = builder.expect(builder->builder.cause(null)).build();
-        Assertions2.call(() -> Assertions2.assertTrue(
-                MockFlight.equals(flight, airport.getFlight(flight.getFlightNumber(), isDeparting)),
-                info, comment -> "Unexpected exception occurred while searching for the flight!"
-            ),
+        TestInformation info = builder.expect(builder -> builder.cause(null)).build();
+        AtomicReference<Flight> result = new AtomicReference<>();
+        Assertions2.call(() -> result.set(airport.getFlight(flight.getFlightNumber(), isDeparting)),
             info, comment -> "Flight should be found!");
+        Assertions2.assertTrue(
+            MockFlight.equals(flight, result.get()),
+            info, comment -> "Unexpected exception occurred while searching for the flight!"
+        );
     }
 
     @DisplayName("Die Methode wirft korrekt eine FlightNotFoundException, wenn der Flug nicht existiert.")

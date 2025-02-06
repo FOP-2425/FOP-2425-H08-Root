@@ -12,6 +12,7 @@ import org.tudalgo.algoutils.tutor.general.reflections.TypeLink;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 /**
  * Defines JSON converters for the H08 assignment.
@@ -142,5 +143,24 @@ public final class JsonConverters extends org.tudalgo.algoutils.tutor.general.js
             isCancelledLink.set(booking, isCancelled);
         }
         return booking;
+    }
+
+    /**
+     * Converts a JSON node to a flight management.
+     *
+     * @param node the JSON node to convert
+     *
+     * @return the flight management represented by the JSON node
+     */
+    public static FlightManagement toFlightManagement(JsonNode node) {
+        if (!node.isObject()) {
+            throw new IllegalArgumentException("Expected an object");
+        }
+        List<Airport> airports = toList(node.get("airports"), JsonConverters::toAirport);
+        FlightManagement instance = new FlightManagement(airports.size());
+        for (Airport airport : airports) {
+            instance.addAirport(airport);
+        }
+        return instance;
     }
 }

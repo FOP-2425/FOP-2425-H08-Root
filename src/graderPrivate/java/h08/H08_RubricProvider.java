@@ -1,10 +1,10 @@
 package h08;
 
+import h08.rubric.TaskRubricProvider;
 import h08.rubric.task.AtomicTask;
 import h08.rubric.task.CompositeTask;
 import h08.rubric.task.Subtask;
 import h08.rubric.task.Task;
-import h08.rubric.TaskRubricProvider;
 import org.tudalgo.algoutils.tutor.general.json.JsonParameterSet;
 
 import java.util.List;
@@ -127,9 +127,9 @@ public class H08_RubricProvider extends TaskRubricProvider {
     private static final Subtask H08_5_1 = Subtask.builder()
         .description("H8.5.1 | Airport and Flight Lookup")
         .testClassName("h08.H08_5_1_Tests")
-        .criterion("Die Methode searchAirport findet Flughäfen korrekt.", "testSearchAirport")
-        .criterion("Die Methode searchFlight durchsucht Flüge korrekt.", "testSearchFlight")
-        .criterion("Die Methode getFlight gibt Flüge korrekt zurück.", "testGetFlight")
+        .criterion("Die Methode searchAirport findet Flughäfen korrekt.", "testSearchAirport", JsonParameterSet.class)
+        .criterion("Die Methode searchFlight durchsucht Flüge korrekt.", "testSearchFlight", JsonParameterSet.class)
+        .criterion("Die Methode getFlight gibt Flüge korrekt zurück.", "testGetFlight", JsonParameterSet.class)
         .build();
 
     /**
