@@ -95,9 +95,9 @@ public class H08_4_1_TestsPrivate extends H08_Tests {
         Flight flight = parameters.get("flight");
         boolean isDeparting = parameters.get("isDeparting");
 
-        TestInformation info = builder.build();
+        TestInformation info = builder.expect(builder->builder.cause(null)).build();
         Assertions2.call(() -> airport.addFlight(flight, isDeparting), info,
-            comment -> "Unexpected exception occured while adding the flight!");
+            comment -> "Unexpected exception occurred while adding the flight!");
         MockAirport postAirport = parameters.get("airportPost");
         Assertions2.assertEquals(postAirport, airport, info, comment -> "The airport should be modified correctly!");
     }
@@ -112,12 +112,12 @@ public class H08_4_1_TestsPrivate extends H08_Tests {
         Flight flight = parameters.get("flight");
         boolean isDeparting = parameters.get("isDeparting");
 
-        TestInformation info = builder.build();
+        TestInformation info = builder.expect(builder -> builder.cause(IllegalArgumentException.class)).build();
         Exception exception = Assertions2.assertThrows(
             IllegalArgumentException.class,
             () -> airport.addFlight(flight, isDeparting),
             info,
-           comment -> "The exception should be thrown!"
+            comment -> "The exception should be thrown!"
         );
         String message = parameters.get("message");
         Assertions2.assertEquals(message, exception.getMessage(), info, comment -> "The exception message is incorrect!");

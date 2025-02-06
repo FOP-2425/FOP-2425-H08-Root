@@ -107,10 +107,10 @@ public class H08_RubricProvider extends TaskRubricProvider {
      * Defines the rubric for subtask H08.4.4.
      */
     private static final Subtask H08_4_4 = Subtask.builder()
-        .description("H8.4.4 | Removing a booking")
+        .description("H08.4.4 | Removing a booking")
         .testClassName("h08.H08_4_4_Tests")
-        .criterion("Die Methode cancelBooking() storniert eine Buchung korrekt.", "testCancelBooking")
-        .criterion("Die Methode wirft korrekt eine BookingAlreadyCancelledException, wenn die Buchung bereits storniert wurde.", "testCancelBookingBookingAlreadyCancelledException")
+        .criterion("Die Methode cancelBooking() storniert eine Buchung korrekt.", "testCancelBooking", JsonParameterSet.class)
+        .criterion("Die Methode wirft korrekt eine BookingAlreadyCancelledException, wenn die Buchung bereits storniert wurde.", "testCancelBookingBookingAlreadyCancelledException", JsonParameterSet.class)
         .build();
 
     /**

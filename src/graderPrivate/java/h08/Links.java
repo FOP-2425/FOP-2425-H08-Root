@@ -102,4 +102,16 @@ public final class Links {
             Matcher.of(method -> method.typeList().stream().map(TypeLink::reflection).toList().equals(parameters)))
         );
     }
+
+    /**
+     * Returns the link to the method with the given name in the given class.
+     *
+     * @param type       the class to get the method from
+     * @param methodName the name of the method
+     *
+     * @return the link to the method with the given name in the given class
+     */
+    public static MethodLink getMethod(TypeLink type, String methodName) {
+        return Assertions3.assertMethodExists(type, STRING_MATCHER_FACTORY.matcher(methodName));
+    }
 }

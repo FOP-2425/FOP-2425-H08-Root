@@ -43,9 +43,9 @@ public class H08_4_3_TestsPrivate extends H08_Tests {
     );
 
     /**
-     * The link to the addFlight method of the Airport class.
+     * The link to the getFlight method of the Airport class.
      */
-    private MethodLink addFlightLink;
+    private MethodLink getFlightLink;
 
     /**
      * The builder for the test information.
@@ -57,7 +57,7 @@ public class H08_4_3_TestsPrivate extends H08_Tests {
      */
     @BeforeAll
     protected void globalSetup() {
-        addFlightLink = Links.getMethod(BasicTypeLink.of(Airport.class), "addFlight", Flight.class, boolean.class);
+        getFlightLink = Links.getMethod(BasicTypeLink.of(Airport.class), "getFlight", String.class, boolean.class);
     }
 
     /**
@@ -78,7 +78,7 @@ public class H08_4_3_TestsPrivate extends H08_Tests {
         Flight flight = parameters.get("flight");
         boolean isDeparting = parameters.get("isDeparting");
         builder = TestInformation.builder()
-            .subject(addFlightLink)
+            .subject(getFlightLink)
             .input(builder -> builder
                 .add("airport", airport)
                 .add("flight", flight)
@@ -86,7 +86,7 @@ public class H08_4_3_TestsPrivate extends H08_Tests {
             );
     }
 
-    @DisplayName("Die Methode getFlight gibt Flüge korrekt zurück.")
+    @DisplayName("Die Methode cancelBooking() storniert eine Buchung korrekt.")
     @ParameterizedTest
     @JsonParameterSetTest(value = "H08_4_3_testGetFlight.json", customConverters = CUSTOM_CONVERTERS)
     void testGetFlight(JsonParameterSet parameters) {
@@ -96,7 +96,7 @@ public class H08_4_3_TestsPrivate extends H08_Tests {
         Flight flight = parameters.get("flight");
         boolean isDeparting = parameters.get("isDeparting");
 
-        TestInformation info = builder.build();
+        TestInformation info = builder.expect(builder->builder.cause(null)).build();
         Assertions2.call(() -> Assertions2.assertTrue(
                 MockFlight.equals(flight, airport.getFlight(flight.getFlightNumber(), isDeparting)),
                 info, comment -> "Unexpected exception occurred while searching for the flight!"
@@ -115,9 +115,10 @@ public class H08_4_3_TestsPrivate extends H08_Tests {
         Flight flight = parameters.get("flight");
         boolean isDeparting = parameters.get("isDeparting");
 
-        TestInformation info = builder.build();
         TypeLink type = Links.getType("h08.Exceptions", "FlightNotFoundException");
         Class<? extends Exception> exceptionType = (Class<? extends Exception>) type.reflection();
+        TestInformation info = builder.expect(builder -> builder.cause(exceptionType)).build();
+
         Exception exception = Assertions2.assertThrows(
             exceptionType,
             () -> airport.removeFlight(flight.getFlightNumber(), isDeparting),

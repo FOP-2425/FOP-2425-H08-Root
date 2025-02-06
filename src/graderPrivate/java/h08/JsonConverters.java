@@ -3,7 +3,6 @@ package h08;
 import com.fasterxml.jackson.databind.JsonNode;
 import h08.mock.MockAirport;
 import h08.mock.MockFlight;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.tudalgo.algoutils.tutor.general.match.Matcher;
 import org.tudalgo.algoutils.tutor.general.reflections.BasicTypeLink;
@@ -119,5 +118,29 @@ public final class JsonConverters extends org.tudalgo.algoutils.tutor.general.js
             toList(node.get("departingFlights"), JsonConverters::toFlight),
             toList(node.get("arrivingFlights"), JsonConverters::toFlight)
         );
+    }
+
+    /**
+     * Converts a JSON node to a booking.
+     *
+     * @param node the JSON node to convert
+     *
+     * @return the booking represented by the JSON node
+     */
+    public static Booking toBooking(JsonNode node) {
+        if (!node.isObject()) {
+            throw new IllegalArgumentException("Expected an object");
+        }
+        String bookingId = node.get("bookingId").asText();
+        String flightNumber = node.get("flightNumber").asText();
+        String passengerId = node.get("passengerId").asText();
+        Booking booking = new Booking(bookingId, flightNumber, passengerId);
+        if (node.has("isCancelled")) {
+            boolean isCancelled = node.get("isCancelled").asBoolean();
+            FieldLink isCancelledLink = BasicTypeLink.of(Booking.class)
+                .getField(Matcher.of(field -> field.name().equals("isCancelled")));
+            isCancelledLink.set(booking, isCancelled);
+        }
+        return booking;
     }
 }

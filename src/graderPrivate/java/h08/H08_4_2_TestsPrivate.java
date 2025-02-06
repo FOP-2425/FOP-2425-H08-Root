@@ -45,9 +45,9 @@ public class H08_4_2_TestsPrivate extends H08_Tests {
     );
 
     /**
-     * The link to the addFlight method of the Airport class.
+     * The link to the removeFlight method of the Airport class.
      */
-    private MethodLink addFlightLink;
+    private MethodLink removeFlightLink;
 
     /**
      * The builder for the test information.
@@ -59,7 +59,7 @@ public class H08_4_2_TestsPrivate extends H08_Tests {
      */
     @BeforeAll
     protected void globalSetup() {
-        addFlightLink = Links.getMethod(BasicTypeLink.of(Airport.class), "addFlight", Flight.class, boolean.class);
+        removeFlightLink = Links.getMethod(BasicTypeLink.of(Airport.class), "removeFlight", String.class, boolean.class);
     }
 
     /**
@@ -80,7 +80,7 @@ public class H08_4_2_TestsPrivate extends H08_Tests {
         Flight flight = parameters.get("flight");
         boolean isDeparting = parameters.get("isDeparting");
         builder = TestInformation.builder()
-            .subject(addFlightLink)
+            .subject(removeFlightLink)
             .input(builder -> builder
                 .add("airport", airport)
                 .add("flight", flight)
@@ -98,7 +98,7 @@ public class H08_4_2_TestsPrivate extends H08_Tests {
         Flight flight = parameters.get("flight");
         boolean isDeparting = parameters.get("isDeparting");
 
-        TestInformation info = builder.build();
+    TestInformation info = builder.expect(builder->builder.cause(null)).build();
         Assertions2.call(() -> airport.removeFlight(flight.getFlightNumber(), isDeparting), info,
             comment -> "Unexpected exception occured while removing the flight!");
         MockAirport postAirport = parameters.get("airportPost");
@@ -119,14 +119,15 @@ public class H08_4_2_TestsPrivate extends H08_Tests {
         Flight flight = parameters.get("flight");
         boolean isDeparting = parameters.get("isDeparting");
 
-        TestInformation info = builder.build();
         TypeLink type = Links.getType("h08.Exceptions", "FlightNotFoundException");
         Class<? extends Exception> exceptionType = (Class<? extends Exception>) type.reflection();
+        TestInformation info = builder.expect(builder -> builder.cause(exceptionType)).build();
+
         Exception exception = Assertions2.assertThrows(
             exceptionType,
             () -> airport.removeFlight(flight.getFlightNumber(), isDeparting),
             info,
-          comment -> "The exception should be thrown!"
+            comment -> "The exception should be thrown!"
         );
         String message = parameters.get("message");
         Assertions2.assertEquals(message, exception.getMessage(), info, comment -> "The exception message is incorrect!");
