@@ -89,8 +89,8 @@ public class H08_RubricProvider extends TaskRubricProvider {
     private static final Subtask H08_4_2 = Subtask.builder()
         .description("H08.4.2 | Removing a Flight")
         .testClassName("h08.H08_4_2_Tests")
-        .criterion("Die Methode removeFlight entfernt Flüge korrekt aus den Listen.", "testRemoveFlight")
-        .criterion("Die Methode wirft korrekt eine FlightNotFoundException, wenn der Flug nicht gefunden wird.", "testRemoveFlightFlightNotFoundException")
+        .criterion("Die Methode removeFlight entfernt Flüge korrekt aus den Listen.", "testRemoveFlight", JsonParameterSet.class)
+        .criterion("Die Methode wirft korrekt eine FlightNotFoundException, wenn der Flug nicht gefunden wird.", "testRemoveFlightFlightNotFoundException", JsonParameterSet.class)
         .build();
 
     /**

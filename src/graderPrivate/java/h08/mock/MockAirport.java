@@ -31,18 +31,20 @@ public class MockAirport extends Airport {
     /**
      * The departing size field link.
      */
-    private final FieldLink departingSize;
+    private final FieldLink departingSizeLink;
 
     /**
      * The arriving size field link.
      */
-    private final FieldLink arrivingSize;
+    private final FieldLink arrivingSizeLink;
 
     /**
-     * Constructs a new mock airport with the specified airport code and initial capacity.
+     * Constructs a new mock airport with the specified airport code, initial capacity, and flights.
      *
-     * @param airportCode     the code of the airport
-     * @param initialCapacity the initial capacity of the airport
+     * @param airportCode      the code of the airport
+     * @param initialCapacity  the initial capacity of the airport
+     * @param departingFlights the departing flights of the airport
+     * @param arrivingFlights  the arriving flights of the airport
      */
     public MockAirport(
         String airportCode,
@@ -50,14 +52,35 @@ public class MockAirport extends Airport {
         List<MockFlight> departingFlights,
         List<MockFlight> arrivingFlights
     ) {
+        this(airportCode, initialCapacity, departingFlights, arrivingFlights, departingFlights.size(), arrivingFlights.size());
+    }
+
+    /**
+     * Constructs a new mock airport with the specified airport code, initial capacity, and flights.
+     *
+     * @param airportCode      the code of the airport
+     * @param initialCapacity  the initial capacity of the airport
+     * @param departingFlights the departing flights of the airport
+     * @param arrivingFlights  the arriving flights of the airport
+     * @param departingSize    the number of departing flights
+     * @param arrivingSize     the number of arriving flights
+     */
+    public MockAirport(
+        String airportCode,
+        int initialCapacity,
+        List<MockFlight> departingFlights,
+        List<MockFlight> arrivingFlights,
+        int departingSize,
+        int arrivingSize
+    ) {
         super(airportCode, initialCapacity);
         TypeLink type = BasicTypeLink.of(Airport.class);
         departingFlightsLink = type.getField(Matcher.of(field -> field.name().equals("departingFlights")));
         arrivingFlightsLink = type.getField(Matcher.of(field -> field.name().equals("arrivingFlights")));
-        departingSize = type.getField(Matcher.of(field -> field.name().equals("departingSize")));
-        arrivingSize = type.getField(Matcher.of(field -> field.name().equals("arrivingSize")));
-        departingSize.set(this, departingFlights.size());
-        arrivingSize.set(this, arrivingFlights.size());
+        departingSizeLink = type.getField(Matcher.of(field -> field.name().equals("departingSize")));
+        arrivingSizeLink = type.getField(Matcher.of(field -> field.name().equals("arrivingSize")));
+        departingSizeLink.set(this, departingSize);
+        arrivingSizeLink.set(this, arrivingSize);
         copyFlights(departingFlightsLink, departingFlights);
         copyFlights(arrivingFlightsLink, arrivingFlights);
     }
@@ -100,8 +123,8 @@ public class MockAirport extends Airport {
      *
      * @return the number of departing flights of the airport
      */
-    public int getDepartingSize() {
-        return departingSize.get(this);
+    public int getDepartingSizeLink() {
+        return departingSizeLink.get(this);
     }
 
     /**
@@ -109,8 +132,8 @@ public class MockAirport extends Airport {
      *
      * @return the number of arriving flights to the airport
      */
-    public int getArrivingSize() {
-        return arrivingSize.get(this);
+    public int getArrivingSizeLink() {
+        return arrivingSizeLink.get(this);
     }
 
     /**
@@ -154,13 +177,13 @@ public class MockAirport extends Airport {
         return Objects.equals(getAirportCode(), that.getAirportCode())
             && flightsEqual(getDepartingFlights(), departingFlightsLink.<Flight[]>get(that))
             && flightsEqual(getArrivingFlights(), arrivingFlightsLink.<Flight[]>get(that))
-            && getDepartingSize() == departingSize.<Integer>get(that)
-            && getArrivingSize() == arrivingSize.<Integer>get(that);
+            && getDepartingSizeLink() == departingSizeLink.<Integer>get(that)
+            && getArrivingSizeLink() == arrivingSizeLink.<Integer>get(that);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(departingFlightsLink, arrivingFlightsLink, getDepartingSize(), getArrivingSize());
+        return Objects.hash(departingFlightsLink, arrivingFlightsLink, getDepartingSizeLink(), getArrivingSizeLink());
     }
 
     /**

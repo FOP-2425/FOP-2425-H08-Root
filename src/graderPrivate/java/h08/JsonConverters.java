@@ -72,6 +72,9 @@ public final class JsonConverters extends org.tudalgo.algoutils.tutor.general.js
      * @return the flight represented by the JSON node
      */
     public static MockFlight toFlight(JsonNode node) {
+        if (node.isNull()) {
+            return null;
+        }
         if (!node.isObject()) {
             throw new IllegalArgumentException("Expected an object");
         }
@@ -97,6 +100,16 @@ public final class JsonConverters extends org.tudalgo.algoutils.tutor.general.js
     public static MockAirport toAirport(JsonNode node) {
         if (!node.isObject()) {
             throw new IllegalArgumentException("Expected an object");
+        }
+        if (node.has("departingSize") && node.has("arrivingSize")) {
+            return new MockAirport(
+                node.get("airportCode").asText(),
+                node.get("initialCapacity").asInt(),
+                toList(node.get("departingFlights"), JsonConverters::toFlight),
+                toList(node.get("arrivingFlights"), JsonConverters::toFlight),
+                node.get("departingSize").asInt(),
+                node.get("arrivingSize").asInt()
+            );
         }
         return new MockAirport(
             node.get("airportCode").asText(),
