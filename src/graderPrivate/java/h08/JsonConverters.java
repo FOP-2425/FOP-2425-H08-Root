@@ -3,6 +3,7 @@ package h08;
 import com.fasterxml.jackson.databind.JsonNode;
 import h08.mock.MockAirport;
 import h08.mock.MockFlight;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.tudalgo.algoutils.tutor.general.match.Matcher;
 import org.tudalgo.algoutils.tutor.general.reflections.BasicTypeLink;
@@ -87,6 +88,7 @@ public final class JsonConverters extends org.tudalgo.algoutils.tutor.general.js
         Mockito.when(instance.getDestination()).thenReturn(node.get("destination").asText());
         Mockito.when(instance.getDepartureTime()).thenReturn(toLocalDateTime(node.get("departureTime")).toString());
         Mockito.when(instance.getAvailableSeats()).thenReturn(node.get("availableSeats").asInt());
+        Mockito.when(instance.toString()).thenReturn(node.get("flightNumber").asText());
         return instance;
     }
 

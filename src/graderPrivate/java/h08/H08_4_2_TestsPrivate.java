@@ -98,9 +98,9 @@ public class H08_4_2_TestsPrivate extends H08_Tests {
         Flight flight = parameters.get("flight");
         boolean isDeparting = parameters.get("isDeparting");
 
-        assert builder != null;
         TestInformation info = builder.build();
-        Assertions2.call(() -> airport.removeFlight(flight.getFlightNumber(), isDeparting), info, comment -> "Flight should be removed!");
+        Assertions2.call(() -> airport.removeFlight(flight.getFlightNumber(), isDeparting), info,
+            comment -> "Unexpected exception occured while removing the flight!");
         MockAirport postAirport = parameters.get("airportPost");
         Comparator<Flight> cmp = Comparator.nullsLast(Comparator.comparing(Flight::getFlightNumber));
         Arrays.sort(airport.getDepartingFlights(), cmp);
@@ -126,7 +126,7 @@ public class H08_4_2_TestsPrivate extends H08_Tests {
             exceptionType,
             () -> airport.removeFlight(flight.getFlightNumber(), isDeparting),
             info,
-            comment -> "Flight cannot be removed!"
+          comment -> "The exception should be thrown!"
         );
         String message = parameters.get("message");
         Assertions2.assertEquals(message, exception.getMessage(), info, comment -> "The exception message is incorrect!");

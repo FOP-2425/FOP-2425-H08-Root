@@ -2,6 +2,7 @@ package h08;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import h08.mock.MockAirport;
+import h08.mock.MockFlight;
 import h08.rubric.context.TestInformation;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,20 +16,21 @@ import org.tudalgo.algoutils.tutor.general.json.JsonParameterSet;
 import org.tudalgo.algoutils.tutor.general.json.JsonParameterSetTest;
 import org.tudalgo.algoutils.tutor.general.reflections.BasicTypeLink;
 import org.tudalgo.algoutils.tutor.general.reflections.MethodLink;
+import org.tudalgo.algoutils.tutor.general.reflections.TypeLink;
 
 import java.util.Map;
 import java.util.function.Function;
 
 /**
- * Defines the private tests for the subtask H08.4.1.
+ * Defines the private tests for the subtask H08.4.3.
  *
  * @author Nhan Huynh
  */
 @TestForSubmission
-@DisplayName("H08.4.1 | Adding a Flight")
+@DisplayName("H08.4.3 | Getting a Flight\"")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @SkipAfterFirstFailedTest(TestConstants.SKIP_AFTER_FIRST_FAILED_TEST)
-public class H08_4_1_TestsPrivate extends H08_Tests {
+public class H08_4_3_TestsPrivate extends H08_Tests {
 
     /**
      * The converters used for the test cases using JSON files to read the test data.
@@ -37,7 +39,6 @@ public class H08_4_1_TestsPrivate extends H08_Tests {
         "flight", JsonConverters::toFlight,
         "airport", JsonConverters::toAirport,
         "isDeparting", JsonNode::asBoolean,
-        "airportPost", JsonConverters::toAirport,
         "message", JsonNode::asText
     );
 
@@ -85,10 +86,10 @@ public class H08_4_1_TestsPrivate extends H08_Tests {
             );
     }
 
-    @DisplayName("Die Methode addFlight fügt Flüge korrekt zu abgehenden oder ankommenden Flügen hinzu.")
+    @DisplayName("Die Methode getFlight gibt Flüge korrekt zurück.")
     @ParameterizedTest
-    @JsonParameterSetTest(value = "H08_4_1_testAddFlight.json", customConverters = CUSTOM_CONVERTERS)
-    void testAddFlight(JsonParameterSet parameters) {
+    @JsonParameterSetTest(value = "H08_4_3_testGetFlight.json", customConverters = CUSTOM_CONVERTERS)
+    void testGetFlight(JsonParameterSet parameters) {
         initTest(parameters);
 
         MockAirport airport = parameters.get("airport");
@@ -96,16 +97,18 @@ public class H08_4_1_TestsPrivate extends H08_Tests {
         boolean isDeparting = parameters.get("isDeparting");
 
         TestInformation info = builder.build();
-        Assertions2.call(() -> airport.addFlight(flight, isDeparting), info,
-            comment -> "Unexpected exception occured while adding the flight!");
-        MockAirport postAirport = parameters.get("airportPost");
-        Assertions2.assertEquals(postAirport, airport, info, comment -> "The airport should be modified correctly!");
+        Assertions2.call(() -> Assertions2.assertTrue(
+                MockFlight.equals(flight, airport.getFlight(flight.getFlightNumber(), isDeparting)),
+                info, comment -> "Unexpected exception occurred while searching for the flight!"
+            ),
+            info, comment -> "Flight should be found!");
     }
 
-    @DisplayName("Die Methode prüft und behandelt korrekt falsche Flughafencodes.")
+    @DisplayName("Die Methode wirft korrekt eine FlightNotFoundException, wenn der Flug nicht existiert.")
     @ParameterizedTest
-    @JsonParameterSetTest(value = "H08_4_1_testAddFlightInvalidAirportCode.json", customConverters = CUSTOM_CONVERTERS)
-    void testAddFlightInvalidAirportCode(JsonParameterSet parameters) {
+    @JsonParameterSetTest(value = "H08_4_3_testGetFlightFlightNotFoundException.json", customConverters = CUSTOM_CONVERTERS)
+    @SuppressWarnings("unchecked")
+    void testGetFlightFlightNotFoundException(JsonParameterSet parameters) {
         initTest(parameters);
 
         MockAirport airport = parameters.get("airport");
@@ -113,15 +116,15 @@ public class H08_4_1_TestsPrivate extends H08_Tests {
         boolean isDeparting = parameters.get("isDeparting");
 
         TestInformation info = builder.build();
+        TypeLink type = Links.getType("h08.Exceptions", "FlightNotFoundException");
+        Class<? extends Exception> exceptionType = (Class<? extends Exception>) type.reflection();
         Exception exception = Assertions2.assertThrows(
-            IllegalArgumentException.class,
-            () -> airport.addFlight(flight, isDeparting),
+            exceptionType,
+            () -> airport.removeFlight(flight.getFlightNumber(), isDeparting),
             info,
-           comment -> "The exception should be thrown!"
+            comment -> "The exception should be thrown!"
         );
         String message = parameters.get("message");
         Assertions2.assertEquals(message, exception.getMessage(), info, comment -> "The exception message is incorrect!");
-        MockAirport preAirport = parameters.get("airport");
-        Assertions2.assertEquals(preAirport, airport, info, comment -> "The airport should not be modified!");
     }
 }

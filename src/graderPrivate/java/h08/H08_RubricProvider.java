@@ -99,8 +99,8 @@ public class H08_RubricProvider extends TaskRubricProvider {
     private static final Subtask H08_4_3 = Subtask.builder()
         .description("H08.4.3 | Getting a Flight")
         .testClassName("h08.H08_4_3_Tests")
-        .criterion("Die Methode getFlight gibt Flüge korrekt zurück.", "testGetFlight")
-        .criterion("Die Methode wirft korrekt eine FlightNotFoundException, wenn der Flug nicht existiert.", "testGetFlightFlightNotFoundException")
+        .criterion("Die Methode getFlight gibt Flüge korrekt zurück.", "testGetFlight", JsonParameterSet.class)
+        .criterion("Die Methode wirft korrekt eine FlightNotFoundException, wenn der Flug nicht existiert.", "testGetFlightFlightNotFoundException", JsonParameterSet.class)
         .build();
 
     /**

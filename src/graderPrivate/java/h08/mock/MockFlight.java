@@ -24,6 +24,28 @@ public class MockFlight extends Flight {
         super(flightNumber, departure, destination, departureTime, initialSeats);
     }
 
+    /**
+     * Returns {@code true} if the specified flight is equal to this flight, {@code false} otherwise.
+     *
+     * @param flight the flight to compare
+     * @param other  the mock flight to compare
+     *
+     * @return {@code true} if the specified flight is equal to this flight, {@code false} otherwise
+     */
+    public static boolean equals(Flight flight, Object other) {
+        if (flight == other) {
+            return true;
+        }
+        if (!(other instanceof MockFlight that)) {
+            return false;
+        }
+        return Objects.equals(flight.getFlightNumber(), that.getFlightNumber())
+            && Objects.equals(flight.getDeparture(), that.getDeparture())
+            && Objects.equals(flight.getDestination(), that.getDestination())
+            && Objects.equals(flight.getDepartureTime(), that.getDepartureTime())
+            && flight.getAvailableSeats() == that.getAvailableSeats();
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
