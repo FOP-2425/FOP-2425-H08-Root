@@ -56,7 +56,8 @@ public class MockAirport extends Airport {
         arrivingFlightsLink = type.getField(Matcher.of(field -> field.name().equals("arrivingFlights")));
         departingSize = type.getField(Matcher.of(field -> field.name().equals("departingSize")));
         arrivingSize = type.getField(Matcher.of(field -> field.name().equals("arrivingSize")));
-
+        departingSize.set(this, departingFlights.size());
+        arrivingSize.set(this, arrivingFlights.size());
         copyFlights(departingFlightsLink, departingFlights);
         copyFlights(arrivingFlightsLink, arrivingFlights);
     }
@@ -112,13 +113,47 @@ public class MockAirport extends Airport {
         return arrivingSize.get(this);
     }
 
+    /**
+     * Since we are using Mockito to mock the Flight class, we need to override the equals method to compare the
+     * properties of the Flight class.
+     *
+     * @param flights1 the first array of flights
+     * @param flights2 the second array of flights
+     *
+     * @return true if the flights are equal, false otherwise
+     */
+    private boolean flightsEqual(Flight[] flights1, Flight[] flights2) {
+        if (flights1.length != flights2.length) {
+            return false;
+        }
+        for (int i = 0; i < flights1.length; i++) {
+            Flight flight1 = flights1[i];
+            Flight flight2 = flights2[i];
+            if (flight1 == null && flight2 == null) {
+                continue;
+            }
+            if (flight1 == null) {
+                return false;
+            }
+            if (!Objects.equals(flight1.getFlightNumber(), flight2.getFlightNumber())
+                || !Objects.equals(flight1.getDeparture(), flight2.getDeparture())
+                || !Objects.equals(flight1.getDestination(), flight2.getDestination())
+                || !Objects.equals(flight1.getDepartureTime(), flight2.getDepartureTime())
+                || flight1.getAvailableSeats() != flight2.getAvailableSeats()
+            ) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;
         if (!(object instanceof Airport that)) return false;
         return Objects.equals(getAirportCode(), that.getAirportCode())
-            && Arrays.equals(getDepartingFlights(), departingFlightsLink.<Flight[]>get(that))
-            && Arrays.equals(getArrivingFlights(), arrivingFlightsLink.<Flight[]>get(that))
+            && flightsEqual(getDepartingFlights(), departingFlightsLink.<Flight[]>get(that))
+            && flightsEqual(getArrivingFlights(), arrivingFlightsLink.<Flight[]>get(that))
             && getDepartingSize() == departingSize.<Integer>get(that)
             && getArrivingSize() == arrivingSize.<Integer>get(that);
     }

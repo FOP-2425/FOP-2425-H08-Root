@@ -3,7 +3,6 @@ package h08;
 import com.fasterxml.jackson.databind.JsonNode;
 import h08.mock.MockAirport;
 import h08.rubric.context.TestInformation;
-import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -38,6 +37,7 @@ public class H08_4_1_TestsPrivate extends H08_Tests {
         "flight", JsonConverters::toFlight,
         "airport", JsonConverters::toAirport,
         "isDeparting", JsonNode::asBoolean,
+        "airportPost", JsonConverters::toAirport,
         "message", JsonNode::asText
     );
 
@@ -51,7 +51,7 @@ public class H08_4_1_TestsPrivate extends H08_Tests {
      */
     private TestInformation.TestInformationBuilder builder;
 
-       /**
+    /**
      * Sets up the global test environment.
      */
     @BeforeAll
@@ -59,7 +59,7 @@ public class H08_4_1_TestsPrivate extends H08_Tests {
         addFlightLink = Links.getMethod(BasicTypeLink.of(Airport.class), "addFlight", Flight.class, boolean.class);
     }
 
-       /**
+    /**
      * Sets up the test environment before each test.
      */
     @BeforeEach
@@ -83,6 +83,23 @@ public class H08_4_1_TestsPrivate extends H08_Tests {
                 .add("flight", flight)
                 .add("isDeparting", isDeparting)
             );
+    }
+
+    @DisplayName("Die Methode addFlight fügt Flüge korrekt zu abgehenden oder ankommenden Flügen hinzu.")
+    @ParameterizedTest
+    @JsonParameterSetTest(value = "H08_4_1_testAddFlight.json", customConverters = CUSTOM_CONVERTERS)
+    void testAddFlight(JsonParameterSet parameters) {
+        initTest(parameters);
+
+        MockAirport airport = parameters.get("airport");
+        Flight flight = parameters.get("flight");
+        boolean isDeparting = parameters.get("isDeparting");
+
+        assert builder != null;
+        TestInformation info = builder.build();
+        Assertions2.call(() -> airport.addFlight(flight, isDeparting), info, comment -> "Flight should be added!");
+        MockAirport postAirport = parameters.get("airportPost");
+        Assertions2.assertEquals(postAirport, airport, info, comment -> "The airport should be modified correctly!");
     }
 
     @DisplayName("Die Methode prüft und behandelt korrekt falsche Flughafencodes.")
