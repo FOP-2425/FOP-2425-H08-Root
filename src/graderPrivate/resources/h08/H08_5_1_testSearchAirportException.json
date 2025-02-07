@@ -130,48 +130,7 @@
         }
       ]
     },
-    "airportCode": "JFK-017XY",
-    "airport": {
-      "airportCode": "JFK-017XY",
-      "departingFlights": [
-        {
-          "flightNumber": "VAN-6233",
-          "departure": "JFK-017XY",
-          "destination": "LAX",
-          "departureTime": "2020-12-01 07:00",
-          "initialSeats": 150,
-          "availableSeats": 100
-        },
-        {
-          "flightNumber": "VAN-6234",
-          "departure": "JFK-017XY",
-          "destination": "LAX",
-          "departureTime": "2020-12-01 09:00",
-          "initialSeats": 150,
-          "availableSeats": 100
-        }
-      ],
-      "arrivingFlights": [
-        {
-          "flightNumber": "VAN-6233",
-          "departure": "LAX",
-          "destination": "JFK-017XY",
-          "departureTime": "2020-12-01 08:30",
-          "initialSeats": 150,
-          "availableSeats": 100
-        },
-        {
-          "flightNumber": "VAN-6234",
-          "departure": "LAX",
-          "destination": "JFK-017XY",
-          "departureTime": "2020-12-01 10:30",
-          "initialSeats": 150,
-          "availableSeats": 100
-        }
-      ],
-      "initialCapacity": 3,
-      "departingSize": 2,
-      "arrivingSize": 2
-    }
+    "airportCode": "JFK-0174K",
+    "message": "Airport not found: JFK-0174K"
   }
 ]

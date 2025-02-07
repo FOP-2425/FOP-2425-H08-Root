@@ -1,167 +1,248 @@
 [
   {
-    "airport": {
-      "airportCode": "LAX-022AB",
-      "departingFlights": [],
-      "arrivingFlights": [],
-      "initialCapacity": 1
-    },
-    "flight": {
-      "flightNumber": "VAN-4213",
-      "departure": "LAX-022AB",
-      "destination": "SFO",
-      "departureTime": "2020-12-01 08:00",
-      "initialSeats": 100,
-      "availableSeats": 50
-    },
-    "isDeparting": true,
-    "airportPost": {
-      "airportCode": "LAX-022AB",
+    "preAirport": {
+      "airportCode": "FRA",
+      "initialCapacity": 2,
       "departingFlights": [
         {
-          "flightNumber": "VAN-4213",
-          "departure": "LAX-022AB",
-          "destination": "SFO",
-          "departureTime": "2020-12-01 08:00",
+          "flightNumber": "LH1234",
+          "departure": "FRA",
+          "destination": "ICN",
+          "departureTime": "2025-02-07 13:00",
           "initialSeats": 100,
-          "availableSeats": 50
+          "availableSeats": 1
         }
       ],
       "arrivingFlights": [],
-      "initialCapacity": 1
-    }
-  },
-  {
-    "airport": {
-      "airportCode": "LAX-022AB",
+      "departingSize": 1,
+      "arrivingSize": 0
+    },
+    "postAirport": {
+      "airportCode": "FRA",
+      "initialCapacity": 2,
       "departingFlights": [
         {
-          "flightNumber": "LAX-4213",
-          "departure": "LAX-022AB",
-          "destination": "VAN",
-          "departureTime": "2020-12-01 08:00",
+          "flightNumber": "LH1234",
+          "departure": "FRA",
+          "destination": "ICN",
+          "departureTime": "2025-02-07 13:00",
           "initialSeats": 100,
-          "availableSeats": 50
-        }
-      ],
-      "arrivingFlights": [],
-      "initialCapacity": 1
-    },
-    "flight": {
-      "flightNumber": "VAN-4213",
-      "departure": "LAX-022AB",
-      "destination": "SFO",
-      "departureTime": "2020-12-01 08:00",
-      "initialSeats": 100,
-      "availableSeats": 50
-    },
-    "isDeparting": true,
-    "airportPost": {
-      "airportCode": "LAX-022AB",
-      "departingFlights": [
-        {
-          "flightNumber": "LAX-4213",
-          "departure": "LAX-022AB",
-          "destination": "VAN",
-          "departureTime": "2020-12-01 08:00",
-          "initialSeats": 100,
-          "availableSeats": 50
+          "availableSeats": 1
         },
         {
-          "flightNumber": "VAN-4213",
-          "departure": "LAX-022AB",
-          "destination": "SFO",
-          "departureTime": "2020-12-01 08:00",
+          "flightNumber": "LH1235",
+          "departure": "FRA",
+          "destination": "ICN",
+          "departureTime": "2025-02-07 15:00",
           "initialSeats": 100,
-          "availableSeats": 50
+          "availableSeats": 5
         }
       ],
       "arrivingFlights": [],
-      "initialCapacity": 1
-    }
-  },
-  {
-    "airport": {
-      "airportCode": "LAX-022AB",
-      "departingFlights": [],
-      "arrivingFlights": [],
-      "initialCapacity": 1
+      "departingSize": 2,
+      "arrivingSize": 0
     },
     "flight": {
-      "flightNumber": "VAN-4213",
-      "departure": "SFO",
-      "destination": "LAX-022AB",
-      "departureTime": "2020-12-01 08:00",
+      "flightNumber": "LH1235",
+      "departure": "FRA",
+      "destination": "ICN",
+      "departureTime": "2025-02-07 15:00",
       "initialSeats": 100,
-      "availableSeats": 50
+      "availableSeats": 5
     },
-    "isDeparting": false,
-    "airportPost": {
-      "airportCode": "LAX-022AB",
-      "departingFlights": [
-      ],
-      "arrivingFlights": [
-        {
-          "flightNumber": "VAN-4213",
-          "departure": "SFO",
-          "destination": "LAX-022AB",
-          "departureTime": "2020-12-01 08:00",
-          "initialSeats": 100,
-          "availableSeats": 50
-        }
-      ],
-      "initialCapacity": 1
-    }
+    "isDeparting": true
   },
   {
-    "airport": {
-      "airportCode": "LAX-022AB",
+    "preAirport": {
+      "airportCode": "FRA",
+      "initialCapacity": 2,
       "departingFlights": [
-      ],
-      "arrivingFlights": [
         {
-          "flightNumber": "LAX-4213",
-          "departure": "VAN",
-          "destination": "LAX-022AB",
-          "departureTime": "2020-12-01 08:00",
+          "flightNumber": "LH1234",
+          "departure": "FRA",
+          "destination": "ICN",
+          "departureTime": "2025-02-07 13:00",
           "initialSeats": 100,
-          "availableSeats": 50
-        }
-      ],
-      "initialCapacity": 1
-    },
-    "flight": {
-      "flightNumber": "VAN-4213",
-          "departure": "SFO",
-          "destination": "LAX-022AB",
-          "departureTime": "2020-12-01 08:00",
-          "initialSeats": 100,
-          "availableSeats": 50
-    },
-    "isDeparting": false,
-    "airportPost": {
-      "airportCode": "LAX-022AB",
-      "departingFlights": [
-      ],
-      "arrivingFlights": [
-        {
-          "flightNumber": "LAX-4213",
-          "departure": "VAN",
-          "destination": "LAX-022AB",
-          "departureTime": "2020-12-01 08:00",
-          "initialSeats": 100,
-          "availableSeats": 50
+          "availableSeats": 1
         },
         {
-          "flightNumber": "VAN-4213",
-          "departure": "SFO",
-          "destination": "LAX-022AB",
-          "departureTime": "2020-12-01 08:00",
+          "flightNumber": "LH1235",
+          "departure": "FRA",
+          "destination": "ICN",
+          "departureTime": "2025-02-07 15:00",
           "initialSeats": 100,
-          "availableSeats": 50
+          "availableSeats": 5
         }
       ],
-      "initialCapacity": 1
-    }
+      "arrivingFlights": [],
+      "departingSize": 2,
+      "arrivingSize": 0
+    },
+    "postAirport": {
+      "airportCode": "FRA",
+      "initialCapacity": 2,
+      "departingFlights": [
+        {
+          "flightNumber": "LH1234",
+          "departure": "FRA",
+          "destination": "ICN",
+          "departureTime": "2025-02-07 13:00",
+          "initialSeats": 100,
+          "availableSeats": 1
+        },
+        {
+          "flightNumber": "LH1235",
+          "departure": "FRA",
+          "destination": "ICN",
+          "departureTime": "2025-02-07 15:00",
+          "initialSeats": 100,
+          "availableSeats": 5
+        },
+        {
+          "flightNumber": "LH1236",
+          "departure": "FRA",
+          "destination": "ICN",
+          "departureTime": "2025-02-07 17:00",
+          "initialSeats": 100,
+          "availableSeats": 5
+        },
+        null
+      ],
+      "arrivingFlights": [],
+      "departingSize": 3,
+      "arrivingSize": 0
+    },
+    "flight": {
+      "flightNumber": "LH1236",
+      "departure": "FRA",
+      "destination": "ICN",
+      "departureTime": "2025-02-07 17:00",
+      "initialSeats": 100,
+      "availableSeats": 5
+    },
+    "isDeparting": true
+  },
+  {
+    "preAirport": {
+      "airportCode": "FRA",
+      "initialCapacity": 2,
+      "departingFlights": [],
+      "arrivingFlights": [
+        {
+          "flightNumber": "LH1234",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 13:00",
+          "initialSeats": 100,
+          "availableSeats": 1
+        }
+      ],
+      "departingSize": 0,
+      "arrivingSize": 1
+    },
+    "postAirport": {
+      "airportCode": "FRA",
+      "initialCapacity": 2,
+      "departingFlights": [],
+      "arrivingFlights": [
+        {
+          "flightNumber": "LH1234",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 13:00",
+          "initialSeats": 100,
+          "availableSeats": 1
+        },
+        {
+          "flightNumber": "LH1235",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 15:00",
+          "initialSeats": 100,
+          "availableSeats": 5
+        }
+      ],
+      "departingSize": 0,
+      "arrivingSize": 2
+    },
+    "flight": {
+      "flightNumber": "LH1235",
+      "departure": "ICN",
+      "destination": "FRA",
+      "departureTime": "2025-02-07 15:00",
+      "initialSeats": 100,
+      "availableSeats": 5
+    },
+    "isDeparting": false
+  },
+  {
+    "preAirport": {
+      "airportCode": "FRA",
+      "initialCapacity": 2,
+      "departingFlights": [],
+      "arrivingFlights": [
+        {
+          "flightNumber": "LH1234",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 13:00",
+          "initialSeats": 100,
+          "availableSeats": 1
+        },
+        {
+          "flightNumber": "LH1235",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 15:00",
+          "initialSeats": 100,
+          "availableSeats": 5
+        }
+      ],
+      "departingSize": 0,
+      "arrivingSize": 2
+    },
+    "postAirport": {
+      "airportCode": "FRA",
+      "initialCapacity": 2,
+      "departingFlights": [],
+      "arrivingFlights": [
+        {
+          "flightNumber": "LH1234",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 13:00",
+          "initialSeats": 100,
+          "availableSeats": 1
+        },
+        {
+          "flightNumber": "LH1235",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 15:00",
+          "initialSeats": 100,
+          "availableSeats": 5
+        },
+        {
+          "flightNumber": "LH1236",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 17:00",
+          "initialSeats": 100,
+          "availableSeats": 5
+        },
+        null
+      ],
+      "departingSize": 0,
+      "arrivingSize": 3
+    },
+    "flight": {
+      "flightNumber": "LH1236",
+      "departure": "ICN",
+      "destination": "FRA",
+      "departureTime": "2025-02-07 17:00",
+      "initialSeats": 100,
+      "availableSeats": 5
+    },
+    "isDeparting": false
   }
 ]

@@ -1,20 +1,56 @@
 [
   {
-    "flightNumber": "GG1234",
-    "initialSeats": 10,
-    "availableSeats": 10,
-    "availableSeatsAfterBooking": 9
+    "preFlight": {
+      "flightNumber": "LH1234",
+      "departure": "FRA",
+      "destination": "ICN",
+      "departureTime": "2025-02-07 13:00",
+      "initialSeats": 100,
+      "availableSeats": 100
+    },
+    "postFlight": {
+      "flightNumber": "LH1234",
+      "departure": "FRA",
+      "destination": "ICN",
+      "departureTime": "2025-02-07 13:00",
+      "initialSeats": 100,
+      "availableSeats": 99
+    }
   },
   {
-    "flightNumber": "WP1234",
-    "initialSeats": 5,
-    "availableSeats": 2,
-    "availableSeatsAfterBooking": 1
+    "preFlight": {
+      "flightNumber": "LH1234",
+      "departure": "FRA",
+      "destination": "ICN",
+      "departureTime": "2025-02-07 13:00",
+      "initialSeats": 100,
+      "availableSeats": 67
+    },
+    "postFlight": {
+      "flightNumber": "LH1234",
+      "departure": "FRA",
+      "destination": "ICN",
+      "departureTime": "2025-02-07 13:00",
+      "initialSeats": 100,
+      "availableSeats": 66
+    }
   },
   {
-    "flightNumber": "GG1234",
-    "initialSeats": 22,
-    "availableSeats": 1,
-    "availableSeatsAfterBooking": 0
+    "preFlight": {
+      "flightNumber": "LH1234",
+      "departure": "FRA",
+      "destination": "ICN",
+      "departureTime": "2025-02-07 13:00",
+      "initialSeats": 100,
+      "availableSeats": 1
+    },
+    "postFlight": {
+      "flightNumber": "LH1234",
+      "departure": "FRA",
+      "destination": "ICN",
+      "departureTime": "2025-02-07 13:00",
+      "initialSeats": 100,
+      "availableSeats": 0
+    }
   }
 ]

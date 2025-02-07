@@ -1,56 +1,30 @@
 [
   {
-    "flightNumber": "YF0802",
-    "departure": "Germany",
-    "destination": "London",
-    "departureTime": "2025-02-02 12:00",
-    "initialSeats": 2,
-    "expectedException": false,
-    "exceptionCause": null
-  },
-  {
-    "flightNumber": "YF080",
-    "departure": "Germany",
-    "destination": "London",
-    "departureTime": "2025-02-02 12:00",
-    "initialSeats": 22,
-    "expectedException": false,
-    "exceptionCause": null
-  },
-  {
-    "flightNumber": "YF0802",
+    "flightNumber": "LH1234",
     "departure": null,
-    "destination": "London",
-    "departureTime": "2025-02-02 12:00",
-    "initialSeats": 2,
-    "expectedException": true,
-    "exceptionCause": "departure"
+    "destination": "ICN",
+    "departureTime": "2025-02-07 13:00",
+    "initialSeats": 100
   },
   {
-    "flightNumber": "YF0802",
-    "departure": "Germany",
+    "flightNumber": "LH1234",
+    "departure": "FRA",
     "destination": null,
-    "departureTime": "2025-02-02 12:00",
-    "initialSeats": 2,
-    "expectedException": true,
-    "exceptionCause": "destination"
+    "departureTime": "2025-02-07 13:00",
+    "initialSeats": 100
   },
   {
-    "flightNumber": "YF0802",
-    "departure": "Germany",
-    "destination": "London",
+    "flightNumber": "LH1234",
+    "departure": "FRA",
+    "destination": "ICN",
     "departureTime": null,
-    "initialSeats": 2,
-    "expectedException": true,
-    "exceptionCause": "departure"
+    "initialSeats": 100
   },
   {
-    "flightNumber": "YF0802",
-    "departure": "Germany",
-    "destination": "London",
-    "departureTime": "2025-02-02 12:00",
-    "initialSeats": -2,
-    "expectedException": true,
-    "exceptionCause": "initialSeats"
+    "flightNumber": "LH1234",
+    "departure": "FRA",
+    "destination": "ICN",
+    "departureTime": "2025-02-07 13:00",
+    "initialSeats": -1
   }
 ]

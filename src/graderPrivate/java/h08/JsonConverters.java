@@ -1,13 +1,12 @@
 package h08;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import h08.mock.MockAirport;
-import h08.mock.MockFlight;
-import org.mockito.Mockito;
+import h08.assertions.Mocks;
+import h08.mocks.FakeAirport;
+import org.jetbrains.annotations.Nullable;
 import org.tudalgo.algoutils.tutor.general.match.Matcher;
 import org.tudalgo.algoutils.tutor.general.reflections.BasicTypeLink;
 import org.tudalgo.algoutils.tutor.general.reflections.FieldLink;
-import org.tudalgo.algoutils.tutor.general.reflections.TypeLink;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -29,7 +28,7 @@ public final class JsonConverters extends org.tudalgo.algoutils.tutor.general.js
     /**
      * The date time formatter for the departure time.
      */
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     /**
      * Prevent instantiation of this utility class.
@@ -72,52 +71,39 @@ public final class JsonConverters extends org.tudalgo.algoutils.tutor.general.js
      *
      * @return the flight represented by the JSON node
      */
-    public static MockFlight toFlight(JsonNode node) {
+    public static @Nullable Flight toFlight(JsonNode node) {
         if (node.isNull()) {
             return null;
         }
         if (!node.isObject()) {
-            throw new IllegalArgumentException("Expected an object");
+            throw new IllegalArgumentException("Node is not an object");
         }
-        MockFlight instance = Mockito.mock(MockFlight.class);
-        TypeLink type = BasicTypeLink.of(Flight.class);
-        FieldLink initialSeatsLink = type.getField(Matcher.of(field -> field.name().equals("initialSeats")));
-        initialSeatsLink.set(instance, node.get("initialSeats").asInt());
-        Mockito.when(instance.getFlightNumber()).thenReturn(node.get("flightNumber").asText());
-        Mockito.when(instance.getDeparture()).thenReturn(node.get("departure").asText());
-        Mockito.when(instance.getDestination()).thenReturn(node.get("destination").asText());
-        Mockito.when(instance.getDepartureTime()).thenReturn(toLocalDateTime(node.get("departureTime")).toString());
-        Mockito.when(instance.getAvailableSeats()).thenReturn(node.get("availableSeats").asInt());
-        Mockito.when(instance.toString()).thenReturn(node.get("flightNumber").asText());
-        return instance;
+        return Mocks.createFlight(
+            node.get("flightNumber").asText(),
+            node.get("departure").asText(),
+            node.get("destination").asText(),
+            toLocalDateTime(node.get("departureTime")),
+            node.get("initialSeats").asInt(),
+            node.get("availableSeats").asInt()
+        );
     }
 
     /**
      * Converts a JSON node to an airport.
-     *
      * @param node the JSON node to convert
-     *
      * @return the airport represented by the JSON node
      */
-    public static MockAirport toAirport(JsonNode node) {
+    public static Airport toAirport(JsonNode node) {
         if (!node.isObject()) {
-            throw new IllegalArgumentException("Expected an object");
+            throw new IllegalArgumentException("Node is not an object");
         }
-        if (node.has("departingSize") && node.has("arrivingSize")) {
-            return new MockAirport(
-                node.get("airportCode").asText(),
-                node.get("initialCapacity").asInt(),
-                toList(node.get("departingFlights"), JsonConverters::toFlight),
-                toList(node.get("arrivingFlights"), JsonConverters::toFlight),
-                node.get("departingSize").asInt(),
-                node.get("arrivingSize").asInt()
-            );
-        }
-        return new MockAirport(
+        return new FakeAirport(
             node.get("airportCode").asText(),
             node.get("initialCapacity").asInt(),
-            toList(node.get("departingFlights"), JsonConverters::toFlight),
-            toList(node.get("arrivingFlights"), JsonConverters::toFlight)
+            toList(node.get("departingFlights"), JsonConverters::toFlight).toArray(Flight[]::new),
+            toList(node.get("arrivingFlights"), JsonConverters::toFlight).toArray(Flight[]::new),
+            node.get("departingSize").asInt(),
+            node.get("arrivingSize").asInt()
         );
     }
 

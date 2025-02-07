@@ -1,6 +1,7 @@
 package h08;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import h08.assertions.Links;
 import h08.rubric.context.TestInformation;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -151,9 +152,10 @@ public class H08_1_TestsPrivate extends H08_Tests {
         // Test verification
         String expected = parameters.getString("expectedInitials");
         Assertions2.assertEquals(expected, actual.substring(0, 2), testInformation(parameters),
-            comment -> "The two first characters of the passenger ID should be the initials of the first and last name.");
+            comment -> "The two initials does not match the initials from the first and last name.");
     }
 
+    @DisplayName("Die Methode generatePassengerID stellt sicher, dass der Hash-Code des Datums korrekt im zweiten Teil der ID enthalten ist.")
     @ParameterizedTest
     @JsonParameterSetTest(value = "H08_1_generatePassengerID.json", customConverters = CUSTOM_CONVERTERS)
     void testGeneratePassengerIDDateHash(JsonParameterSet parameters) throws Throwable {
@@ -163,6 +165,6 @@ public class H08_1_TestsPrivate extends H08_Tests {
         // Test verification
         String expected = parameters.getString("expectedHash");
         Assertions2.assertEquals(expected, actual.substring(2), testInformation(parameters),
-            comment -> "The rest of the passenger ID should be the hash code of the date of birth.");
+            comment -> "Hash does not match expected hash.");
     }
 }

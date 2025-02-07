@@ -33,8 +33,14 @@ public class H08_RubricProvider extends TaskRubricProvider {
     private static final Subtask H08_2_1 = Subtask.builder()
         .description("H8.2.1 | Let’s get in shape.")
         .testClassName("h08.H08_2_1_Tests")
-        .criterion("Die Methode validateFlightNumber überprüft die Flugnummer korrekt.", "testValidateFlightNumber", JsonParameterSet.class)
-        .criterion("Der Konstruktor der Klasse Flight enthält assert-Anweisungen, die die Eingaben überprüfen.", "testFlightConstructor", JsonParameterSet.class)
+        .criterion("Die Methode validateFlightNumber überprüft die Flugnummer korrekt.", Map.of(
+            "testValidateFlightNumber", List.of(),
+            "testValidateFlightNumberException", List.of(JsonParameterSet.class)
+        ))
+        .criterion("Der Konstruktor der Klasse Flight enthält assert-Anweisungen, die die Eingaben überprüfen.", Map.of(
+            "testFlightConstructor", List.of(),
+            "testFlightConstructorException", List.of(JsonParameterSet.class)
+        ))
         .build();
 
     /**
@@ -44,14 +50,17 @@ public class H08_RubricProvider extends TaskRubricProvider {
         .description("H08.2.2 | Fasten your seatbelts")
         .testClassName("h08.H08_2_2_Tests")
         .criterion("Die Methode bookSeat() reserviert korrekt Sitzplätze.", "testBookSeat", JsonParameterSet.class)
-        .criterion("Die Methode wirft korrekt eine NoSeatsAvailableException, wenn keine Plätze mehr verfügbar sind.", "testBookSeatNoSeatsAvailableException", JsonParameterSet.class)
+        .criterion("Die Methode wirft korrekt eine NoSeatsAvailableException, wenn keine Plätze mehr verfügbar sind.", Map.of(
+            "testNoSeatsAvailableException", List.of(),
+            "testBookSeatException", List.of()
+        ))
         .build();
 
     /**
      * Defines the rubric for task H08.2.
      */
     private static final Task H08_2 = CompositeTask.builder()
-        .description("h08.H08.2 | Flight Zone")
+        .description("H08.2 | Flight Zone")
         .subtasks(H08_2_1, H08_2_2)
         .build();
 
@@ -80,7 +89,7 @@ public class H08_RubricProvider extends TaskRubricProvider {
         .description("H08.4.1 | Adding a Flight")
         .testClassName("h08.H08_4_1_Tests")
         .criterion("Die Methode addFlight fügt Flüge korrekt zu abgehenden oder ankommenden Flügen hinzu.", "testAddFlight", JsonParameterSet.class)
-        .criterion("Die Methode prüft und behandelt korrekt falsche Flughafencodes.", "testAddFlightInvalidAirportCode", JsonParameterSet.class)
+        .criterion("Die Methode prüft und behandelt korrekt falsche Flughafencodes.", "testAddFlightException", JsonParameterSet.class)
         .build();
 
     /**
@@ -90,7 +99,7 @@ public class H08_RubricProvider extends TaskRubricProvider {
         .description("H08.4.2 | Removing a Flight")
         .testClassName("h08.H08_4_2_Tests")
         .criterion("Die Methode removeFlight entfernt Flüge korrekt aus den Listen.", "testRemoveFlight", JsonParameterSet.class)
-        .criterion("Die Methode wirft korrekt eine FlightNotFoundException, wenn der Flug nicht gefunden wird.", "testRemoveFlightFlightNotFoundException", JsonParameterSet.class)
+        .criterion("Die Methode wirft korrekt eine FlightNotFoundException, wenn der Flug nicht gefunden wird.", "testRemoveFlightException", JsonParameterSet.class)
         .build();
 
     /**
@@ -100,7 +109,7 @@ public class H08_RubricProvider extends TaskRubricProvider {
         .description("H08.4.3 | Getting a Flight")
         .testClassName("h08.H08_4_3_Tests")
         .criterion("Die Methode getFlight gibt Flüge korrekt zurück.", "testGetFlight", JsonParameterSet.class)
-        .criterion("Die Methode wirft korrekt eine FlightNotFoundException, wenn der Flug nicht existiert.", "testGetFlightFlightNotFoundException", JsonParameterSet.class)
+        .criterion("Die Methode wirft korrekt eine FlightNotFoundException, wenn der Flug nicht existiert.", "testGetFlightException", JsonParameterSet.class)
         .build();
 
     /**
@@ -110,7 +119,7 @@ public class H08_RubricProvider extends TaskRubricProvider {
         .description("H08.4.4 | Removing a booking")
         .testClassName("h08.H08_4_4_Tests")
         .criterion("Die Methode cancelBooking() storniert eine Buchung korrekt.", "testCancelBooking", JsonParameterSet.class)
-        .criterion("Die Methode wirft korrekt eine BookingAlreadyCancelledException, wenn die Buchung bereits storniert wurde.", "testCancelBookingBookingAlreadyCancelledException", JsonParameterSet.class)
+        .criterion("Die Methode wirft korrekt eine BookingAlreadyCancelledException, wenn die Buchung bereits storniert wurde.", "testCancelBookingException", JsonParameterSet.class)
         .build();
 
     /**
@@ -127,9 +136,15 @@ public class H08_RubricProvider extends TaskRubricProvider {
     private static final Subtask H08_5_1 = Subtask.builder()
         .description("H8.5.1 | Airport and Flight Lookup")
         .testClassName("h08.H08_5_1_Tests")
-        .criterion("Die Methode searchAirport findet Flughäfen korrekt.", "testSearchAirport", JsonParameterSet.class)
+        .criterion("Die Methode searchAirport findet Flughäfen korrekt.", Map.of(
+            "testSearchAirport", List.of(JsonParameterSet.class),
+            "testSearchAirportException", List.of(JsonParameterSet.class)
+        ))
         .criterion("Die Methode searchFlight durchsucht Flüge korrekt.", "testSearchFlight", JsonParameterSet.class)
-        .criterion("Die Methode getFlight gibt Flüge korrekt zurück.", "testGetFlight", JsonParameterSet.class)
+        .criterion("Die Methode getFlight gibt Flüge korrekt zurück.", Map.of(
+            "testGetFlight", List.of(JsonParameterSet.class),
+            "testGetFlightNull", List.of(JsonParameterSet.class)
+        ))
         .build();
 
     /**

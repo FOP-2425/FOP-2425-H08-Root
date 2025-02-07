@@ -1,10 +1,11 @@
 package h08;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import h08.assertions.Links;
 import h08.rubric.context.TestInformation;
-import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.mockito.Mockito;
@@ -46,14 +47,13 @@ public class H08_2_1_TestsPrivate extends H08_Tests {
         "departureTime", node -> node.isNull() ? null : JsonConverters.toLocalDateTime(node),
         "initialSeats", JsonNode::asInt,
         "availableSeats", JsonNode::asInt,
-        "expectedException", JsonNode::asBoolean,
-        "exceptionCause", node -> node.isNull() ? "No cause" : node.asText()
+        "message", JsonNode::asText
     );
 
     /**
      * The link to the flight class.
      */
-    private TypeLink flightLink;
+    private TypeLink typeLink;
 
     /**
      * Sets up the global test environment.
@@ -61,53 +61,60 @@ public class H08_2_1_TestsPrivate extends H08_Tests {
     @BeforeAll
     protected void globalSetup() {
         super.globalSetup();
-        flightLink = Links.getType(Flight.class);
+        typeLink = Links.getType(Flight.class);
     }
 
-    @ParameterizedTest
-    @JsonParameterSetTest(value = "H08_2_1_testValidateFlightNumber.json", customConverters = CUSTOM_CONVERTERS)
-    void testValidateFlightNumber(JsonParameterSet parameters) throws Throwable {
-        String flightNumber = parameters.get("flightNumber");
-        boolean expectedException = parameters.getBoolean("expectedException");
+    @DisplayName("Die Methode validateFlightNumber wirft keinen Fehler für valide Eingaben.")
+    @Test
+    void testValidateFlightNumber() throws Throwable {
+        String[] flightNumbers = {"LH123", "LH1234"};
         Flight flight = Mockito.mock(Flight.class);
-        MethodLink validateFlightNumber = Links.getMethod(this.flightLink, "validateFlightNumber", String.class);
+        MethodLink methodLink = Links.getMethod(this.typeLink, "validateFlightNumber", String.class);
 
-        TestInformation info = TestInformation.builder()
-            .subject(validateFlightNumber)
-            .input(builder -> builder.add("flightNumber", flightNumber))
-            .expect(builder -> builder.cause(expectedException ? AssertionError.class : null))
-            .build();
+        for (String flightNumber : flightNumbers) {
+            TestInformation info = TestInformation.builder()
+                .subject(methodLink)
+                .input(builder -> builder.add("flightNumber", flightNumber))
+                .expect(builder -> builder.cause(null))
+                .build();
 
-        if (expectedException) {
-            @Nullable Throwable throwable = null;
-            try {
-                validateFlightNumber.invoke(flight, flightNumber);
-            } catch (AssertionError e) {
-                throwable = e;
-            }
-            Assertions2.assertNotNull(throwable, info, comment -> "Invalid flight number");
-        } else {
-            Assertions2.call(() -> validateFlightNumber.invoke(flight, flightNumber), Assertions2.emptyContext(),
-                comment -> "Valid flight number");
+            Assertions2.call(
+                () -> methodLink.invoke(flight, flightNumber),
+                info,
+                comment -> "Valid flight number should not throw an exception");
         }
     }
 
-    @DisplayName("Der Konstruktor der Klasse Flight enthält assert-Anweisungen, die die Eingaben überprüfen.")
+    @DisplayName("Die Methode validateFlightNumber wirft einen Fehler für invalide Eingaben.")
     @ParameterizedTest
-    @JsonParameterSetTest(value = "H08_2_1_testFlightConstructor.json", customConverters = CUSTOM_CONVERTERS)
-    void testFlightConstructor(JsonParameterSet parameters) {
+    @JsonParameterSetTest(value = "H08_2_1_testValidateFlightNumberException.json", customConverters = CUSTOM_CONVERTERS)
+    void testValidateFlightNumberException(JsonParameterSet parameters) throws Throwable {
         String flightNumber = parameters.get("flightNumber");
-        String departure = parameters.get("departure");
-        String destination = parameters.get("destination");
-        LocalDateTime departureTime = parameters.get("departureTime");
-        int initialSeats = parameters.getInt("initialSeats");
-        boolean expectedException = parameters.getBoolean("expectedException");
-        String exceptionCause = parameters.get("exceptionCause");
+        Flight flight = Mockito.mock(Flight.class);
+        MethodLink methodLink = Links.getMethod(this.typeLink, "validateFlightNumber", String.class);
+
+        TestInformation info = TestInformation.builder()
+            .subject(methodLink)
+            .input(builder -> builder.add("flightNumber", flightNumber))
+            .expect(builder -> builder.cause(AssertionError.class))
+            .build();
+
+        assertAssertions(() -> methodLink.invoke(flight, flightNumber), info);
+    }
+
+    @DisplayName("Der Konstruktor der Klasse Flight enthält führt keine assert-Anweisungen aus.")
+    @Test
+    void testFlightConstructor() {
+        String flightNumber = "LH1234";
+        String departure = "FRA";
+        String destination = "ICN";
+        LocalDateTime departureTime = LocalDateTime.of(2025, 2, 7, 13, 0);
+        int initialSeats = 0;
 
         List<TypeLink> parameterTypes = Stream.of(String.class, String.class, String.class, LocalDateTime.class, int.class)
             .<TypeLink>map(BasicTypeLink::of)
             .toList();
-        ConstructorLink constructor = flightLink.getConstructor(Matcher.of(m -> m.typeList().equals(parameterTypes)));
+        ConstructorLink constructor = typeLink.getConstructor(Matcher.of(m -> m.typeList().equals(parameterTypes)));
 
         TestInformation info = TestInformation.builder()
             .subject(constructor)
@@ -117,21 +124,41 @@ public class H08_2_1_TestsPrivate extends H08_Tests {
                 .add("destination", destination)
                 .add("departureTime", departureTime)
                 .add("initialSeats", initialSeats)
-            ).expect(builder -> builder.cause(expectedException ? AssertionError.class : null))
+            ).expect(builder -> builder.cause(null))
+            .build();
+        Assertions2.call(
+            () -> new Flight(flightNumber, departure, destination, departureTime, initialSeats),
+            info,
+            comment -> "Constructor should not throw an exception for valid input."
+        );
+    }
+
+    @DisplayName("Der Konstruktor der Klasse Flight enthält assert-Anweisungen, die die Eingaben überprüfen.")
+    @ParameterizedTest
+    @JsonParameterSetTest(value = "H08_2_1_testFlightConstructor.json", customConverters = CUSTOM_CONVERTERS)
+    void testFlightConstructorException(JsonParameterSet parameters) {
+        String flightNumber = parameters.get("flightNumber");
+        String departure = parameters.get("departure");
+        String destination = parameters.get("destination");
+        LocalDateTime departureTime = parameters.get("departureTime");
+        int initialSeats = parameters.getInt("initialSeats");
+
+        List<TypeLink> parameterTypes = Stream.of(String.class, String.class, String.class, LocalDateTime.class, int.class)
+            .<TypeLink>map(BasicTypeLink::of)
+            .toList();
+        ConstructorLink constructor = typeLink.getConstructor(Matcher.of(m -> m.typeList().equals(parameterTypes)));
+
+        TestInformation info = TestInformation.builder()
+            .subject(constructor)
+            .input(builder -> builder
+                .add("flightNumber", flightNumber)
+                .add("departure", departure)
+                .add("destination", destination)
+                .add("departureTime", departureTime)
+                .add("initialSeats", initialSeats)
+            ).expect(builder -> builder.cause(AssertionError.class))
             .build();
 
-        if (expectedException) {
-            @Nullable Throwable throwable = null;
-            try {
-                Flight instance = new Flight(flightNumber, departure, destination, departureTime, initialSeats);
-            } catch (AssertionError e) {
-                throwable = e;
-            }
-            Assertions2.assertNotNull(throwable, info, comment -> "The constructor should throw an error for "
-                + exceptionCause + ".");
-        } else {
-            Assertions2.call(() -> new Flight(flightNumber, departure, destination, departureTime, initialSeats), info,
-                comment -> "The constructor should not throw an exception if the inputs are correct.");
-        }
+        assertAssertions(() -> new Flight(flightNumber, departure, destination, departureTime, initialSeats), info);
     }
 }

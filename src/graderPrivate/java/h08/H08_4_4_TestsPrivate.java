@@ -1,6 +1,7 @@
 package h08;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import h08.assertions.Links;
 import h08.rubric.context.TestInformation;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -39,16 +40,16 @@ public class H08_4_4_TestsPrivate extends H08_Tests {
     );
 
     /**
-     * The link to the addFlight method of the Airport class.
+     * The link to the cancelBooking method of the Booking class.
      */
-    private MethodLink cancelBookingLink;
+    private MethodLink methodLink;
 
     /**
      * Sets up the global test environment.
      */
     @BeforeAll
     protected void globalSetup() {
-        cancelBookingLink = Links.getMethod(BasicTypeLink.of(Booking.class), "cancelBooking");
+        methodLink = Links.getMethod(BasicTypeLink.of(Booking.class), "cancelBooking");
     }
 
     /**
@@ -60,7 +61,7 @@ public class H08_4_4_TestsPrivate extends H08_Tests {
         Booking booking = parameters.get("booking");
         boolean isCancelled = parameters.getBoolean("isCancelled");
         return TestInformation.builder()
-            .subject(cancelBookingLink)
+            .subject(methodLink)
             .input(builder -> builder
                 .add("booking", booking)
                 .add("isCancelled", isCancelled)
@@ -78,15 +79,15 @@ public class H08_4_4_TestsPrivate extends H08_Tests {
                 add("isCancelled", true)
             ).build();
         Assertions2.call(booking::cancelBooking, info,
-            comment -> "Unexpected exception occurred while cancelling the booking!");
-        Assertions2.assertTrue(booking.isCancelled(), info, comment -> "The booking should be cancelled!");
+            comment -> "Something went wrong while cancelling the booking.");
+        Assertions2.assertTrue(booking.isCancelled(), info, comment -> "The status of the cancellation is not correct.");
     }
 
     @DisplayName("Die Methode wirft korrekt eine BookingAlreadyCancelledException, wenn die Buchung bereits storniert wurde.")
     @ParameterizedTest
-    @JsonParameterSetTest(value = "H08_4_4_testCancelBookingBookingAlreadyCancelledException.json", customConverters = CUSTOM_CONVERTERS)
+    @JsonParameterSetTest(value = "H08_4_4_testCancelBookingException.json", customConverters = CUSTOM_CONVERTERS)
     @SuppressWarnings("unchecked")
-    void testCancelBookingBookingAlreadyCancelledException(JsonParameterSet parameters) {
+    void testCancelBookingException(JsonParameterSet parameters) {
         TypeLink type = Links.getType("h08.Exceptions", "BookingAlreadyCancelledException");
         Class<? extends Exception> exceptionType = (Class<? extends Exception>) type.reflection();
         TestInformation info = info(parameters)
@@ -95,13 +96,18 @@ public class H08_4_4_TestsPrivate extends H08_Tests {
                 .add("isCancelled", parameters.getBoolean("isCancelled")))
             .build();
         Booking booking = parameters.get("booking");
-        Exception exception = Assertions2.assertThrows(
+        Throwable exception = Assertions2.assertThrows(
             exceptionType,
             booking::cancelBooking,
             info,
-            comment -> "The exception should be thrown!"
+            comment -> "Cannot cancel a booking that has already been cancelled."
         );
         String message = parameters.get("message");
-        Assertions2.assertEquals(message, exception.getMessage(), info, comment -> "The exception message is incorrect!");
+        Assertions2.assertEquals(
+            message,
+            exception.getMessage(),
+            info,
+            comment -> "Exception message does not match expected message."
+        );
     }
 }

@@ -1,9 +1,8 @@
 package h08;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import h08.mock.MockFlight;
+import h08.assertions.Links;
 import h08.rubric.context.TestInformation;
-import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -39,8 +38,7 @@ public class H08_5_1_TestsPrivate extends H08_Tests {
      */
     public static final Map<String, Function<JsonNode, ?>> CONVERTERS = Map.of(
         "flightManagement", JsonConverters::toFlightManagement,
-        "airportCode", JsonNode::asText,
-        "airport", node -> node.isNull() ? null : JsonConverters.toAirport(node),
+        "airport", JsonConverters::toAirport,
         "flightNumber", JsonNode::asText,
         "flight", node -> node.isNull() ? null : JsonConverters.toFlight(node),
         "message", node -> node.isNull() ? null : node.asText()
@@ -80,45 +78,62 @@ public class H08_5_1_TestsPrivate extends H08_Tests {
     void testSearchAirport(JsonParameterSet parameters) {
         MethodLink method = Links.getMethod(type, "searchAirport", String.class);
         FlightManagement management = parameters.get("flightManagement");
-        String airportCode = parameters.get("airportCode");
         Airport airport = parameters.get("airport");
-        @Nullable String message = parameters.get("message");
+        TestInformation info = TestInformation.builder()
+            .subject(method)
+            .input(builder -> builder
+                .add("Flight Management", management)
+                .add("airportCode", airport.getAirportCode())
+            )
+            .expect(builder -> builder
+                .cause(null)
+                .add("Result", airport))
+            .build();
+
+        AtomicReference<Airport> result = new AtomicReference<>();
+        Assertions2.call(() -> result.set(method.invoke(management, airport.getAirportCode())),
+            info,
+            comment -> "Unexpected exception occurred while searching for the airport!"
+        );
+        Assertions2.assertEquals(
+            airport,
+            result.get(),
+            info,
+            comment -> "Wrong search result!"
+        );
+
+    }
+
+    @DisplayName("Die Methode searchAirport findet keine Flughäfen korrekt.")
+    @ParameterizedTest
+    @JsonParameterSetTest(value = "H08_5_1_testSearchAirportException.json", customConverters = CUSTOM_CONVERTERS)
+    void testSearchAirportException(JsonParameterSet parameters) {
+        MethodLink method = Links.getMethod(type, "searchAirport", String.class);
+        FlightManagement management = parameters.get("flightManagement");
+        String airportCode = parameters.get("airportCode");
+        String message = parameters.get("message");
+
         TestInformation info = TestInformation.builder()
             .subject(method)
             .input(builder -> builder
                 .add("Flight Management", management)
                 .add("airportCode", airportCode)
             )
-            .expect(builder -> {
-                    builder.cause(message == null ? null : Exception.class);
-                    if (message != null) {
-                        builder.add("Result", airport);
-                    }
-                    return builder;
-                }
-            ).build();
+            .expect(builder -> builder.cause(Exception.class))
+            .build();
 
-        if (message == null) {
-            AtomicReference<Airport> result = new AtomicReference<>();
-            Assertions2.call(() -> result.set(method.invoke(management, airportCode)),
-                info,
-                comment -> "Unexpected exception occurred while searching for the airport!"
-            );
-            Assertions2.assertEquals(
-                airport,
-                result.get(),
-                info,
-                comment -> "Wrong search result!"
-            );
-        } else {
-            Exception exception = Assertions2.assertThrows(
-                Exception.class,
-                () -> method.invoke(management, airportCode),
-                info,
-                comment -> "Expected exception to be thrown!"
-            );
-            Assertions2.assertEquals(message, exception.getMessage(), info, comment -> "Wrong exception message!");
-        }
+        Throwable exception = Assertions2.assertThrows(
+            Exception.class,
+            () -> method.invoke(management, airportCode),
+            info,
+            comment -> "Airport should not be found."
+        );
+        Assertions2.assertEquals(
+            message,
+            exception.getMessage(),
+            info,
+            comment -> "Exception message does not match the expected message."
+        );
     }
 
     @DisplayName("Die Methode searchFlight durchsucht Flüge korrekt.")
@@ -135,18 +150,22 @@ public class H08_5_1_TestsPrivate extends H08_Tests {
             .input(builder -> builder
                 .add("Flight Management", management)
                 .add("airport", airport)
-                .add("flightNumber", flightNumber)
-            )
+                .add("flightNumber", flightNumber))
             .expect(builder -> builder
                 .cause(null)
-                .add("Result", String.valueOf(flight))
-            ).build();
+                .add("Result", String.valueOf(flight)))
+            .build();
         AtomicReference<Flight> result = new AtomicReference<>();
-        Assertions2.call(() -> result.set(method.invoke(management, airport, flightNumber)),
+        Assertions2.call(
+            () -> result.set(method.invoke(management, airport, flightNumber)),
             info,
-            comment -> "Unexpected exception occurred while searching for the airport!"
+            comment -> "Unexpected exception occurred while searching for the airport."
         );
-        Assertions2.assertTrue(MockFlight.equals(flight, result.get()), info, comment -> "Wrong search result!");
+        Assertions2.assertTrue(
+            TutorUtils.equalFlight(flight, result.get()),
+            info,
+            comment -> "The result of the searched flight does not match the expected flight."
+        );
     }
 
     @DisplayName("Die Methode getFlight gibt Flüge korrekt zurück.")
@@ -155,15 +174,12 @@ public class H08_5_1_TestsPrivate extends H08_Tests {
     void testGetFlight(JsonParameterSet parameters) {
         MethodLink method = Links.getMethod(type, "getFlight", String.class);
         FlightManagement management = parameters.get("flightManagement");
-        String flightNumber = parameters.get("flightNumber");
         Flight flight = parameters.get("flight");
-        @Nullable String message = parameters.get("message");
         TestInformation info = TestInformation.builder()
             .subject(method)
             .input(builder -> builder
                 .add("Flight Management", management)
-                .add("flightNumber", flightNumber)
-            )
+                .add("flightNumber", flight.getFlightNumber()))
             .expect(builder -> builder
                 .cause(null)
                 .add("Result", flight)
@@ -172,14 +188,51 @@ public class H08_5_1_TestsPrivate extends H08_Tests {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         System.setOut(new PrintStream(baos));
         AtomicReference<Flight> result = new AtomicReference<>();
-        Assertions2.call(() -> result.set(method.invoke(management, flightNumber)),
+        Assertions2.call(() -> result.set(method.invoke(management, flight.getFlightNumber())),
+            info,
+            comment -> "Unexpected exception occurred while searching for the airport."
+        );
+        Assertions2.assertTrue(
+            TutorUtils.equalFlight(flight, result.get()),
+            info,
+            comment -> "The result of the searched flight does not match the expected flight."
+        );
+    }
+
+    @DisplayName("Die Methode getFlight null zurück, falls kein Flug gefunden werden kann.")
+    @ParameterizedTest
+    @JsonParameterSetTest(value = "H08_5_1_testGetFlightNull.json", customConverters = CUSTOM_CONVERTERS)
+    void testGetFlightNull(JsonParameterSet parameters) {
+        MethodLink method = Links.getMethod(type, "getFlight", String.class);
+        FlightManagement management = parameters.get("flightManagement");
+        Flight flight = parameters.get("flight");
+        TestInformation info = TestInformation.builder()
+            .subject(method)
+            .input(builder -> builder
+                .add("Flight Management", management)
+                .add("flightNumber", flight.getFlightNumber())
+            ).expect(builder -> builder
+                .cause(null)
+                .add("Result", "null")
+            ).build();
+
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(baos));
+        AtomicReference<Flight> result = new AtomicReference<>();
+        Assertions2.call(() -> result.set(method.invoke(management, flight.getFlightNumber())),
             info,
             comment -> "Unexpected exception occurred while searching for the airport!"
         );
-        Assertions2.assertTrue(MockFlight.equals(flight, result.get()), info, comment -> "Wrong search result!");
-
-        if (message != null) {
-            Assertions2.assertEquals(message, baos.toString().trim(), info, comment -> "Wrong exception message!");
-        }
+        Assertions2.assertNull(
+            result.get(),
+            info,
+            comment -> "The result of the searched flight does not match the expected flight."
+        );
+        String message = parameters.get("message");
+        Assertions2.assertEquals(
+            message, baos.toString().trim(),
+            info,
+            comment -> "The output does not match the expected message."
+        );
     }
 }

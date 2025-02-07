@@ -1,515 +1,416 @@
 [
   {
     "airport": {
-      "airportCode": "LAX-022AB",
+      "airportCode": "FRA",
+      "initialCapacity": 3,
       "departingFlights": [
         {
-          "flightNumber": "VAN-4213",
-          "departure": "LAX-022AB",
-          "destination": "SFO",
-          "departureTime": "2020-12-01 08:00",
+          "flightNumber": "VN300",
+          "departure": "FRA",
+          "destination": "SGN",
+          "departureTime": "2025-02-07 13:00",
           "initialSeats": 100,
-          "availableSeats": 50
+          "availableSeats": 1
         },
         {
-          "flightNumber": "VAN-4214",
-          "departure": "LAX-022AB",
-          "destination": "SFO",
-          "departureTime": "2020-12-01 09:00",
+          "flightNumber": "VN400",
+          "departure": "FRA",
+          "destination": "SGN",
+          "departureTime": "2025-02-07 14:00",
           "initialSeats": 100,
-          "availableSeats": 50
+          "availableSeats": 12
         },
         {
-          "flightNumber": "VAN-4215",
-          "departure": "LAX-022AB",
-          "destination": "SFO",
-          "departureTime": "2020-12-01 10:00",
+          "flightNumber": "VN500",
+          "departure": "FRA",
+          "destination": "SGN",
+          "departureTime": "2025-02-07 15:00",
           "initialSeats": 100,
-          "availableSeats": 50
-        },
-        {
-          "flightNumber": "VAN-4216",
-          "departure": "LAX-022AB",
-          "destination": "SFO",
-          "departureTime": "2020-12-01 11:00",
-          "initialSeats": 100,
-          "availableSeats": 50
+          "availableSeats": 2
         }
       ],
       "arrivingFlights": [
         {
-          "flightNumber": "VAN-4213",
-          "departure": "SFO",
-          "destination": "LAX-022AB",
-          "departureTime": "2020-12-01 08:00",
+          "flightNumber": "LH300",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 13:00",
           "initialSeats": 100,
-          "availableSeats": 50
+          "availableSeats": 1
         },
         {
-          "flightNumber": "VAN-4214",
-          "departure": "SFO",
-          "destination": "LAX-022AB",
-          "departureTime": "2020-12-01 09:00",
+          "flightNumber": "LH400",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 14:00",
           "initialSeats": 100,
-          "availableSeats": 50
+          "availableSeats": 12
         },
         {
-          "flightNumber": "VAN-4215",
-          "departure": "SFO",
-          "destination": "LAX-022AB",
-          "departureTime": "2020-12-01 10:00",
+          "flightNumber": "LH500",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 15:00",
           "initialSeats": 100,
-          "availableSeats": 50
-        },
-        {
-          "flightNumber": "VAN-4216",
-          "departure": "SFO",
-          "destination": "LAX-022AB",
-          "departureTime": "2020-12-01 11:00",
-          "initialSeats": 100,
-          "availableSeats": 50
+          "availableSeats": 2
         }
       ],
-      "initialCapacity": 1
+      "departingSize": 3,
+      "arrivingSize": 3
     },
     "flight": {
-      "flightNumber": "VAN-4213",
-      "departure": "LAX-022AB",
-      "destination": "SFO",
-      "departureTime": "2020-12-01 08:00",
+      "flightNumber": "VN300",
+      "departure": "FRA",
+      "destination": "SGN",
+      "departureTime": "2025-02-07 13:00",
       "initialSeats": 100,
-      "availableSeats": 50
+      "availableSeats": 1
     },
-    "isDeparting": true,
-    "departingSize": 4,
-    "arrivingSize": 4
+    "isDeparting": true
   },
   {
     "airport": {
-      "airportCode": "LAX-022AB",
+      "airportCode": "FRA",
+      "initialCapacity": 3,
       "departingFlights": [
         {
-          "flightNumber": "VAN-4213",
-          "departure": "LAX-022AB",
-          "destination": "SFO",
-          "departureTime": "2020-12-01 08:00",
+          "flightNumber": "VN300",
+          "departure": "FRA",
+          "destination": "SGN",
+          "departureTime": "2025-02-07 13:00",
           "initialSeats": 100,
-          "availableSeats": 50
+          "availableSeats": 1
         },
         {
-          "flightNumber": "VAN-4214",
-          "departure": "LAX-022AB",
-          "destination": "SFO",
-          "departureTime": "2020-12-01 09:00",
+          "flightNumber": "VN400",
+          "departure": "FRA",
+          "destination": "SGN",
+          "departureTime": "2025-02-07 14:00",
           "initialSeats": 100,
-          "availableSeats": 50
+          "availableSeats": 12
         },
         {
-          "flightNumber": "VAN-4215",
-          "departure": "LAX-022AB",
-          "destination": "SFO",
-          "departureTime": "2020-12-01 10:00",
+          "flightNumber": "VN500",
+          "departure": "FRA",
+          "destination": "SGN",
+          "departureTime": "2025-02-07 15:00",
           "initialSeats": 100,
-          "availableSeats": 50
-        },
-        {
-          "flightNumber": "VAN-4216",
-          "departure": "LAX-022AB",
-          "destination": "SFO",
-          "departureTime": "2020-12-01 11:00",
-          "initialSeats": 100,
-          "availableSeats": 50
+          "availableSeats": 2
         }
       ],
       "arrivingFlights": [
         {
-          "flightNumber": "VAN-4213",
-          "departure": "SFO",
-          "destination": "LAX-022AB",
-          "departureTime": "2020-12-01 08:00",
+          "flightNumber": "LH300",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 13:00",
           "initialSeats": 100,
-          "availableSeats": 50
+          "availableSeats": 1
         },
         {
-          "flightNumber": "VAN-4214",
-          "departure": "SFO",
-          "destination": "LAX-022AB",
-          "departureTime": "2020-12-01 09:00",
+          "flightNumber": "LH400",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 14:00",
           "initialSeats": 100,
-          "availableSeats": 50
+          "availableSeats": 12
         },
         {
-          "flightNumber": "VAN-4215",
-          "departure": "SFO",
-          "destination": "LAX-022AB",
-          "departureTime": "2020-12-01 10:00",
+          "flightNumber": "LH500",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 15:00",
           "initialSeats": 100,
-          "availableSeats": 50
-        },
-        {
-          "flightNumber": "VAN-4216",
-          "departure": "SFO",
-          "destination": "LAX-022AB",
-          "departureTime": "2020-12-01 11:00",
-          "initialSeats": 100,
-          "availableSeats": 50
+          "availableSeats": 2
         }
       ],
-      "initialCapacity": 1
+      "departingSize": 3,
+      "arrivingSize": 3
     },
     "flight": {
-      "flightNumber": "VAN-4215",
-      "departure": "LAX-022AB",
-      "destination": "SFO",
-      "departureTime": "2020-12-01 10:00",
+      "flightNumber": "VN400",
+      "departure": "FRA",
+      "destination": "SGN",
+      "departureTime": "2025-02-07 14:00",
       "initialSeats": 100,
-      "availableSeats": 50
+      "availableSeats": 12
     },
-    "isDeparting": true,
-    "departingSize": 4,
-    "arrivingSize": 4
+    "isDeparting": true
   },
   {
     "airport": {
-      "airportCode": "LAX-022AB",
+      "airportCode": "FRA",
+      "initialCapacity": 3,
       "departingFlights": [
         {
-          "flightNumber": "VAN-4213",
-          "departure": "LAX-022AB",
-          "destination": "SFO",
-          "departureTime": "2020-12-01 08:00",
+          "flightNumber": "VN300",
+          "departure": "FRA",
+          "destination": "SGN",
+          "departureTime": "2025-02-07 13:00",
           "initialSeats": 100,
-          "availableSeats": 50
+          "availableSeats": 1
         },
         {
-          "flightNumber": "VAN-4214",
-          "departure": "LAX-022AB",
-          "destination": "SFO",
-          "departureTime": "2020-12-01 09:00",
+          "flightNumber": "VN400",
+          "departure": "FRA",
+          "destination": "SGN",
+          "departureTime": "2025-02-07 14:00",
           "initialSeats": 100,
-          "availableSeats": 50
+          "availableSeats": 12
         },
         {
-          "flightNumber": "VAN-4215",
-          "departure": "LAX-022AB",
-          "destination": "SFO",
-          "departureTime": "2020-12-01 10:00",
+          "flightNumber": "VN500",
+          "departure": "FRA",
+          "destination": "SGN",
+          "departureTime": "2025-02-07 15:00",
           "initialSeats": 100,
-          "availableSeats": 50
-        },
-        {
-          "flightNumber": "VAN-4216",
-          "departure": "LAX-022AB",
-          "destination": "SFO",
-          "departureTime": "2020-12-01 11:00",
-          "initialSeats": 100,
-          "availableSeats": 50
+          "availableSeats": 2
         }
       ],
       "arrivingFlights": [
         {
-          "flightNumber": "VAN-4213",
-          "departure": "SFO",
-          "destination": "LAX-022AB",
-          "departureTime": "2020-12-01 08:00",
+          "flightNumber": "LH300",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 13:00",
           "initialSeats": 100,
-          "availableSeats": 50
+          "availableSeats": 1
         },
         {
-          "flightNumber": "VAN-4214",
-          "departure": "SFO",
-          "destination": "LAX-022AB",
-          "departureTime": "2020-12-01 09:00",
+          "flightNumber": "LH400",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 14:00",
           "initialSeats": 100,
-          "availableSeats": 50
+          "availableSeats": 12
         },
         {
-          "flightNumber": "VAN-4215",
-          "departure": "SFO",
-          "destination": "LAX-022AB",
-          "departureTime": "2020-12-01 10:00",
+          "flightNumber": "LH500",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 15:00",
           "initialSeats": 100,
-          "availableSeats": 50
-        },
-        {
-          "flightNumber": "VAN-4216",
-          "departure": "SFO",
-          "destination": "LAX-022AB",
-          "departureTime": "2020-12-01 11:00",
-          "initialSeats": 100,
-          "availableSeats": 50
+          "availableSeats": 2
         }
       ],
-      "initialCapacity": 1
+      "departingSize": 3,
+      "arrivingSize": 3
     },
     "flight": {
-      "flightNumber": "VAN-4216",
-      "departure": "LAX-022AB",
-      "destination": "SFO",
-      "departureTime": "2020-12-01 11:00",
+      "flightNumber": "VN500",
+      "departure": "FRA",
+      "destination": "SGN",
+      "departureTime": "2025-02-07 15:00",
       "initialSeats": 100,
-      "availableSeats": 50
+      "availableSeats": 2
     },
-    "isDeparting": true,
-    "departingSize": 4,
-    "arrivingSize": 4
-  },
-
-
-
-   {
-    "airport": {
-      "airportCode": "LAX-022AB",
-      "departingFlights": [
-        {
-          "flightNumber": "VAN-4213",
-          "departure": "LAX-022AB",
-          "destination": "SFO",
-          "departureTime": "2020-12-01 08:00",
-          "initialSeats": 100,
-          "availableSeats": 50
-        },
-        {
-          "flightNumber": "VAN-4214",
-          "departure": "LAX-022AB",
-          "destination": "SFO",
-          "departureTime": "2020-12-01 09:00",
-          "initialSeats": 100,
-          "availableSeats": 50
-        },
-        {
-          "flightNumber": "VAN-4215",
-          "departure": "LAX-022AB",
-          "destination": "SFO",
-          "departureTime": "2020-12-01 10:00",
-          "initialSeats": 100,
-          "availableSeats": 50
-        },
-        {
-          "flightNumber": "VAN-4216",
-          "departure": "LAX-022AB",
-          "destination": "SFO",
-          "departureTime": "2020-12-01 11:00",
-          "initialSeats": 100,
-          "availableSeats": 50
-        }
-      ],
-      "arrivingFlights": [
-        {
-          "flightNumber": "VAN-4213",
-          "departure": "SFO",
-          "destination": "LAX-022AB",
-          "departureTime": "2020-12-01 08:00",
-          "initialSeats": 100,
-          "availableSeats": 50
-        },
-        {
-          "flightNumber": "VAN-4214",
-          "departure": "SFO",
-          "destination": "LAX-022AB",
-          "departureTime": "2020-12-01 09:00",
-          "initialSeats": 100,
-          "availableSeats": 50
-        },
-        {
-          "flightNumber": "VAN-4215",
-          "departure": "SFO",
-          "destination": "LAX-022AB",
-          "departureTime": "2020-12-01 10:00",
-          "initialSeats": 100,
-          "availableSeats": 50
-        },
-        {
-          "flightNumber": "VAN-4216",
-          "departure": "SFO",
-          "destination": "LAX-022AB",
-          "departureTime": "2020-12-01 11:00",
-          "initialSeats": 100,
-          "availableSeats": 50
-        }
-      ],
-      "initialCapacity": 1
-    },
-    "flight":    {
-          "flightNumber": "VAN-4213",
-          "departure": "SFO",
-          "destination": "LAX-022AB",
-          "departureTime": "2020-12-01 08:00",
-          "initialSeats": 100,
-          "availableSeats": 50
-        },
-    "isDeparting": false,
-    "departingSize": 4,
-    "arrivingSize": 4
+    "isDeparting": true
   },
   {
     "airport": {
-      "airportCode": "LAX-022AB",
+      "airportCode": "FRA",
+      "initialCapacity": 3,
       "departingFlights": [
         {
-          "flightNumber": "VAN-4213",
-          "departure": "LAX-022AB",
-          "destination": "SFO",
-          "departureTime": "2020-12-01 08:00",
+          "flightNumber": "VN300",
+          "departure": "FRA",
+          "destination": "SGN",
+          "departureTime": "2025-02-07 13:00",
           "initialSeats": 100,
-          "availableSeats": 50
+          "availableSeats": 1
         },
         {
-          "flightNumber": "VAN-4214",
-          "departure": "LAX-022AB",
-          "destination": "SFO",
-          "departureTime": "2020-12-01 09:00",
+          "flightNumber": "VN400",
+          "departure": "FRA",
+          "destination": "SGN",
+          "departureTime": "2025-02-07 14:00",
           "initialSeats": 100,
-          "availableSeats": 50
+          "availableSeats": 12
         },
         {
-          "flightNumber": "VAN-4215",
-          "departure": "LAX-022AB",
-          "destination": "SFO",
-          "departureTime": "2020-12-01 10:00",
+          "flightNumber": "VN500",
+          "departure": "FRA",
+          "destination": "SGN",
+          "departureTime": "2025-02-07 15:00",
           "initialSeats": 100,
-          "availableSeats": 50
-        },
-        {
-          "flightNumber": "VAN-4216",
-          "departure": "LAX-022AB",
-          "destination": "SFO",
-          "departureTime": "2020-12-01 11:00",
-          "initialSeats": 100,
-          "availableSeats": 50
+          "availableSeats": 2
         }
       ],
       "arrivingFlights": [
         {
-          "flightNumber": "VAN-4213",
-          "departure": "SFO",
-          "destination": "LAX-022AB",
-          "departureTime": "2020-12-01 08:00",
+          "flightNumber": "LH300",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 13:00",
           "initialSeats": 100,
-          "availableSeats": 50
+          "availableSeats": 1
         },
         {
-          "flightNumber": "VAN-4214",
-          "departure": "SFO",
-          "destination": "LAX-022AB",
-          "departureTime": "2020-12-01 09:00",
+          "flightNumber": "LH400",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 14:00",
           "initialSeats": 100,
-          "availableSeats": 50
+          "availableSeats": 12
         },
         {
-          "flightNumber": "VAN-4215",
-          "departure": "SFO",
-          "destination": "LAX-022AB",
-          "departureTime": "2020-12-01 10:00",
+          "flightNumber": "LH500",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 15:00",
           "initialSeats": 100,
-          "availableSeats": 50
-        },
-        {
-          "flightNumber": "VAN-4216",
-          "departure": "SFO",
-          "destination": "LAX-022AB",
-          "departureTime": "2020-12-01 11:00",
-          "initialSeats": 100,
-          "availableSeats": 50
+          "availableSeats": 2
         }
       ],
-      "initialCapacity": 1
+      "departingSize": 3,
+      "arrivingSize": 3
     },
-    "flight":  {
-          "flightNumber": "VAN-4215",
-          "departure": "SFO",
-          "destination": "LAX-022AB",
-          "departureTime": "2020-12-01 10:00",
-          "initialSeats": 100,
-          "availableSeats": 50
-        },
-    "isDeparting": false,
-    "departingSize": 4,
-    "arrivingSize": 4
+    "flight": {
+      "flightNumber": "LH300",
+      "departure": "ICN",
+      "destination": "FRA",
+      "departureTime": "2025-02-07 13:00",
+      "initialSeats": 100,
+      "availableSeats": 1
+    },
+    "isDeparting": false
   },
   {
     "airport": {
-      "airportCode": "LAX-022AB",
+      "airportCode": "FRA",
+      "initialCapacity": 3,
       "departingFlights": [
         {
-          "flightNumber": "VAN-4213",
-          "departure": "LAX-022AB",
-          "destination": "SFO",
-          "departureTime": "2020-12-01 08:00",
+          "flightNumber": "VN300",
+          "departure": "FRA",
+          "destination": "SGN",
+          "departureTime": "2025-02-07 13:00",
           "initialSeats": 100,
-          "availableSeats": 50
+          "availableSeats": 1
         },
         {
-          "flightNumber": "VAN-4214",
-          "departure": "LAX-022AB",
-          "destination": "SFO",
-          "departureTime": "2020-12-01 09:00",
+          "flightNumber": "VN400",
+          "departure": "FRA",
+          "destination": "SGN",
+          "departureTime": "2025-02-07 14:00",
           "initialSeats": 100,
-          "availableSeats": 50
+          "availableSeats": 12
         },
         {
-          "flightNumber": "VAN-4215",
-          "departure": "LAX-022AB",
-          "destination": "SFO",
-          "departureTime": "2020-12-01 10:00",
+          "flightNumber": "VN500",
+          "departure": "FRA",
+          "destination": "SGN",
+          "departureTime": "2025-02-07 15:00",
           "initialSeats": 100,
-          "availableSeats": 50
-        },
-        {
-          "flightNumber": "VAN-4216",
-          "departure": "LAX-022AB",
-          "destination": "SFO",
-          "departureTime": "2020-12-01 11:00",
-          "initialSeats": 100,
-          "availableSeats": 50
+          "availableSeats": 2
         }
       ],
       "arrivingFlights": [
         {
-          "flightNumber": "VAN-4213",
-          "departure": "SFO",
-          "destination": "LAX-022AB",
-          "departureTime": "2020-12-01 08:00",
+          "flightNumber": "LH300",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 13:00",
           "initialSeats": 100,
-          "availableSeats": 50
+          "availableSeats": 1
         },
         {
-          "flightNumber": "VAN-4214",
-          "departure": "SFO",
-          "destination": "LAX-022AB",
-          "departureTime": "2020-12-01 09:00",
+          "flightNumber": "LH400",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 14:00",
           "initialSeats": 100,
-          "availableSeats": 50
+          "availableSeats": 12
         },
         {
-          "flightNumber": "VAN-4215",
-          "departure": "SFO",
-          "destination": "LAX-022AB",
-          "departureTime": "2020-12-01 10:00",
+          "flightNumber": "LH500",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 15:00",
           "initialSeats": 100,
-          "availableSeats": 50
-        },
-        {
-          "flightNumber": "VAN-4216",
-          "departure": "SFO",
-          "destination": "LAX-022AB",
-          "departureTime": "2020-12-01 11:00",
-          "initialSeats": 100,
-          "availableSeats": 50
+          "availableSeats": 2
         }
       ],
-      "initialCapacity": 1
+      "departingSize": 3,
+      "arrivingSize": 3
     },
-    "flight":    {
-          "flightNumber": "VAN-4216",
-          "departure": "SFO",
-          "destination": "LAX-022AB",
-          "departureTime": "2020-12-01 11:00",
+    "flight": {
+      "flightNumber": "LH400",
+      "departure": "ICN",
+      "destination": "FRA",
+      "departureTime": "2025-02-07 14:00",
+      "initialSeats": 100,
+      "availableSeats": 12
+    },
+    "isDeparting": false
+  },
+  {
+    "airport": {
+      "airportCode": "FRA",
+      "initialCapacity": 3,
+      "departingFlights": [
+        {
+          "flightNumber": "VN300",
+          "departure": "FRA",
+          "destination": "SGN",
+          "departureTime": "2025-02-07 13:00",
           "initialSeats": 100,
-          "availableSeats": 50
+          "availableSeats": 1
         },
-    "isDeparting": false,
-    "departingSize": 4,
-    "arrivingSize": 4
+        {
+          "flightNumber": "VN400",
+          "departure": "FRA",
+          "destination": "SGN",
+          "departureTime": "2025-02-07 14:00",
+          "initialSeats": 100,
+          "availableSeats": 12
+        },
+        {
+          "flightNumber": "VN500",
+          "departure": "FRA",
+          "destination": "SGN",
+          "departureTime": "2025-02-07 15:00",
+          "initialSeats": 100,
+          "availableSeats": 2
+        }
+      ],
+      "arrivingFlights": [
+        {
+          "flightNumber": "LH300",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 13:00",
+          "initialSeats": 100,
+          "availableSeats": 1
+        },
+        {
+          "flightNumber": "LH400",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 14:00",
+          "initialSeats": 100,
+          "availableSeats": 12
+        },
+        {
+          "flightNumber": "LH500",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 15:00",
+          "initialSeats": 100,
+          "availableSeats": 2
+        }
+      ],
+      "departingSize": 3,
+      "arrivingSize": 3
+    },
+    "flight": {
+      "flightNumber": "LH500",
+      "departure": "ICN",
+      "destination": "FRA",
+      "departureTime": "2025-02-07 15:00",
+      "initialSeats": 100,
+      "availableSeats": 2
+    },
+    "isDeparting": false
   }
 ]

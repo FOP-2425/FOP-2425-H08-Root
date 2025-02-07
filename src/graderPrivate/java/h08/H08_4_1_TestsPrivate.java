@@ -1,10 +1,9 @@
 package h08;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import h08.mock.MockAirport;
+import h08.assertions.Links;
 import h08.rubric.context.TestInformation;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -13,7 +12,6 @@ import org.tudalgo.algoutils.tutor.general.annotation.SkipAfterFirstFailedTest;
 import org.tudalgo.algoutils.tutor.general.assertions.Assertions2;
 import org.tudalgo.algoutils.tutor.general.json.JsonParameterSet;
 import org.tudalgo.algoutils.tutor.general.json.JsonParameterSetTest;
-import org.tudalgo.algoutils.tutor.general.reflections.BasicTypeLink;
 import org.tudalgo.algoutils.tutor.general.reflections.MethodLink;
 
 import java.util.Map;
@@ -34,94 +32,86 @@ public class H08_4_1_TestsPrivate extends H08_Tests {
      * The converters used for the test cases using JSON files to read the test data.
      */
     public static final Map<String, Function<JsonNode, ?>> CONVERTERS = Map.of(
+        "preAirport", JsonConverters::toAirport,
+        "postAirport", JsonConverters::toAirport,
         "flight", JsonConverters::toFlight,
-        "airport", JsonConverters::toAirport,
-        "isDeparting", JsonNode::asBoolean,
-        "airportPost", JsonConverters::toAirport,
-        "message", JsonNode::asText
+        "isDeparting", JsonNode::asBoolean
     );
 
     /**
      * The link to the addFlight method of the Airport class.
      */
-    private MethodLink addFlightLink;
+    private MethodLink methodLink;
 
     /**
-     * The builder for the test information.
-     */
-    private TestInformation.TestInformationBuilder builder;
-
-    /**
-     * Sets up the global test environment.
+     * The link to the addFlight method of the Airport class.
      */
     @BeforeAll
     protected void globalSetup() {
-        addFlightLink = Links.getMethod(BasicTypeLink.of(Airport.class), "addFlight", Flight.class, boolean.class);
+        methodLink = Links.getMethod(Links.getType(Airport.class), "addFlight", Flight.class, boolean.class);
     }
 
-    /**
-     * Sets up the test environment before each test.
-     */
-    @BeforeEach
-    void setup() {
-        builder = null;
-    }
-
-    /**
-     * Initializes the test with the given parameters.
-     *
-     * @param parameters the parameters to initialize the test with
-     */
-    private void initTest(JsonParameterSet parameters) {
-        MockAirport airport = parameters.get("airport");
+    private TestInformation.TestInformationBuilder infoBuilder(JsonParameterSet parameters) {
+        Airport preAirport = parameters.get("preAirport");
         Flight flight = parameters.get("flight");
         boolean isDeparting = parameters.get("isDeparting");
-        builder = TestInformation.builder()
-            .subject(addFlightLink)
+        return TestInformation.builder()
+            .subject(methodLink)
             .input(builder -> builder
-                .add("airport", airport)
+                .add("airport", preAirport)
                 .add("flight", flight)
-                .add("isDeparting", isDeparting)
-            );
+                .add("isDeparting", isDeparting));
     }
 
     @DisplayName("Die Methode addFlight fügt Flüge korrekt zu abgehenden oder ankommenden Flügen hinzu.")
     @ParameterizedTest
     @JsonParameterSetTest(value = "H08_4_1_testAddFlight.json", customConverters = CUSTOM_CONVERTERS)
     void testAddFlight(JsonParameterSet parameters) {
-        initTest(parameters);
-
-        MockAirport airport = parameters.get("airport");
+        Airport preAirport = parameters.get("preAirport");
+        Airport postAirport = parameters.get("postAirport");
         Flight flight = parameters.get("flight");
         boolean isDeparting = parameters.get("isDeparting");
 
-        TestInformation info = builder.expect(builder->builder.cause(null)).build();
-        Assertions2.call(() -> airport.addFlight(flight, isDeparting), info,
-            comment -> "Unexpected exception occurred while adding the flight!");
-        MockAirport postAirport = parameters.get("airportPost");
-        Assertions2.assertEquals(postAirport, airport, info, comment -> "The airport should be modified correctly!");
+        TestInformation info = infoBuilder(parameters).expect(builder -> builder
+                .cause(null)
+                .add("airport", postAirport))
+            .build();
+        Assertions2.call(
+            () -> preAirport.addFlight(flight, isDeparting),
+            info,
+            comment -> "Valid depature/destination should not cause an exception."
+        );
+        Assertions2.assertEquals(
+            postAirport,
+            preAirport,
+            info,
+            comment -> "The airport should be updated correctly after adding the flight."
+        );
     }
 
     @DisplayName("Die Methode prüft und behandelt korrekt falsche Flughafencodes.")
     @ParameterizedTest
-    @JsonParameterSetTest(value = "H08_4_1_testAddFlightInvalidAirportCode.json", customConverters = CUSTOM_CONVERTERS)
-    void testAddFlightInvalidAirportCode(JsonParameterSet parameters) {
-        initTest(parameters);
-
-        MockAirport airport = parameters.get("airport");
+    @JsonParameterSetTest(value = "H08_4_1_testAddFlightException.json", customConverters = CUSTOM_CONVERTERS)
+    void testAddFlightException(JsonParameterSet parameters) {
+        Airport preAirport = parameters.get("preAirport");
+        Airport postAirport = parameters.get("postAirport");
         Flight flight = parameters.get("flight");
         boolean isDeparting = parameters.get("isDeparting");
 
-        TestInformation info = builder.expect(builder -> builder.cause(IllegalArgumentException.class)).build();
-        Exception exception = Assertions2.assertThrows(
+        TestInformation info = infoBuilder(parameters)
+            .expect(builder -> builder.cause(IllegalAccessError.class))
+            .build();
+        Assertions2.assertThrows(
             IllegalArgumentException.class,
-            () -> airport.addFlight(flight, isDeparting),
+            () -> preAirport.addFlight(flight, isDeparting),
             info,
-            comment -> "The exception should be thrown!"
+            comment -> "Invalid depature/destination should cause an exception."
         );
-        String message = parameters.get("message");
-        Assertions2.assertEquals(message, exception.getMessage(), info, comment -> "The exception message is incorrect!");
-        MockAirport preAirport = parameters.get("airport");
-        Assertions2.assertEquals(preAirport, airport, info, comment -> "The airport should not be modified!");
+        Assertions2.assertEquals(
+            postAirport,
+            preAirport,
+            info,
+            comment -> "The airport should not be updated when an exception occurs."
+        );
     }
 }

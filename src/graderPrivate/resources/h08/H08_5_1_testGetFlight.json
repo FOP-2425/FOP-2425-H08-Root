@@ -3,265 +3,390 @@
     "flightManagement": {
       "airports": [
         {
-          "airportCode": "LAX-022AB",
+          "airportCode": "FRA",
+          "initialCapacity": 3,
           "departingFlights": [
             {
-              "flightNumber": "VAN-4213A",
-              "departure": "LAX-022AB",
-              "destination": "SFO",
-              "departureTime": "2020-12-01 08:00",
+              "flightNumber": "VN300",
+              "departure": "FRA",
+              "destination": "SGN",
+              "departureTime": "2025-02-07 13:00",
               "initialSeats": 100,
-              "availableSeats": 50
+              "availableSeats": 1
             },
             {
-              "flightNumber": "VAN-4214B",
-              "departure": "LAX-022AB",
-              "destination": "SFO",
-              "departureTime": "2020-12-01 09:00",
+              "flightNumber": "VN400",
+              "departure": "FRA",
+              "destination": "SGN",
+              "departureTime": "2025-02-07 14:00",
               "initialSeats": 100,
-              "availableSeats": 50
+              "availableSeats": 12
+            },
+            {
+              "flightNumber": "VN500",
+              "departure": "FRA",
+              "destination": "SGN",
+              "departureTime": "2025-02-07 15:00",
+              "initialSeats": 100,
+              "availableSeats": 2
             }
           ],
           "arrivingFlights": [
             {
-              "flightNumber": "VAN-4213A",
-              "departure": "SFO",
-              "destination": "LAX-022AB",
-              "departureTime": "2020-12-01 08:00",
+              "flightNumber": "LH300",
+              "departure": "ICN",
+              "destination": "FRA",
+              "departureTime": "2025-02-07 13:00",
               "initialSeats": 100,
-              "availableSeats": 50
+              "availableSeats": 1
             },
             {
-              "flightNumber": "VAN-4214B",
-              "departure": "SFO",
-              "destination": "LAX-022AB",
-              "departureTime": "2020-12-01 09:00",
+              "flightNumber": "LH400",
+              "departure": "ICN",
+              "destination": "FRA",
+              "departureTime": "2025-02-07 14:00",
               "initialSeats": 100,
-              "availableSeats": 50
+              "availableSeats": 12
+            },
+            {
+              "flightNumber": "LH500",
+              "departure": "ICN",
+              "destination": "FRA",
+              "departureTime": "2025-02-07 15:00",
+              "initialSeats": 100,
+              "availableSeats": 2
             }
           ],
-          "initialCapacity": 1
+          "departingSize": 3,
+          "arrivingSize": 3
         },
         {
-          "airportCode": "SFO-045DC",
+          "airportCode": "IATA ",
+          "initialCapacity": 3,
           "departingFlights": [
             {
-              "flightNumber": "VAN-5223C",
-              "departure": "SFO-045DC",
-              "destination": "LAX",
-              "departureTime": "2020-12-01 08:30",
-              "initialSeats": 120,
-              "availableSeats": 80
+              "flightNumber": "IH300",
+              "departure": "IATA",
+              "destination": "SGN",
+              "departureTime": "2025-02-07 13:00",
+              "initialSeats": 100,
+              "availableSeats": 1
             },
             {
-              "flightNumber": "VAN-5224D",
-              "departure": "SFO-045DC",
-              "destination": "LAX",
-              "departureTime": "2020-12-01 10:00",
-              "initialSeats": 120,
-              "availableSeats": 80
+              "flightNumber": "IN400",
+              "departure": "IATA",
+              "destination": "SGN",
+              "departureTime": "2025-02-07 14:00",
+              "initialSeats": 100,
+              "availableSeats": 12
+            },
+            {
+              "flightNumber": "IN500",
+              "departure": "IATA",
+              "destination": "SGN",
+              "departureTime": "2025-02-07 15:00",
+              "initialSeats": 100,
+              "availableSeats": 2
             }
           ],
           "arrivingFlights": [
             {
-              "flightNumber": "VAN-5223C",
-              "departure": "LAX",
-              "destination": "SFO-045DC",
-              "departureTime": "2020-12-01 09:00",
-              "initialSeats": 120,
-              "availableSeats": 80
+              "flightNumber": "IH300",
+              "departure": "ICN",
+              "destination": "IATA",
+              "departureTime": "2025-02-07 13:00",
+              "initialSeats": 100,
+              "availableSeats": 1
             },
             {
-              "flightNumber": "VAN-5224D",
-              "departure": "LAX",
-              "destination": "SFO-045DC",
-              "departureTime": "2020-12-01 11:00",
-              "initialSeats": 120,
-              "availableSeats": 80
-            }
-          ],
-          "initialCapacity": 2
-        },
-        {
-          "airportCode": "JFK-017XY",
-          "departingFlights": [
-            {
-              "flightNumber": "VAN-6233E",
-              "departure": "JFK-017XY",
-              "destination": "LAX",
-              "departureTime": "2020-12-01 07:00",
-              "initialSeats": 150,
-              "availableSeats": 100
+              "flightNumber": "IH400",
+              "departure": "ICN",
+              "destination": "IATA",
+              "departureTime": "2025-02-07 14:00",
+              "initialSeats": 100,
+              "availableSeats": 12
             },
             {
-              "flightNumber": "VAN-6234F",
-              "departure": "JFK-017XY",
-              "destination": "LAX",
-              "departureTime": "2020-12-01 09:00",
-              "initialSeats": 150,
-              "availableSeats": 100
+              "flightNumber": "IH500",
+              "departure": "ICN",
+              "destination": "IATA",
+              "departureTime": "2025-02-07 15:00",
+              "initialSeats": 100,
+              "availableSeats": 2
             }
           ],
-          "arrivingFlights": [
-            {
-              "flightNumber": "VAN-6233E",
-              "departure": "LAX",
-              "destination": "JFK-017XY",
-              "departureTime": "2020-12-01 08:30",
-              "initialSeats": 150,
-              "availableSeats": 100
-            },
-            {
-              "flightNumber": "VAN-6234F",
-              "departure": "LAX",
-              "destination": "JFK-017XY",
-              "departureTime": "2020-12-01 10:30",
-              "initialSeats": 150,
-              "availableSeats": 100
-            }
-          ],
-          "initialCapacity": 3
+          "departingSize": 3,
+          "arrivingSize": 3
         }
       ]
     },
-    "flightNumber": "VAN-5224D",
     "flight": {
-      "flightNumber": "VAN-5224D",
-      "departure": "SFO-045DC",
-      "destination": "LAX",
-      "departureTime": "2020-12-01 10:00",
-      "initialSeats": 120,
-      "availableSeats": 80
-    },
-    "message": null
+      "flightNumber": "VN500",
+      "departure": "FRA",
+      "destination": "SGN",
+      "departureTime": "2025-02-07 15:00",
+      "initialSeats": 100,
+      "availableSeats": 2
+    }
   },
   {
     "flightManagement": {
       "airports": [
         {
-          "airportCode": "LAX-022AB",
+          "airportCode": "FRA",
+          "initialCapacity": 3,
           "departingFlights": [
             {
-              "flightNumber": "VAN-4213A",
-              "departure": "LAX-022AB",
-              "destination": "SFO",
-              "departureTime": "2020-12-01 08:00",
+              "flightNumber": "VN300",
+              "departure": "FRA",
+              "destination": "SGN",
+              "departureTime": "2025-02-07 13:00",
               "initialSeats": 100,
-              "availableSeats": 50
+              "availableSeats": 1
             },
             {
-              "flightNumber": "VAN-4214B",
-              "departure": "LAX-022AB",
-              "destination": "SFO",
-              "departureTime": "2020-12-01 09:00",
+              "flightNumber": "VN400",
+              "departure": "FRA",
+              "destination": "SGN",
+              "departureTime": "2025-02-07 14:00",
               "initialSeats": 100,
-              "availableSeats": 50
+              "availableSeats": 12
+            },
+            {
+              "flightNumber": "VN500",
+              "departure": "FRA",
+              "destination": "SGN",
+              "departureTime": "2025-02-07 15:00",
+              "initialSeats": 100,
+              "availableSeats": 2
             }
           ],
           "arrivingFlights": [
             {
-              "flightNumber": "VAN-4213A",
-              "departure": "SFO",
-              "destination": "LAX-022AB",
-              "departureTime": "2020-12-01 08:00",
+              "flightNumber": "LH300",
+              "departure": "ICN",
+              "destination": "FRA",
+              "departureTime": "2025-02-07 13:00",
               "initialSeats": 100,
-              "availableSeats": 50
+              "availableSeats": 1
             },
             {
-              "flightNumber": "VAN-4214B",
-              "departure": "SFO",
-              "destination": "LAX-022AB",
-              "departureTime": "2020-12-01 09:00",
+              "flightNumber": "LH400",
+              "departure": "ICN",
+              "destination": "FRA",
+              "departureTime": "2025-02-07 14:00",
               "initialSeats": 100,
-              "availableSeats": 50
+              "availableSeats": 12
+            },
+            {
+              "flightNumber": "LH500",
+              "departure": "ICN",
+              "destination": "FRA",
+              "departureTime": "2025-02-07 15:00",
+              "initialSeats": 100,
+              "availableSeats": 2
             }
           ],
-          "initialCapacity": 1
+          "departingSize": 3,
+          "arrivingSize": 3
         },
         {
-          "airportCode": "SFO-045DC",
+          "airportCode": "IATA ",
+          "initialCapacity": 3,
           "departingFlights": [
             {
-              "flightNumber": "VAN-5223C",
-              "departure": "SFO-045DC",
-              "destination": "LAX",
-              "departureTime": "2020-12-01 08:30",
-              "initialSeats": 120,
-              "availableSeats": 80
+              "flightNumber": "IH300",
+              "departure": "IATA",
+              "destination": "SGN",
+              "departureTime": "2025-02-07 13:00",
+              "initialSeats": 100,
+              "availableSeats": 1
             },
             {
-              "flightNumber": "VAN-5224D",
-              "departure": "SFO-045DC",
-              "destination": "LAX",
-              "departureTime": "2020-12-01 10:00",
-              "initialSeats": 120,
-              "availableSeats": 80
+              "flightNumber": "IN400",
+              "departure": "IATA",
+              "destination": "SGN",
+              "departureTime": "2025-02-07 14:00",
+              "initialSeats": 100,
+              "availableSeats": 12
+            },
+            {
+              "flightNumber": "IN500",
+              "departure": "IATA",
+              "destination": "SGN",
+              "departureTime": "2025-02-07 15:00",
+              "initialSeats": 100,
+              "availableSeats": 2
             }
           ],
           "arrivingFlights": [
             {
-              "flightNumber": "VAN-5223C",
-              "departure": "LAX",
-              "destination": "SFO-045DC",
-              "departureTime": "2020-12-01 09:00",
-              "initialSeats": 120,
-              "availableSeats": 80
+              "flightNumber": "IH300",
+              "departure": "ICN",
+              "destination": "IATA",
+              "departureTime": "2025-02-07 13:00",
+              "initialSeats": 100,
+              "availableSeats": 1
             },
             {
-              "flightNumber": "VAN-5224D",
-              "departure": "LAX",
-              "destination": "SFO-045DC",
-              "departureTime": "2020-12-01 11:00",
-              "initialSeats": 120,
-              "availableSeats": 80
-            }
-          ],
-          "initialCapacity": 2
-        },
-        {
-          "airportCode": "JFK-017XY",
-          "departingFlights": [
-            {
-              "flightNumber": "VAN-6233E",
-              "departure": "JFK-017XY",
-              "destination": "LAX",
-              "departureTime": "2020-12-01 07:00",
-              "initialSeats": 150,
-              "availableSeats": 100
+              "flightNumber": "IH400",
+              "departure": "ICN",
+              "destination": "IATA",
+              "departureTime": "2025-02-07 14:00",
+              "initialSeats": 100,
+              "availableSeats": 12
             },
             {
-              "flightNumber": "VAN-6234F",
-              "departure": "JFK-017XY",
-              "destination": "LAX",
-              "departureTime": "2020-12-01 09:00",
-              "initialSeats": 150,
-              "availableSeats": 100
+              "flightNumber": "IH500",
+              "departure": "ICN",
+              "destination": "IATA",
+              "departureTime": "2025-02-07 15:00",
+              "initialSeats": 100,
+              "availableSeats": 2
             }
           ],
-          "arrivingFlights": [
-            {
-              "flightNumber": "VAN-6233E",
-              "departure": "LAX",
-              "destination": "JFK-017XY",
-              "departureTime": "2020-12-01 08:30",
-              "initialSeats": 150,
-              "availableSeats": 100
-            },
-            {
-              "flightNumber": "VAN-6234F",
-              "departure": "LAX",
-              "destination": "JFK-017XY",
-              "departureTime": "2020-12-01 10:30",
-              "initialSeats": 150,
-              "availableSeats": 100
-            }
-          ],
-          "initialCapacity": 3
+          "departingSize": 3,
+          "arrivingSize": 3
         }
       ]
     },
-    "flightNumber": "VAX-5224D",
-    "flight": null,
-    "message": "Error retrieving flight: Flight not found: VAX-5224D"
+    "flight": {
+      "flightNumber": "IH400",
+      "departure": "ICN",
+      "destination": "IATA",
+      "departureTime": "2025-02-07 14:00",
+      "initialSeats": 100,
+      "availableSeats": 12
+    }
+  },
+  {
+    "flightManagement": {
+      "airports": [
+        {
+          "airportCode": "FRA",
+          "initialCapacity": 3,
+          "departingFlights": [
+            {
+              "flightNumber": "VN300",
+              "departure": "FRA",
+              "destination": "SGN",
+              "departureTime": "2025-02-07 13:00",
+              "initialSeats": 100,
+              "availableSeats": 1
+            },
+            {
+              "flightNumber": "VN400",
+              "departure": "FRA",
+              "destination": "SGN",
+              "departureTime": "2025-02-07 14:00",
+              "initialSeats": 100,
+              "availableSeats": 12
+            },
+            {
+              "flightNumber": "VN500",
+              "departure": "FRA",
+              "destination": "SGN",
+              "departureTime": "2025-02-07 15:00",
+              "initialSeats": 100,
+              "availableSeats": 2
+            }
+          ],
+          "arrivingFlights": [
+            {
+              "flightNumber": "LH300",
+              "departure": "ICN",
+              "destination": "FRA",
+              "departureTime": "2025-02-07 13:00",
+              "initialSeats": 100,
+              "availableSeats": 1
+            },
+            {
+              "flightNumber": "LH400",
+              "departure": "ICN",
+              "destination": "FRA",
+              "departureTime": "2025-02-07 14:00",
+              "initialSeats": 100,
+              "availableSeats": 12
+            },
+            {
+              "flightNumber": "LH500",
+              "departure": "ICN",
+              "destination": "FRA",
+              "departureTime": "2025-02-07 15:00",
+              "initialSeats": 100,
+              "availableSeats": 2
+            }
+          ],
+          "departingSize": 3,
+          "arrivingSize": 3
+        },
+        {
+          "airportCode": "IATA ",
+          "initialCapacity": 3,
+          "departingFlights": [
+            {
+              "flightNumber": "IH300",
+              "departure": "IATA",
+              "destination": "SGN",
+              "departureTime": "2025-02-07 13:00",
+              "initialSeats": 100,
+              "availableSeats": 1
+            },
+            {
+              "flightNumber": "IN400",
+              "departure": "IATA",
+              "destination": "SGN",
+              "departureTime": "2025-02-07 14:00",
+              "initialSeats": 100,
+              "availableSeats": 12
+            },
+            {
+              "flightNumber": "IN500",
+              "departure": "IATA",
+              "destination": "SGN",
+              "departureTime": "2025-02-07 15:00",
+              "initialSeats": 100,
+              "availableSeats": 2
+            }
+          ],
+          "arrivingFlights": [
+            {
+              "flightNumber": "IH300",
+              "departure": "ICN",
+              "destination": "IATA",
+              "departureTime": "2025-02-07 13:00",
+              "initialSeats": 100,
+              "availableSeats": 1
+            },
+            {
+              "flightNumber": "IH400",
+              "departure": "ICN",
+              "destination": "IATA",
+              "departureTime": "2025-02-07 14:00",
+              "initialSeats": 100,
+              "availableSeats": 12
+            },
+            {
+              "flightNumber": "IH500",
+              "departure": "ICN",
+              "destination": "IATA",
+              "departureTime": "2025-02-07 15:00",
+              "initialSeats": 100,
+              "availableSeats": 2
+            }
+          ],
+          "departingSize": 3,
+          "arrivingSize": 3
+        }
+      ]
+    },
+    "flight": {
+      "flightNumber": "IN500",
+      "departure": "IATA",
+      "destination": "SGN",
+      "departureTime": "2025-02-07 15:00",
+      "initialSeats": 100,
+      "availableSeats": 2
+    }
   }
 ]

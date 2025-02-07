@@ -1,0 +1,80 @@
+[
+  {
+    "preAirport": {
+      "airportCode": "FRA",
+      "initialCapacity": 2,
+      "departingFlights": [
+        {
+          "flightNumber": "VN300",
+          "departure": "FRA",
+          "destination": "SGN",
+          "departureTime": "2025-02-07 13:00",
+          "initialSeats": 100,
+          "availableSeats": 1
+        }
+      ],
+      "arrivingFlights": [],
+      "departingSize": 1,
+      "arrivingSize": 0
+    },
+    "postAirport": {
+      "airportCode": "FRA",
+      "initialCapacity": 2,
+      "departingFlights": [
+        {
+          "flightNumber": "VN300",
+          "departure": "FRA",
+          "destination": "SGN",
+          "departureTime": "2025-02-07 13:00",
+          "initialSeats": 100,
+          "availableSeats": 1
+        }
+      ],
+      "arrivingFlights": [],
+      "departingSize": 1,
+      "arrivingSize": 0
+    },
+    "flightNumber": "VN302",
+    "isDeparting": true,
+    "message": "Departing flight not found: VN302"
+  },
+  {
+    "preAirport": {
+      "airportCode": "FRA",
+      "initialCapacity": 2,
+      "departingFlights": [
+        {
+          "flightNumber": "VN300",
+          "departure": "SGN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 13:00",
+          "initialSeats": 100,
+          "availableSeats": 1
+        }
+      ],
+      "arrivingFlights": [],
+      "departingSize": 1,
+      "arrivingSize": 0
+    },
+    "postAirport": {
+      "airportCode": "FRA",
+      "initialCapacity": 2,
+      "departingFlights": [
+        {
+          "flightNumber": "VN300",
+          "departure": "SGN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 13:00",
+          "initialSeats": 100,
+          "availableSeats": 1
+        }
+      ],
+      "arrivingFlights": [],
+      "departingSize": 1,
+      "arrivingSize": 0
+    },
+    "flightNumber": "VN303",
+    "isDeparting": false,
+    "message": "Arriving flight not found: VN303"
+  }
+]

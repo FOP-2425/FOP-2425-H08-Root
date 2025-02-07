@@ -1,22 +1,25 @@
 package h08;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import h08.assertions.ClassReference;
+import h08.assertions.Mocks;
 import h08.rubric.context.TestInformation;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.mockito.Mockito;
 import org.sourcegrade.jagr.api.rubric.TestForSubmission;
 import org.tudalgo.algoutils.tutor.general.annotation.SkipAfterFirstFailedTest;
 import org.tudalgo.algoutils.tutor.general.assertions.Assertions2;
 import org.tudalgo.algoutils.tutor.general.json.JsonParameterSet;
 import org.tudalgo.algoutils.tutor.general.json.JsonParameterSetTest;
-import org.tudalgo.algoutils.tutor.general.reflections.FieldLink;
-import org.tudalgo.algoutils.tutor.general.reflections.MethodLink;
+import org.tudalgo.algoutils.tutor.general.match.Matcher;
+import org.tudalgo.algoutils.tutor.general.reflections.BasicTypeLink;
+import org.tudalgo.algoutils.tutor.general.reflections.ConstructorLink;
 import org.tudalgo.algoutils.tutor.general.reflections.TypeLink;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -35,120 +38,82 @@ public class H08_2_2_TestsPrivate extends H08_Tests {
      * The converters used for the test cases using JSON files to read the test data.
      */
     public static final Map<String, Function<JsonNode, ?>> CONVERTERS = Map.of(
-        "flightNumber", JsonNode::asText,
-        "initialSeats", JsonNode::asInt,
-        "availableSeats", JsonNode::asInt,
-        "availableSeatsAfterBooking", JsonNode::asInt,
-        "message", JsonNode::asText
+        "preFlight", JsonConverters::toFlight,
+        "postFlight", JsonConverters::toFlight
     );
 
-    /**
-     * The link to the flight class.
-     */
-    private TypeLink flightLink;
-
-    /**
-     * The link to the flight number field of the Flight class.
-     */
-    private FieldLink flightNumberLink;
-
-    /**
-     * The link to the initial seats field of the Flight class.
-     */
-    private FieldLink initialSeatsLink;
-
-    /**
-     * The link to the available seats field of the Flight class.
-     */
-    private FieldLink availableSeatsLink;
-
-    /**
-     * The flight instance used for testing.
-     */
-    private Flight instance;
-
-    /**
-     * The builder for the test information.
-     */
-    private TestInformation.TestInformationBuilder builder;
-
-    /**
-     * Sets up the global test environment.
-     */
-    @BeforeAll
-    protected void globalSetup() {
-        super.globalSetup();
-        flightLink = Links.getType(Flight.class);
-        flightNumberLink = Links.getField(flightLink, "flightNumber");
-        initialSeatsLink = Links.getField(flightLink, "initialSeats");
-        availableSeatsLink = Links.getField(flightLink, "availableSeats");
-    }
-
-    /**
-     * Sets up the test environment before each test.
-     */
-    @BeforeEach
-    void setup() {
-        instance = null;
-        builder = null;
-    }
-
-    /**
-     * Initializes the test with the given parameters.
-     *
-     * @param parameters the parameters to initialize the test with
-     */
-    private void initTest(JsonParameterSet parameters) {
-        instance = Mockito.mock(Flight.class, Mockito.CALLS_REAL_METHODS);
-        String flightNumber = parameters.get("flightNumber");
-        int initialSeats = parameters.getInt("initialSeats");
-        int availableSeats = parameters.getInt("availableSeats");
-
-        flightNumberLink.set(instance, flightNumber);
-        initialSeatsLink.set(instance, initialSeats);
-        availableSeatsLink.set(instance, availableSeats);
-
-        MethodLink methodLink = Links.getMethod(flightLink, "bookSeat", new Class[0]);
-        builder = TestInformation.builder()
-            .subject(methodLink)
-            .input(builder -> builder
-                .add("initialSeats", initialSeats)
-                .add("availableSeats", availableSeats)
-            );
+    @DisplayName("Die NoSeatsAvailableException ist korrekt implementiert.")
+    @Test
+    void testNoSeatsAvailableException() throws Throwable {
+        ClassReference reference = ClassReference.NO_SEATS_AVAILABLE_EXCEPTION;
+        assertExceptionDefinedCorrectly(reference);
+        TypeLink typeLink = reference.getLink();
+        List<TypeLink> constructorParameterTypes = List.of(BasicTypeLink.of(String.class));
+        ConstructorLink constructorLink = typeLink.getConstructor(
+            Matcher.of(c -> c.typeList().equals(constructorParameterTypes))
+        );
+        String flightNumber = "YF0802";
+        Throwable instance = constructorLink.invoke(flightNumber);
+        String actualMessage = instance.getMessage();
+        String expectedMessage = "No seats available for flight YF0802";
+        TestInformation info = TestInformation.builder()
+            .subject(typeLink)
+            .input(builder -> builder.add("flightNumber", flightNumber))
+            .expect(builder -> builder.add("getMessage()", expectedMessage))
+            .actual(builder -> builder.add("getMessage()", actualMessage))
+            .build();
+        Assertions2.assertEquals(
+            expectedMessage,
+            actualMessage,
+            info,
+            comment -> "Message does not match expected message."
+        );
     }
 
     @DisplayName("Die Methode bookSeat() reserviert korrekt Sitzplätze.")
     @ParameterizedTest
     @JsonParameterSetTest(value = "H08_2_2_testBookSeat.json", customConverters = CUSTOM_CONVERTERS)
-    void testBookSeat(JsonParameterSet parameters) {
-        initTest(parameters);
-
-        int availableSeatsAfterBooking = parameters.getInt("availableSeatsAfterBooking");
-        builder.expect(builder -> builder
-            .add("availableSeats", availableSeatsAfterBooking)
-            .cause(null)
+    void testBookSeat(JsonParameterSet parameters) throws Exception {
+        Flight preFlight = parameters.get("preFlight");
+        Flight postFlight = parameters.get("postFlight");
+        TestInformation.TestInformationBuilder infoBuilder = TestInformation.builder()
+            .input(builder -> builder.add("flight", preFlight))
+            .expect(builder -> builder.add("flight", postFlight));
+        preFlight.bookSeat();
+        TestInformation info = infoBuilder
+            .actual(builder -> builder.add("flight", postFlight))
+            .build();
+        Assertions2.assertTrue(
+            TutorUtils.equalFlight(postFlight, preFlight),
+            info,
+            comment -> "Flight does not match expected flight."
         );
-        Assertions2.call(() -> instance.bookSeat(), builder.build(), comment -> "Seats are available!");
     }
 
-    @DisplayName("Die Methode wirft korrekt eine NoSeatsAvailableException, wenn keine Plätze mehr verfügbar sind.")
-    @ParameterizedTest
-    @JsonParameterSetTest(value = "H08_2_2_testBookSeatNoSeatsAvailableException.json", customConverters = CUSTOM_CONVERTERS)
+    @DisplayName("Die Methode bookSeat() reserviert korrekt Sitzplätze.")
+    @Test
     @SuppressWarnings("unchecked")
-    void testBookSeatNoSeatsAvailableException(JsonParameterSet parameters) {
-        initTest(parameters);
-        TypeLink exception = Links.getType("h08.Exceptions", "NoSeatsAvailableException");
-        Class<? extends Exception> exceptionClass = (Class<? extends Exception>) exception.reflection();
-        builder.expect(builder -> builder.cause(exceptionClass));
-        TestInformation info = builder.build();
-
-        Exception e = Assertions2.assertThrows(
-            exceptionClass,
-            () -> instance.bookSeat(),
-            info,
-            comment -> "No seats available"
+    void testBookSeatException() {
+        Flight flight = Mocks.createFlight(
+            "LH712",
+            "FRA",
+            "ICN",
+            LocalDateTime.of(2025, 2, 7, 13, 0),
+            100,
+            0
         );
-        String message = parameters.get("message");
-        Assertions2.assertEquals(message, e.getMessage(), info, comment -> "Invalid exception message!");
+        ClassReference reference = ClassReference.NO_SEATS_AVAILABLE_EXCEPTION;
+        reference.assertDefined();
+        Class<? extends Exception> exceptionClass = (Class<? extends Exception>) reference.getLink().reflection();
+        TestInformation info = TestInformation.builder()
+            .input(builder -> builder.add("flight", flight))
+            .expect(builder -> builder.cause(exceptionClass))
+            .build();
+        Assertions2.assertThrows(
+            exceptionClass,
+            flight::bookSeat,
+            info,
+            comment -> "%s should be thrown.".formatted(exceptionClass.getSimpleName())
+        );
     }
 }
