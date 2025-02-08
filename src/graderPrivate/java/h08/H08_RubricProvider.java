@@ -154,7 +154,7 @@ public class H08_RubricProvider extends TaskRubricProvider {
         .description("H08.5.2 | Flight and Booking Management")
         .testClassName("h08.H08_5_2_Tests")
         .criterion("Die Methode manageFlight verwaltet Flüge korrekt (Hinzufügen oder Entfernen).", "testManageFlight")
-        .criterion("Die Methode manageFlight prüft korrekt die Flughafencodes.", "testManageFlightInvalidAirportCode")
+        .criterion("Die Methode manageFlight prüft korrekt die Flughafencodes.", "testManageFlightCode")
         .criterion("Die Methode validateAndCheckBooking validiert Buchungsdetails korrekt.", "testValidateAndCheckBooking")
         .criterion("Die Methode validateAndCheckBooking prüft korrekt auf doppelte Buchungen.", "testValidateAndCheckBookingDuplicateBooking")
         .build();
