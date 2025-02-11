@@ -123,7 +123,7 @@ public class ClassReference {
     public static final ClassReference BOOKING_ALREADY_CANCELLED_EXCEPTION = new ClassReference(
         "h08.Exceptions",
         "BookingAlreadyCancelledException",
-        new String[]{"h08.Exceptions.BookingNotFoundException"},
+        new String[]{"h08.Exceptions.FlightNotFoundException"},
         Link.Kind.CLASS,
         Modifier.PUBLIC,
         Modifier.NON_FINAL,

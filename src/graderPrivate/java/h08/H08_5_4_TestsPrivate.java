@@ -76,7 +76,7 @@ public class H08_5_4_TestsPrivate extends H08_Tests {
         System.setOut(out);
     }
 
-    private void assertCancelBookingMessage(JsonParameterSet parameters) {
+    private void assertCancelBookingMessage(JsonParameterSet parameters) throws Throwable {
         BookingManagement management = parameters.<FakeBookingManagement>get("bookingManagement");
         Booking booking = parameters.get("booking");
         String message = parameters.getString("message");
@@ -99,7 +99,7 @@ public class H08_5_4_TestsPrivate extends H08_Tests {
 
     @ParameterizedTest
     @JsonParameterSetTest(value = "H08_5_4_testCancelBooking.json", customConverters = CUSTOM_CONVERTERS)
-    void testCancelBooking(JsonParameterSet parameters) {
+    void testCancelBooking(JsonParameterSet parameters) throws Throwable {
         FakeBookingManagement management = parameters.<FakeBookingManagement>get("bookingManagement");
         Booking booking = Arrays.stream(management.getBookings())
             .filter(b -> TutorUtils.equalBookings(b, parameters.get("booking")))
@@ -123,19 +123,19 @@ public class H08_5_4_TestsPrivate extends H08_Tests {
 
     @ParameterizedTest
     @JsonParameterSetTest(value = "H08_5_4_testCancelBooking.json", customConverters = CUSTOM_CONVERTERS)
-    void testCancelBookingMessage(JsonParameterSet parameters) {
+    void testCancelBookingMessage(JsonParameterSet parameters) throws Throwable {
         assertCancelBookingMessage(parameters);
     }
 
     @ParameterizedTest
     @JsonParameterSetTest(value = "H08_5_4_testCancelBookingAlreadyCancelled.json", customConverters = CUSTOM_CONVERTERS)
-    void testCancelBookingAlreadyCancelled(JsonParameterSet parameters) {
+    void testCancelBookingAlreadyCancelled(JsonParameterSet parameters) throws Throwable {
         assertCancelBookingMessage(parameters);
     }
 
     @ParameterizedTest
     @JsonParameterSetTest(value = "H08_5_4_testCancelBookingNotFound.json", customConverters = CUSTOM_CONVERTERS)
-    void testCancelBookingNotFound(JsonParameterSet parameters) {
+    void testCancelBookingNotFound(JsonParameterSet parameters) throws Throwable {
         assertCancelBookingMessage(parameters);
     }
 }

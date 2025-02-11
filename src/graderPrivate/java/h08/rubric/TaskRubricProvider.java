@@ -32,8 +32,8 @@ public abstract class TaskRubricProvider implements RubricProvider {
     /**
      * Creates a new TaskRubricProvider with the given task number, title, and whether the tests are public or private.
      *
-     * @param taskNumber  the task number of the assignment
-     * @param title       the title of the assignment
+     * @param taskNumber   the task number of the assignment
+     * @param title        the title of the assignment
      * @param privateTests whether the tests are public or private
      */
     public TaskRubricProvider(int taskNumber, String title, boolean privateTests) {

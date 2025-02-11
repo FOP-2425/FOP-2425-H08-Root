@@ -53,7 +53,7 @@ public class H08_5_2_TestsPrivate extends H08_Tests {
     @ParameterizedTest
     @JsonParameterSetTest(value = "H08_5_2_validateAndCheckBookingDuplicate.json", customConverters = CUSTOM_CONVERTERS)
     @SuppressWarnings("unchecked")
-    void validateAndCheckBookingDuplicate(JsonParameterSet parameters) {
+    void validateAndCheckBookingDuplicate(JsonParameterSet parameters) throws Throwable {
         TypeLink typeLink = Links.getType(BookingManagement.class);
         MethodLink methodLink = Links.getMethod(typeLink, "validateAndCheckBooking",
             String.class, String.class, String.class);
@@ -91,7 +91,7 @@ public class H08_5_2_TestsPrivate extends H08_Tests {
     @ParameterizedTest
     @JsonParameterSetTest(value = "H08_5_2_validateAndCheckBookingInvalid.json", customConverters = CUSTOM_CONVERTERS)
     @SuppressWarnings("unchecked")
-    void validateAndCheckBookingInvalid(JsonParameterSet parameters) {
+    void validateAndCheckBookingInvalid(JsonParameterSet parameters) throws Throwable {
         TypeLink typeLink = Links.getType(BookingManagement.class);
         MethodLink methodLink = Links.getMethod(typeLink, "validateAndCheckBooking",
             String.class, String.class, String.class);
@@ -127,7 +127,7 @@ public class H08_5_2_TestsPrivate extends H08_Tests {
     }
 
     @Test
-    void testManageFlightCode() {
+    void testManageFlightCode() throws Throwable {
         FlightManagement management = Mockito.mock(FlightManagement.class, Mockito.CALLS_REAL_METHODS);
         TypeLink airportLink = Links.getType(FlightManagement.class);
         MethodLink manageFlightLink = Links.getMethod(airportLink, "manageFlight", String.class, Flight.class, boolean.class);
@@ -158,9 +158,9 @@ public class H08_5_2_TestsPrivate extends H08_Tests {
         Mockito.verify(airport, Mockito.times(1)).addFlight(Mockito.eq(flight), Mockito.anyBoolean());
     }
 
-        @ParameterizedTest
+    @ParameterizedTest
     @JsonParameterSetTest(value = "H08_5_2_testManageFlight.json", customConverters = CUSTOM_CONVERTERS)
-    void testManageFlight(JsonParameterSet parameters) {
+    void testManageFlight(JsonParameterSet parameters) throws Throwable {
         FlightManagement management = parameters.get("flightManagement");
         String airportCode = parameters.get("airportCode");
         Flight flight = parameters.get("flight");

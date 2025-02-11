@@ -67,7 +67,7 @@ public class H08_5_3_TestsPrivate extends H08_Tests {
         System.setOut(out);
     }
 
-    private void assertBooking(JsonParameterSet parameters, MethodLink method) {
+    private void assertBooking(JsonParameterSet parameters, MethodLink method) throws Throwable {
         BookingManagement management = parameters.<FakeBookingManagement>get("bookingManagement");
         Booking booking = parameters.get("booking");
         TestInformation info = TestInformation.builder()
@@ -92,14 +92,14 @@ public class H08_5_3_TestsPrivate extends H08_Tests {
 
     @ParameterizedTest
     @JsonParameterSetTest(value = "H08_5_3_testSearchBooking.json", customConverters = CUSTOM_CONVERTERS)
-    void testSearchBooking(JsonParameterSet parameters) {
+    void testSearchBooking(JsonParameterSet parameters) throws Throwable {
         assertBooking(parameters, Links.getMethod(type, "searchBooking", String.class));
     }
 
     @ParameterizedTest
     @JsonParameterSetTest(value = "H08_5_3_testSearchBookingException.json", customConverters = CUSTOM_CONVERTERS)
     @SuppressWarnings("unchecked")
-    void testSearchBookingException(JsonParameterSet parameters) {
+    void testSearchBookingException(JsonParameterSet parameters) throws Throwable {
         BookingManagement management = parameters.<FakeBookingManagement>get("bookingManagement");
         Booking booking = parameters.get("booking");
         MethodLink method = Links.getMethod(type, "searchBooking", String.class);
@@ -129,7 +129,7 @@ public class H08_5_3_TestsPrivate extends H08_Tests {
 
     @ParameterizedTest
     @JsonParameterSetTest(value = "H08_5_3_testGetBooking.json", customConverters = CUSTOM_CONVERTERS)
-    void testGetBooking(JsonParameterSet parameters) {
+    void testGetBooking(JsonParameterSet parameters) throws Throwable {
         assertBooking(parameters, Links.getMethod(type, "getBooking", String.class));
     }
 

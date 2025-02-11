@@ -44,8 +44,8 @@ public class FlightManagement {
     /**
      * Manages the addition or removal of a flight for a specific airport.
      *
-     * @param airportCode the airport code where the flight should be managed
-     * @param flight      the flight to be added or removed
+     * @param airportCode    the airport code where the flight should be managed
+     * @param flight         the flight to be added or removed
      * @param isAddOperation if true, the flight will be added; if false, the flight will be removed
      */
     public void manageFlight(String airportCode, Flight flight, boolean isAddOperation) {
@@ -57,8 +57,9 @@ public class FlightManagement {
                 try {
                     airport.addFlight(flight, true);
                     operationSuccessful = true;
-                } catch (Exception ignored) {}
-                if(!operationSuccessful) {
+                } catch (Exception ignored) {
+                }
+                if (!operationSuccessful) {
                     try {
                         airport.addFlight(flight, false);
                     } catch (Exception e2) {
@@ -69,8 +70,9 @@ public class FlightManagement {
                 try {
                     airport.removeFlight(flightNumber, true);
                     operationSuccessful = true;
-                } catch (Exception ignored) {}
-                if(!operationSuccessful) {
+                } catch (Exception ignored) {
+                }
+                if (!operationSuccessful) {
                     try {
                         airport.removeFlight(flightNumber, false);
                     } catch (Exception e2) {
@@ -89,6 +91,7 @@ public class FlightManagement {
      *
      * @param airportCode  the airport code from which the flight should be returned
      * @param flightNumber the flight number of the flight
+     *
      * @return a flight from a specific airport
      */
     public Flight getFlight(String airportCode, String flightNumber) {
@@ -109,9 +112,10 @@ public class FlightManagement {
      * Returns a flight with a specified flight number.
      *
      * @param flightNumber the flight number of the flight
+     *
      * @return a flight with a specified flight number
      */
-    public Flight getFlight(String flightNumber){
+    public Flight getFlight(String flightNumber) {
         for (int i = 0; i < size; i++) {
             Flight flight = searchFlight(airports[i], flightNumber);
             if (flight != null) {
@@ -126,6 +130,7 @@ public class FlightManagement {
      * Searches for an airport by airport code.
      *
      * @param airportCode the airport code
+     *
      * @return an airport by airport code
      * @throws Exception if the airport ist not found
      */
@@ -143,15 +148,18 @@ public class FlightManagement {
      *
      * @param airport      the airport in which the flight should be searched
      * @param flightNumber the flight number of the flight
+     *
      * @return a flight in departing or arriving flights
      */
     private Flight searchFlight(Airport airport, String flightNumber) {
         try {
-            return airport.getFlight(flightNumber,true);
-        } catch (FlightNotFoundException ignored) {}
+            return airport.getFlight(flightNumber, true);
+        } catch (FlightNotFoundException ignored) {
+        }
         try {
-            return airport.getFlight(flightNumber,false);
-        } catch (FlightNotFoundException ignored) {}
+            return airport.getFlight(flightNumber, false);
+        } catch (FlightNotFoundException ignored) {
+        }
         return null;
     }
 }

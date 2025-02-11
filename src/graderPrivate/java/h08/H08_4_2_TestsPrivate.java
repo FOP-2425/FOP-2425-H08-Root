@@ -5,7 +5,6 @@ import h08.Exceptions.FlightNotFoundException;
 import h08.assertions.Links;
 import h08.mocks.FakeAirport;
 import h08.rubric.context.TestInformation;
-import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.TestInstance;
@@ -72,9 +71,9 @@ public class H08_4_2_TestsPrivate extends H08_Tests {
     @DisplayName("Die Methode removeFlight entfernt Flüge korrekt aus den Listen.")
     @ParameterizedTest
     @JsonParameterSetTest(value = "H08_4_2_testRemoveFlight.json", customConverters = CUSTOM_CONVERTERS)
-    void testRemoveFlight(JsonParameterSet parameters) {
+    void testRemoveFlight(JsonParameterSet parameters) throws Throwable {
         FakeAirport preAirport = (FakeAirport) parameters.<Airport>get("preAirport");
-        FakeAirport postAirport = (FakeAirport)  parameters.<Airport>get("postAirport");
+        FakeAirport postAirport = (FakeAirport) parameters.<Airport>get("postAirport");
         String flightNumber = parameters.get("flightNumber");
         boolean isDeparting = parameters.get("isDeparting");
 
@@ -103,7 +102,7 @@ public class H08_4_2_TestsPrivate extends H08_Tests {
     @DisplayName("Die Methode wirft korrekt eine FlightNotFoundException, wenn der Flug nicht gefunden wird.")
     @ParameterizedTest
     @JsonParameterSetTest(value = "H08_4_2_testRemoveFlightException.json", customConverters = CUSTOM_CONVERTERS)
-    void testRemoveFlightException(JsonParameterSet parameters) {
+    void testRemoveFlightException(JsonParameterSet parameters) throws Throwable {
         Airport preAirport = parameters.get("preAirport");
         Airport postAirport = parameters.get("postAirport");
         String flightNumber = parameters.get("flightNumber");

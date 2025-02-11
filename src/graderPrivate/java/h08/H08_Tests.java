@@ -1,7 +1,6 @@
 package h08;
 
 import h08.assertions.ClassReference;
-import h08.assertions.Links;
 import h08.rubric.context.TestInformation;
 import org.jetbrains.annotations.Nullable;
 import org.junit.jupiter.api.Assertions;
@@ -16,11 +15,9 @@ import org.tudalgo.algoutils.tutor.general.callable.Callable;
 import org.tudalgo.algoutils.tutor.general.match.Matcher;
 import org.tudalgo.algoutils.tutor.general.reflections.BasicTypeLink;
 import org.tudalgo.algoutils.tutor.general.reflections.ConstructorLink;
-import org.tudalgo.algoutils.tutor.general.reflections.FieldLink;
 import org.tudalgo.algoutils.tutor.general.reflections.TypeLink;
 
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Defines a test skeleton for the H08 assignment.

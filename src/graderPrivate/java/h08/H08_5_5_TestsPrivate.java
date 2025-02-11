@@ -1,7 +1,6 @@
 package h08;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import h08.Exceptions.NoSeatsAvailableException;
 import h08.assertions.ClassReference;
 import h08.assertions.Links;
 import h08.mocks.FakeBookingManagement;
@@ -81,7 +80,7 @@ public class H08_5_5_TestsPrivate extends H08_Tests {
 
     @ParameterizedTest
     @JsonParameterSetTest(value = "H08_5_5_testCreateBooking.json", customConverters = CUSTOM_CONVERTERS)
-    void testCreateBooking(JsonParameterSet parameters) {
+    void testCreateBooking(JsonParameterSet parameters) throws Throwable {
         FakeBookingManagement management = parameters.get("bookingManagement");
         String bookingId = parameters.getString("bookingId");
         String flightNumber = parameters.getString("flightNumber");
@@ -107,7 +106,7 @@ public class H08_5_5_TestsPrivate extends H08_Tests {
     @ParameterizedTest
     @JsonParameterSetTest(value = "H08_5_5_testCreateBooking.json", customConverters = CUSTOM_CONVERTERS)
     @SuppressWarnings("unchecked")
-    void testCreateBookingNoFlight(JsonParameterSet parameters) {
+    void testCreateBookingNoFlight(JsonParameterSet parameters) throws Throwable {
         FakeBookingManagement management = parameters.get("bookingManagement");
         FlightManagement flightManagement = management.getFlightManagement();
         String bookingId = parameters.getString("bookingId");
@@ -142,7 +141,7 @@ public class H08_5_5_TestsPrivate extends H08_Tests {
         );
     }
 
-    private void assertCreateBookingMessage(JsonParameterSet parameters) {
+    private void assertCreateBookingMessage(JsonParameterSet parameters) throws Throwable {
         BookingManagement management = parameters.<FakeBookingManagement>get("bookingManagement");
         String bookingId = parameters.getString("bookingId");
         String flightNumber = parameters.getString("flightNumber");
@@ -169,25 +168,25 @@ public class H08_5_5_TestsPrivate extends H08_Tests {
 
     @ParameterizedTest
     @JsonParameterSetTest(value = "H08_5_5_testCreateBookingDuplicate.json", customConverters = CUSTOM_CONVERTERS)
-    void testCreateBookingDuplicate(JsonParameterSet parameters) {
+    void testCreateBookingDuplicate(JsonParameterSet parameters) throws Throwable {
         assertCreateBookingMessage(parameters);
     }
 
     @ParameterizedTest
     @JsonParameterSetTest(value = "H08_5_5_testCreateBookingInvalid.json", customConverters = CUSTOM_CONVERTERS)
-    void testCreateBookingInvalid(JsonParameterSet parameters) {
+    void testCreateBookingInvalid(JsonParameterSet parameters) throws Throwable {
         assertCreateBookingMessage(parameters);
     }
 
     @ParameterizedTest
     @JsonParameterSetTest(value = "H08_5_5_testCreateBookingNoSeats.json", customConverters = CUSTOM_CONVERTERS)
-    void testCreateBookingNoSeats(JsonParameterSet parameters) {
+    void testCreateBookingNoSeats(JsonParameterSet parameters) throws Throwable {
         assertCreateBookingMessage(parameters);
     }
 
     @ParameterizedTest
     @JsonParameterSetTest(value = "H08_5_5_testCreateBookingValidation.json", customConverters = CUSTOM_CONVERTERS)
-    void testCreateBookingValidation(JsonParameterSet parameters) throws NoSeatsAvailableException {
+    void testCreateBookingValidation(JsonParameterSet parameters) throws Throwable {
         FakeBookingManagement management = parameters.get("bookingManagement");
         FlightManagement flightManagement = management.getFlightManagement();
         String bookingId = parameters.getString("bookingId");

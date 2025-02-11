@@ -51,8 +51,9 @@ public class Airport {
     /**
      * Adds a flight.
      *
-     * @param flight the flight to add
+     * @param flight      the flight to add
      * @param isDeparting if true, adds to departing flights, otherwise to arriving flights
+     *
      * @throws IllegalArgumentException if the flight's airport code doesn't match the airport's code
      */
     public void addFlight(Flight flight, boolean isDeparting) throws IllegalArgumentException {
@@ -79,7 +80,8 @@ public class Airport {
      * Removes a flight by flight number.
      *
      * @param flightNumber the flight number
-     * @param isDeparting if true, removes from departing flights, otherwise from arriving flights
+     * @param isDeparting  if true, removes from departing flights, otherwise from arriving flights
+     *
      * @throws FlightNotFoundException if the flight is not found
      */
     public void removeFlight(String flightNumber, boolean isDeparting) throws FlightNotFoundException {
@@ -108,7 +110,8 @@ public class Airport {
      * Returns a flight by flight number.
      *
      * @param flightNumber the flight number
-     * @param isDeparting if true, searches in departing flights, otherwise in arriving flights
+     * @param isDeparting  if true, searches in departing flights, otherwise in arriving flights
+     *
      * @return the flight with the specified flight number
      * @throws FlightNotFoundException if the flight is not found
      */

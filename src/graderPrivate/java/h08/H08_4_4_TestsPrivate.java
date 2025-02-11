@@ -71,7 +71,7 @@ public class H08_4_4_TestsPrivate extends H08_Tests {
     @DisplayName("Die Methode getFlight gibt Flüge korrekt zurück.")
     @ParameterizedTest
     @JsonParameterSetTest(value = "H08_4_4_testCancelBooking.json", customConverters = CUSTOM_CONVERTERS)
-    void testCancelBooking(JsonParameterSet parameters) {
+    void testCancelBooking(JsonParameterSet parameters) throws Throwable {
         Booking booking = parameters.get("booking");
         TestInformation info = info(parameters)
             .expect(builder -> builder
@@ -87,7 +87,7 @@ public class H08_4_4_TestsPrivate extends H08_Tests {
     @ParameterizedTest
     @JsonParameterSetTest(value = "H08_4_4_testCancelBookingException.json", customConverters = CUSTOM_CONVERTERS)
     @SuppressWarnings("unchecked")
-    void testCancelBookingException(JsonParameterSet parameters) {
+    void testCancelBookingException(JsonParameterSet parameters) throws Throwable {
         TypeLink type = Links.getType("h08.Exceptions", "BookingAlreadyCancelledException");
         Class<? extends Exception> exceptionType = (Class<? extends Exception>) type.reflection();
         TestInformation info = info(parameters)

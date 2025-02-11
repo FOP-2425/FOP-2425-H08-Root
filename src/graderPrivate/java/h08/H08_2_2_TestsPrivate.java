@@ -55,7 +55,7 @@ public class H08_2_2_TestsPrivate extends H08_Tests {
         String flightNumber = "YF0802";
         Throwable instance = constructorLink.invoke(flightNumber);
         String actualMessage = instance.getMessage();
-        String expectedMessage = "No seats available for flight YF0802";
+        String expectedMessage = "No seats available for flight: YF0802";
         TestInformation info = TestInformation.builder()
             .subject(typeLink)
             .input(builder -> builder.add("flightNumber", flightNumber))
@@ -73,7 +73,7 @@ public class H08_2_2_TestsPrivate extends H08_Tests {
     @DisplayName("Die Methode bookSeat() reserviert korrekt Sitzplätze.")
     @ParameterizedTest
     @JsonParameterSetTest(value = "H08_2_2_testBookSeat.json", customConverters = CUSTOM_CONVERTERS)
-    void testBookSeat(JsonParameterSet parameters) throws Exception {
+    void testBookSeat(JsonParameterSet parameters) throws Throwable {
         Flight preFlight = parameters.get("preFlight");
         Flight postFlight = parameters.get("postFlight");
         TestInformation.TestInformationBuilder infoBuilder = TestInformation.builder()
@@ -93,7 +93,7 @@ public class H08_2_2_TestsPrivate extends H08_Tests {
     @DisplayName("Die Methode bookSeat() reserviert korrekt Sitzplätze.")
     @Test
     @SuppressWarnings("unchecked")
-    void testBookSeatException() {
+    void testBookSeatException() throws Throwable {
         Flight flight = Mocks.createFlight(
             "LH712",
             "FRA",

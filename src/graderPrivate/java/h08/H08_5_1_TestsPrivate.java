@@ -75,7 +75,7 @@ public class H08_5_1_TestsPrivate extends H08_Tests {
     @DisplayName("Die Methode searchAirport findet Flughäfen korrekt.")
     @ParameterizedTest
     @JsonParameterSetTest(value = "H08_5_1_testSearchAirport.json", customConverters = CUSTOM_CONVERTERS)
-    void testSearchAirport(JsonParameterSet parameters) {
+    void testSearchAirport(JsonParameterSet parameters) throws Throwable {
         MethodLink method = Links.getMethod(type, "searchAirport", String.class);
         FlightManagement management = parameters.get("flightManagement");
         Airport airport = parameters.get("airport");
@@ -107,7 +107,7 @@ public class H08_5_1_TestsPrivate extends H08_Tests {
     @DisplayName("Die Methode searchAirport findet keine Flughäfen korrekt.")
     @ParameterizedTest
     @JsonParameterSetTest(value = "H08_5_1_testSearchAirportException.json", customConverters = CUSTOM_CONVERTERS)
-    void testSearchAirportException(JsonParameterSet parameters) {
+    void testSearchAirportException(JsonParameterSet parameters) throws Throwable {
         MethodLink method = Links.getMethod(type, "searchAirport", String.class);
         FlightManagement management = parameters.get("flightManagement");
         String airportCode = parameters.get("airportCode");
@@ -139,7 +139,7 @@ public class H08_5_1_TestsPrivate extends H08_Tests {
     @DisplayName("Die Methode searchFlight durchsucht Flüge korrekt.")
     @ParameterizedTest
     @JsonParameterSetTest(value = "H08_5_1_testSearchFlight.json", customConverters = CUSTOM_CONVERTERS)
-    void testSearchFlight(JsonParameterSet parameters) {
+    void testSearchFlight(JsonParameterSet parameters) throws Throwable {
         MethodLink method = Links.getMethod(type, "searchFlight", Airport.class, String.class);
         FlightManagement management = parameters.get("flightManagement");
         Airport airport = parameters.get("airport");
@@ -171,7 +171,7 @@ public class H08_5_1_TestsPrivate extends H08_Tests {
     @DisplayName("Die Methode getFlight gibt Flüge korrekt zurück.")
     @ParameterizedTest
     @JsonParameterSetTest(value = "H08_5_1_testGetFlight.json", customConverters = CUSTOM_CONVERTERS)
-    void testGetFlight(JsonParameterSet parameters) {
+    void testGetFlight(JsonParameterSet parameters) throws Throwable {
         MethodLink method = Links.getMethod(type, "getFlight", String.class);
         FlightManagement management = parameters.get("flightManagement");
         Flight flight = parameters.get("flight");
@@ -202,7 +202,7 @@ public class H08_5_1_TestsPrivate extends H08_Tests {
     @DisplayName("Die Methode getFlight null zurück, falls kein Flug gefunden werden kann.")
     @ParameterizedTest
     @JsonParameterSetTest(value = "H08_5_1_testGetFlightNull.json", customConverters = CUSTOM_CONVERTERS)
-    void testGetFlightNull(JsonParameterSet parameters) {
+    void testGetFlightNull(JsonParameterSet parameters) throws Throwable {
         MethodLink method = Links.getMethod(type, "getFlight", String.class);
         FlightManagement management = parameters.get("flightManagement");
         Flight flight = parameters.get("flight");

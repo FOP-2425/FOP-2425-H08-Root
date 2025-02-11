@@ -69,7 +69,7 @@ public class H08_4_3_TestsPrivate extends H08_Tests {
     @DisplayName("Die Methode getFlight gibt Flüge korrekt zurück.")
     @ParameterizedTest
     @JsonParameterSetTest(value = "H08_4_3_testGetFlight.json", customConverters = CUSTOM_CONVERTERS)
-    void testGetFlight(JsonParameterSet parameters) {
+    void testGetFlight(JsonParameterSet parameters) throws Throwable {
         Airport airport = parameters.get("airport");
         Flight flight = parameters.get("flight");
         boolean isDeparting = parameters.get("isDeparting");
@@ -93,7 +93,7 @@ public class H08_4_3_TestsPrivate extends H08_Tests {
     @ParameterizedTest
     @JsonParameterSetTest(value = "H08_4_3_testGetFlightException.json", customConverters = CUSTOM_CONVERTERS)
     @SuppressWarnings("unchecked")
-    void testGetFlightException(JsonParameterSet parameters) {
+    void testGetFlightException(JsonParameterSet parameters) throws Throwable {
         Airport airport = parameters.get("airport");
         Flight flight = parameters.get("flight");
         boolean isDeparting = parameters.get("isDeparting");

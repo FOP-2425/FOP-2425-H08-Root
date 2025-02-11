@@ -47,6 +47,7 @@ public class Passenger {
      * @param firstName   the first name of the passenger
      * @param lastName    the last name of the passenger
      * @param dateOfBirth the date of birth of the passenger
+     *
      * @return the generated ID of the passenger
      */
     private String generatePassengerID(String firstName, String lastName, LocalDate dateOfBirth) {

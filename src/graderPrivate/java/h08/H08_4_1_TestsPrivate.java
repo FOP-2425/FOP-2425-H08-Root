@@ -66,7 +66,7 @@ public class H08_4_1_TestsPrivate extends H08_Tests {
     @DisplayName("Die Methode addFlight fügt Flüge korrekt zu abgehenden oder ankommenden Flügen hinzu.")
     @ParameterizedTest
     @JsonParameterSetTest(value = "H08_4_1_testAddFlight.json", customConverters = CUSTOM_CONVERTERS)
-    void testAddFlight(JsonParameterSet parameters) {
+    void testAddFlight(JsonParameterSet parameters) throws Throwable {
         Airport preAirport = parameters.get("preAirport");
         Airport postAirport = parameters.get("postAirport");
         Flight flight = parameters.get("flight");
@@ -92,7 +92,7 @@ public class H08_4_1_TestsPrivate extends H08_Tests {
     @DisplayName("Die Methode prüft und behandelt korrekt falsche Flughafencodes.")
     @ParameterizedTest
     @JsonParameterSetTest(value = "H08_4_1_testAddFlightException.json", customConverters = CUSTOM_CONVERTERS)
-    void testAddFlightException(JsonParameterSet parameters) {
+    void testAddFlightException(JsonParameterSet parameters) throws Throwable {
         Airport preAirport = parameters.get("preAirport");
         Airport postAirport = parameters.get("postAirport");
         Flight flight = parameters.get("flight");

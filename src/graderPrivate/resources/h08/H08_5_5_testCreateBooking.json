@@ -1,36 +1,36 @@
 [
   {
     "bookingManagement": {
-       "flightManagement": {
-      "airports": [
-        {
-          "airportCode": "FRA",
-          "initialCapacity": 2,
-          "departingFlights": [
-            {
-              "flightNumber": "VN300",
-              "departure": "FRA",
-              "destination": "SGN",
-              "departureTime": "2025-02-07 13:00",
-              "initialSeats": 100,
-              "availableSeats": 1
-            }
-          ],
-          "arrivingFlights": [
-            {
-              "flightNumber": "VN600",
-              "departure": "SGN",
-              "destination": "FRA",
-              "departureTime": "2025-02-07 13:00",
-              "initialSeats": 100,
-              "availableSeats": 1
-            }
-          ],
-          "departingSize": 1,
-          "arrivingSize": 1
-        }
-      ]
-    },
+      "flightManagement": {
+        "airports": [
+          {
+            "airportCode": "FRA",
+            "initialCapacity": 2,
+            "departingFlights": [
+              {
+                "flightNumber": "VN300",
+                "departure": "FRA",
+                "destination": "SGN",
+                "departureTime": "2025-02-07 13:00",
+                "initialSeats": 100,
+                "availableSeats": 1
+              }
+            ],
+            "arrivingFlights": [
+              {
+                "flightNumber": "VN600",
+                "departure": "SGN",
+                "destination": "FRA",
+                "departureTime": "2025-02-07 13:00",
+                "initialSeats": 100,
+                "availableSeats": 1
+              }
+            ],
+            "departingSize": 1,
+            "arrivingSize": 1
+          }
+        ]
+      },
       "bookings": [
         {
           "bookingId": "B001",

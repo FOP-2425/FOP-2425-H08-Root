@@ -20,43 +20,43 @@ public class H08_3_TestsPrivate extends H08_Tests {
 
     @DisplayName("Die FlightManagementException ist korrekt implementiert.")
     @Test
-    void testFlightManagementException() {
+    void testFlightManagementException() throws Throwable {
         assertExceptionDefinedCorrectly(ClassReference.FLIGHT_MANAGEMENT_EXCEPTION);
     }
 
     @DisplayName("Die BookingManagementException ist korrekt implementiert.")
     @Test
-    void testBookingManagementException() {
+    void testBookingManagementException() throws Throwable {
         assertExceptionDefinedCorrectly(ClassReference.BOOKING_MANAGEMENT_EXCEPTION);
     }
 
     @DisplayName("Die FlightNotFoundException ist korrekt implementiert.")
     @Test
-    void testFlightNotFoundException() {
+    void testFlightNotFoundException() throws Throwable {
         assertExceptionDefinedCorrectly(ClassReference.FLIGHT_NOT_FOUND_EXCEPTION);
     }
 
     @DisplayName("Die BookingNotFoundException ist korrekt implementiert.")
     @Test
-    void testBookingNotFoundException() {
+    void testBookingNotFoundException() throws Throwable {
         assertExceptionDefinedCorrectly(ClassReference.BOOKING_NOT_FOUND_EXCEPTION);
     }
 
     @DisplayName("Die InvalidBookingException ist korrekt implementiert.")
     @Test
-    void testInvalidBookingException() {
+    void testInvalidBookingException() throws Throwable {
         assertExceptionDefinedCorrectly(ClassReference.INVALID_BOOKING_EXCEPTION);
     }
 
     @DisplayName("Die BookingAlreadyCancelledException ist korrekt implementiert.")
     @Test
-    void testBookingAlreadyCancelledException() {
+    void testBookingAlreadyCancelledException() throws Throwable {
         assertExceptionDefinedCorrectly(ClassReference.BOOKING_ALREADY_CANCELLED_EXCEPTION);
     }
 
     @DisplayName("Die DuplicateBookingException ist korrekt implementiert.")
     @Test
-    void testDuplicateBookingException() {
+    void testDuplicateBookingException() throws Throwable {
         assertExceptionDefinedCorrectly(ClassReference.DUPLICATE_BOOKING_EXCEPTION);
     }
 }

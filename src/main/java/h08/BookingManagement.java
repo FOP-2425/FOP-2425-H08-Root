@@ -1,6 +1,11 @@
 package h08;
 
-import h08.Exceptions.*;
+import h08.Exceptions.BookingAlreadyCancelledException;
+import h08.Exceptions.BookingNotFoundException;
+import h08.Exceptions.DuplicateBookingException;
+import h08.Exceptions.FlightNotFoundException;
+import h08.Exceptions.InvalidBookingException;
+import h08.Exceptions.NoSeatsAvailableException;
 
 import java.util.Arrays;
 
@@ -80,7 +85,8 @@ public class BookingManagement {
      * @param bookingId    the booking ID of the booking
      * @param flightNumber the flight number of the booking
      * @param passengerId  the passenger ID of the booking
-     * @throws InvalidBookingException if the booking details are invalid
+     *
+     * @throws InvalidBookingException   if the booking details are invalid
      * @throws DuplicateBookingException if the booking ID is already in use
      */
     private void validateAndCheckBooking(String bookingId, String flightNumber, String passengerId) throws InvalidBookingException, DuplicateBookingException {
@@ -98,13 +104,14 @@ public class BookingManagement {
      * Searches for a booking by booking ID.
      *
      * @param bookingId the booking ID of the booking
+     *
      * @return the booking with the specified booking ID
      * @throws BookingNotFoundException if the booking ist not found
      */
     private Booking searchBooking(String bookingId) throws BookingNotFoundException {
         for (Booking booking : bookings) {
             // Check if booking exists and return it
-            if (booking!=null && booking.getBookingId().equals(bookingId)) {
+            if (booking != null && booking.getBookingId().equals(bookingId)) {
                 return booking;
             }
         }
@@ -115,6 +122,7 @@ public class BookingManagement {
      * Returns a booking by booking ID.
      *
      * @param bookingId the booking ID of the booking
+     *
      * @return the booking with the specified booking ID
      */
     public Booking getBooking(String bookingId) {

@@ -68,7 +68,7 @@ public class H08_2_1_TestsPrivate extends H08_Tests {
     @Test
     void testValidateFlightNumber() throws Throwable {
         String[] flightNumbers = {"LH123", "LH1234"};
-        Flight flight = Mockito.mock(Flight.class);
+        Flight flight = Mockito.mock(Flight.class, Mockito.CALLS_REAL_METHODS);
         MethodLink methodLink = Links.getMethod(this.typeLink, "validateFlightNumber", String.class);
 
         for (String flightNumber : flightNumbers) {
@@ -90,7 +90,7 @@ public class H08_2_1_TestsPrivate extends H08_Tests {
     @JsonParameterSetTest(value = "H08_2_1_testValidateFlightNumberException.json", customConverters = CUSTOM_CONVERTERS)
     void testValidateFlightNumberException(JsonParameterSet parameters) throws Throwable {
         String flightNumber = parameters.get("flightNumber");
-        Flight flight = Mockito.mock(Flight.class);
+        Flight flight = Mockito.mock(Flight.class, Mockito.CALLS_REAL_METHODS);
         MethodLink methodLink = Links.getMethod(this.typeLink, "validateFlightNumber", String.class);
 
         TestInformation info = TestInformation.builder()
@@ -104,7 +104,7 @@ public class H08_2_1_TestsPrivate extends H08_Tests {
 
     @DisplayName("Der Konstruktor der Klasse Flight enthält führt keine assert-Anweisungen aus.")
     @Test
-    void testFlightConstructor() {
+    void testFlightConstructor() throws Throwable {
         String flightNumber = "LH1234";
         String departure = "FRA";
         String destination = "ICN";
@@ -136,7 +136,7 @@ public class H08_2_1_TestsPrivate extends H08_Tests {
     @DisplayName("Der Konstruktor der Klasse Flight enthält assert-Anweisungen, die die Eingaben überprüfen.")
     @ParameterizedTest
     @JsonParameterSetTest(value = "H08_2_1_testFlightConstructor.json", customConverters = CUSTOM_CONVERTERS)
-    void testFlightConstructorException(JsonParameterSet parameters) {
+    void testFlightConstructorException(JsonParameterSet parameters) throws Throwable {
         String flightNumber = parameters.get("flightNumber");
         String departure = parameters.get("departure");
         String destination = parameters.get("destination");
