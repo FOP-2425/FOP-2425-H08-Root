@@ -175,8 +175,12 @@ public class H08_RubricProvider extends TaskRubricProvider {
     private static final Subtask H08_5_4 = Subtask.builder()
         .description("H08.5.4 | Cancelling a Booking")
         .testClassName("h08.H08_5_4_Tests")
-        .criterion("Die Methode cancelBooking storniert Buchungen korrekt.", "testCancelBooking")
-        .criterion("Die Methode gibt die richtigen Fehlermeldungen oder Bestätigungen aus.", "testCancelBookingMessages")
+        .criterion("Die Methode cancelBooking storniert Buchungen korrekt.", "testCancelBooking", JsonParameterSet.class)
+        .criterion("Die Methode gibt die richtigen Fehlermeldungen oder Bestätigungen aus.", Map.of(
+            "testCancelBookingMessage", List.of(JsonParameterSet.class),
+            "testCancelBookingAlreadyCancelled", List.of(JsonParameterSet.class),
+            "testCancelBookingNotFound", List.of(JsonParameterSet.class)
+        ))
         .build();
 
     /**

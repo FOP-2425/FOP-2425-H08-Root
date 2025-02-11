@@ -90,7 +90,9 @@ public final class JsonConverters extends org.tudalgo.algoutils.tutor.general.js
 
     /**
      * Converts a JSON node to an airport.
+     *
      * @param node the JSON node to convert
+     *
      * @return the airport represented by the JSON node
      */
     public static Airport toAirport(JsonNode node) {

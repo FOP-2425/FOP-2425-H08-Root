@@ -69,4 +69,11 @@ public final class TutorUtils {
         }
         return true;
     }
+
+    public static boolean equalBookings(Booking booking1, Booking booking2) {
+        return Objects.equals(booking1.getBookingId(), booking2.getBookingId())
+            && Objects.equals(booking1.getFlightNumber(), booking2.getFlightNumber())
+            && Objects.equals(booking1.getPassengerId(), booking2.getPassengerId())
+            && booking1.isCancelled() == booking2.isCancelled();
+    }
 }
