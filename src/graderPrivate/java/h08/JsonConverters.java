@@ -3,7 +3,9 @@ package h08;
 import com.fasterxml.jackson.databind.JsonNode;
 import h08.assertions.Mocks;
 import h08.mocks.FakeAirport;
+import h08.mocks.FakeBookingManagement;
 import org.jetbrains.annotations.Nullable;
+import org.mockito.Mockito;
 import org.tudalgo.algoutils.tutor.general.match.Matcher;
 import org.tudalgo.algoutils.tutor.general.reflections.BasicTypeLink;
 import org.tudalgo.algoutils.tutor.general.reflections.FieldLink;
@@ -150,5 +152,15 @@ public final class JsonConverters extends org.tudalgo.algoutils.tutor.general.js
             instance.addAirport(airport);
         }
         return instance;
+    }
+
+    public static FakeBookingManagement toBookingManagement(JsonNode node) {
+        if (!node.isObject()) {
+            throw new IllegalArgumentException("Expected an object");
+        }
+        return new FakeBookingManagement(
+            node.has("flightManagement") ? toFlightManagement(node.get("flightManagement")) : Mockito.mock(FlightManagement.class),
+            toList(node.get("bookings"), JsonConverters::toBooking)
+        );
     }
 }

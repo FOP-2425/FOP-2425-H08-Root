@@ -76,4 +76,16 @@ public final class TutorUtils {
             && Objects.equals(booking1.getPassengerId(), booking2.getPassengerId())
             && booking1.isCancelled() == booking2.isCancelled();
     }
+
+    public static String cleanOutput(String output) {
+        String[] lines = output.split("\n");
+        StringBuilder actual = new StringBuilder();
+
+        for (String line : lines) {
+            if (!line.contains("Mockito")) {
+                actual.append(line).append("\n");
+            }
+        }
+        return actual.toString();
+    }
 }

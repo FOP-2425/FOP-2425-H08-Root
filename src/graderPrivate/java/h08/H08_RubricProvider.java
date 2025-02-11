@@ -153,10 +153,10 @@ public class H08_RubricProvider extends TaskRubricProvider {
     private static final Subtask H08_5_2 = Subtask.builder()
         .description("H08.5.2 | Flight and Booking Management")
         .testClassName("h08.H08_5_2_Tests")
-        .criterion("Die Methode manageFlight verwaltet Flüge korrekt (Hinzufügen oder Entfernen).", "testManageFlight")
+        .criterion("Die Methode manageFlight verwaltet Flüge korrekt (Hinzufügen oder Entfernen).", "testManageFlight", JsonParameterSet.class)
         .criterion("Die Methode manageFlight prüft korrekt die Flughafencodes.", "testManageFlightCode")
-        .criterion("Die Methode validateAndCheckBooking validiert Buchungsdetails korrekt.", "testValidateAndCheckBooking")
-        .criterion("Die Methode validateAndCheckBooking prüft korrekt auf doppelte Buchungen.", "testValidateAndCheckBookingDuplicateBooking")
+        .criterion("Die Methode validateAndCheckBooking validiert Buchungsdetails korrekt.", "validateAndCheckBookingInvalid", JsonParameterSet.class)
+        .criterion("Die Methode validateAndCheckBooking prüft korrekt auf doppelte Buchungen.", "validateAndCheckBookingDuplicate", JsonParameterSet.class)
         .build();
 
     /**
@@ -165,8 +165,14 @@ public class H08_RubricProvider extends TaskRubricProvider {
     private static final Subtask H08_5_3 = Subtask.builder()
         .description("H8.5.3 | Searching a Booking")
         .testClassName("h08.H08_5_3_Tests")
-        .criterion("Die Methode searchBooking durchsucht Buchungen korrekt.", "testSearchBooking")
-        .criterion("Die Methode getBooking gibt Buchungen korrekt zurück.", "testGetBooking")
+        .criterion("Die Methode searchBooking durchsucht Buchungen korrekt.", Map.of(
+            "testSearchBooking", List.of(JsonParameterSet.class),
+            "testSearchBookingException", List.of(JsonParameterSet.class)
+        ))
+        .criterion("Die Methode getBooking gibt Buchungen korrekt zurück.", Map.of(
+            "testGetBooking", List.of(JsonParameterSet.class),
+            "testGetBookingException", List.of(JsonParameterSet.class)
+        ))
         .build();
 
     /**
@@ -189,9 +195,13 @@ public class H08_RubricProvider extends TaskRubricProvider {
     private static final Subtask H08_5_5 = Subtask.builder()
         .description("H08.5.5 | Creating a Booking")
         .testClassName("h08.H08_5_5_Tests")
-        .criterion("Die Methode createBooking erstellt Buchungen korrekt.", "testCreateBooking")
-        .criterion("Die Methode behandelt alle relevanten Ausnahmen korrekt.", "testCreateBookingExceptions")
-        .criterion("Die Methode validiert Buchungsdetails und reserviert Sitzplätze korrekt.", "testCreateBookingValidation")
+        .criterion("Die Methode createBooking erstellt Buchungen korrekt.", "testCreateBooking", JsonParameterSet.class)
+        .criterion("Die Methode behandelt alle relevanten Ausnahmen korrekt.", Map.of(
+            "testCreateBookingDuplicate", List.of(JsonParameterSet.class),
+            "testCreateBookingInvalid", List.of(JsonParameterSet.class),
+            "testCreateBookingNoSeats", List.of(JsonParameterSet.class)
+        ))
+        .criterion("Die Methode validiert Buchungsdetails und reserviert Sitzplätze korrekt.", "testCreateBookingValidation", JsonParameterSet.class)
         .build();
 
     /**

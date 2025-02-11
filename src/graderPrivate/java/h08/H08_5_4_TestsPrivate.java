@@ -2,6 +2,7 @@ package h08;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import h08.assertions.Links;
+import h08.mocks.FakeBookingManagement;
 import h08.rubric.context.TestInformation;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -20,6 +21,7 @@ import org.tudalgo.algoutils.tutor.general.reflections.TypeLink;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -35,7 +37,7 @@ import java.util.function.Function;
 public class H08_5_4_TestsPrivate extends H08_Tests {
 
     public static final Map<String, Function<JsonNode, ?>> CONVERTERS = Map.of(
-        "bookingManagement", JsonConverters::toFlightManagement, // TODO
+        "bookingManagement", JsonConverters::toBookingManagement,
         "booking", JsonConverters::toBooking
     );
 
@@ -75,7 +77,7 @@ public class H08_5_4_TestsPrivate extends H08_Tests {
     }
 
     private void assertCancelBookingMessage(JsonParameterSet parameters) {
-        BookingManagement management = parameters.get("bookingManagement");
+        BookingManagement management = parameters.<FakeBookingManagement>get("bookingManagement");
         Booking booking = parameters.get("booking");
         String message = parameters.getString("message");
 
@@ -88,7 +90,8 @@ public class H08_5_4_TestsPrivate extends H08_Tests {
             .build();
         management.cancelBooking(booking.getBookingId());
         Assertions2.assertEquals(
-            message, baos.toString(),
+            message,
+            TutorUtils.cleanOutput(baos.toString()).trim(),
             info,
             comment -> "Printed message does not match expected message."
         );
@@ -97,10 +100,12 @@ public class H08_5_4_TestsPrivate extends H08_Tests {
     @ParameterizedTest
     @JsonParameterSetTest(value = "H08_5_4_testCancelBooking.json", customConverters = CUSTOM_CONVERTERS)
     void testCancelBooking(JsonParameterSet parameters) {
-        BookingManagement management = parameters.get("bookingManagement");
-        Booking booking = parameters.get("booking");
+        FakeBookingManagement management = parameters.<FakeBookingManagement>get("bookingManagement");
+        Booking booking = Arrays.stream(management.getBookings())
+            .filter(b -> TutorUtils.equalBookings(b, parameters.get("booking")))
+            .findFirst()
+            .orElseThrow();
         String message = parameters.getString("message");
-
         TestInformation info = TestInformation.builder()
             .subject(method)
             .input(builder -> builder
@@ -117,7 +122,7 @@ public class H08_5_4_TestsPrivate extends H08_Tests {
     }
 
     @ParameterizedTest
-    @JsonParameterSetTest(value = "H08_5_4_testCancelBookingMessage.json", customConverters = CUSTOM_CONVERTERS)
+    @JsonParameterSetTest(value = "H08_5_4_testCancelBooking.json", customConverters = CUSTOM_CONVERTERS)
     void testCancelBookingMessage(JsonParameterSet parameters) {
         assertCancelBookingMessage(parameters);
     }

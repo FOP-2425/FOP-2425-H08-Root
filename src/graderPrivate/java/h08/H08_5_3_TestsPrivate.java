@@ -3,6 +3,7 @@ package h08;
 import com.fasterxml.jackson.databind.JsonNode;
 import h08.assertions.ClassReference;
 import h08.assertions.Links;
+import h08.mocks.FakeBookingManagement;
 import h08.rubric.context.TestInformation;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -36,10 +37,9 @@ import java.util.function.Function;
 public class H08_5_3_TestsPrivate extends H08_Tests {
 
     public static final Map<String, Function<JsonNode, ?>> CONVERTERS = Map.of(
-        "bookingManagement", JsonConverters::toFlightManagement, // TODO
+        "bookingManagement", JsonConverters::toBookingManagement,
         "booking", JsonConverters::toBooking
     );
-
 
     private TypeLink type;
 
@@ -68,7 +68,7 @@ public class H08_5_3_TestsPrivate extends H08_Tests {
     }
 
     private void assertBooking(JsonParameterSet parameters, MethodLink method) {
-        BookingManagement management = parameters.get("bookingManagement");
+        BookingManagement management = parameters.<FakeBookingManagement>get("bookingManagement");
         Booking booking = parameters.get("booking");
         TestInformation info = TestInformation.builder()
             .subject(method)
@@ -100,7 +100,7 @@ public class H08_5_3_TestsPrivate extends H08_Tests {
     @JsonParameterSetTest(value = "H08_5_3_testSearchBookingException.json", customConverters = CUSTOM_CONVERTERS)
     @SuppressWarnings("unchecked")
     void testSearchBookingException(JsonParameterSet parameters) {
-        BookingManagement management = parameters.get("bookingManagement");
+        BookingManagement management = parameters.<FakeBookingManagement>get("bookingManagement");
         Booking booking = parameters.get("booking");
         MethodLink method = Links.getMethod(type, "searchBooking", String.class);
         ClassReference reference = ClassReference.BOOKING_NOT_FOUND_EXCEPTION;
@@ -148,10 +148,16 @@ public class H08_5_3_TestsPrivate extends H08_Tests {
             )
             .expect(builder -> builder.add("message", message))
             .build();
-        method.invoke(management, booking.getBookingId());
+        Booking result = method.invoke(management, booking.getBookingId());
+        Assertions2.assertNull(
+            result,
+            info,
+            comment -> "Expected null to be returned."
+        );
+
         Assertions2.assertEquals(
             message,
-            baos.toString(),
+            TutorUtils.cleanOutput(baos.toString()).trim(),
             info,
             comment -> "Printed message does not match the expected message."
         );
