@@ -216,7 +216,7 @@ public class H08_RubricProvider extends TaskRubricProvider {
      * Creates a new rubric provider for H08.
      */
     public H08_RubricProvider() {
-        super(8, "Flight Control: Navigating the Exceptions", false);
+        super(8, "Flight Control: Navigating the Exceptions", true);
     }
 
     @Override
