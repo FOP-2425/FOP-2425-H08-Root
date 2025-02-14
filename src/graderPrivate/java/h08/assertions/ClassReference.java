@@ -37,15 +37,15 @@ public class ClassReference {
     /**
      * The predefined packages in this assignment.
      */
-    public static final List<String> PREDEFINED_PACKAGES = List.of("h08", "h08.Exceptions");
+    public static final List<String> PREDEFINED_PACKAGES = List.of("h08", "h08.Exceptions", "h08/Exceptions");
 
     /**
      * The class reference for the {@link NoSeatsAvailableException} class.
      */
     public static final ClassReference NO_SEATS_AVAILABLE_EXCEPTION = new ClassReference(
-        "h08.Exceptions",
+        "h08",
         "NoSeatsAvailableException",
-        new String[]{Exception.class.getName()},
+        new String[]{Exception.class.getSimpleName()},
         Link.Kind.CLASS,
         Modifier.PUBLIC,
         Modifier.NON_FINAL,
@@ -56,9 +56,9 @@ public class ClassReference {
      * The class reference for the {@link FlightManagementException} class.
      */
     public static final ClassReference FLIGHT_MANAGEMENT_EXCEPTION = new ClassReference(
-        "h08.Exceptions",
+        "h08",
         "FlightManagementException",
-        new String[]{Exception.class.getName()},
+        new String[]{Exception.class.getSimpleName()},
         Link.Kind.CLASS,
         Modifier.PUBLIC,
         Modifier.NON_FINAL,
@@ -69,9 +69,9 @@ public class ClassReference {
      * The class reference for the {@link BookingManagementException} class.
      */
     public static final ClassReference BOOKING_MANAGEMENT_EXCEPTION = new ClassReference(
-        "h08.Exceptions",
+        "h08",
         "BookingManagementException",
-        new String[]{Exception.class.getName()},
+        new String[]{Exception.class.getSimpleName()},
         Link.Kind.CLASS,
         Modifier.PUBLIC,
         Modifier.NON_FINAL,
@@ -82,9 +82,9 @@ public class ClassReference {
      * The class reference for the {@link FlightNotFoundException} class.
      */
     public static final ClassReference FLIGHT_NOT_FOUND_EXCEPTION = new ClassReference(
-        "h08.Exceptions",
+        "h08",
         "FlightNotFoundException",
-        new String[]{"h08.Exceptions.FlightManagementException"},
+        new String[]{"FlightManagementException"},
         Link.Kind.CLASS,
         Modifier.PUBLIC,
         Modifier.NON_FINAL,
@@ -95,9 +95,9 @@ public class ClassReference {
      * The class reference for the {@link BookingNotFoundException} class.
      */
     public static final ClassReference BOOKING_NOT_FOUND_EXCEPTION = new ClassReference(
-        "h08.Exceptions",
+        "h08",
         "BookingNotFoundException",
-        new String[]{"h08.Exceptions.BookingManagementException"},
+        new String[]{"BookingManagementException"},
         Link.Kind.CLASS,
         Modifier.PUBLIC,
         Modifier.NON_FINAL,
@@ -108,9 +108,9 @@ public class ClassReference {
      * The class reference for the {@link InvalidBookingException} class.
      */
     public static final ClassReference INVALID_BOOKING_EXCEPTION = new ClassReference(
-        "h08.Exceptions",
+        "h08",
         "InvalidBookingException",
-        new String[]{"h08.Exceptions.BookingManagementException"},
+        new String[]{"BookingManagementException"},
         Link.Kind.CLASS,
         Modifier.PUBLIC,
         Modifier.NON_FINAL,
@@ -121,9 +121,9 @@ public class ClassReference {
      * The class reference for the {@link BookingAlreadyCancelledException} class.
      */
     public static final ClassReference BOOKING_ALREADY_CANCELLED_EXCEPTION = new ClassReference(
-        "h08.Exceptions",
+        "h08",
         "BookingAlreadyCancelledException",
-        new String[]{"h08.Exceptions.FlightNotFoundException"},
+        new String[]{"FlightNotFoundException"},
         Link.Kind.CLASS,
         Modifier.PUBLIC,
         Modifier.NON_FINAL,
@@ -134,9 +134,9 @@ public class ClassReference {
      * The class reference for the {@link DuplicateBookingException} class.
      */
     public static final ClassReference DUPLICATE_BOOKING_EXCEPTION = new ClassReference(
-        "h08.Exceptions",
+        "h08",
         "DuplicateBookingException",
-        new String[]{"h08.Exceptions.InvalidBookingException"},
+        new String[]{"InvalidBookingException"},
         Link.Kind.CLASS,
         Modifier.PUBLIC,
         Modifier.NON_FINAL,
@@ -294,7 +294,7 @@ public class ClassReference {
             r -> "The modifiers of the type do not match the expected modifiers."
         );
         String[] actualSuperClassNames = Stream.concat(Stream.of(link.superType()), link.interfaces().stream())
-            .map(type -> type.reflection().getName())
+            .map(type -> type.reflection().getSimpleName())
             .toArray(String[]::new);
         assertArrayEquals(
             superClassNames,
