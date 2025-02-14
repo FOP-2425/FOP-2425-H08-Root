@@ -1,14 +1,6 @@
 package h08.assertions;
 
 
-import h08.Exceptions.BookingAlreadyCancelledException;
-import h08.Exceptions.BookingManagementException;
-import h08.Exceptions.BookingNotFoundException;
-import h08.Exceptions.DuplicateBookingException;
-import h08.Exceptions.FlightManagementException;
-import h08.Exceptions.FlightNotFoundException;
-import h08.Exceptions.InvalidBookingException;
-import h08.Exceptions.NoSeatsAvailableException;
 import h08.rubric.context.TestInformation;
 import org.jetbrains.annotations.Nullable;
 import org.opentest4j.AssertionFailedError;
@@ -37,10 +29,10 @@ public class ClassReference {
     /**
      * The predefined packages in this assignment.
      */
-    public static final List<String> PREDEFINED_PACKAGES = List.of("h08", "h08.Exceptions", "h08/Exceptions");
+    public static final List<String> PREDEFINED_PACKAGES = List.of("h08", "h08.Exceptions", "Exceptions");
 
     /**
-     * The class reference for the {@link NoSeatsAvailableException} class.
+     * The class reference for the NoSeatsAvailableException class.
      */
     public static final ClassReference NO_SEATS_AVAILABLE_EXCEPTION = new ClassReference(
         "h08",
@@ -53,7 +45,7 @@ public class ClassReference {
     );
 
     /**
-     * The class reference for the {@link FlightManagementException} class.
+     * The class reference for the FlightManagementException class.
      */
     public static final ClassReference FLIGHT_MANAGEMENT_EXCEPTION = new ClassReference(
         "h08",
@@ -66,7 +58,7 @@ public class ClassReference {
     );
 
     /**
-     * The class reference for the {@link BookingManagementException} class.
+     * The class reference for the BookingManagementException class.
      */
     public static final ClassReference BOOKING_MANAGEMENT_EXCEPTION = new ClassReference(
         "h08",
@@ -79,7 +71,7 @@ public class ClassReference {
     );
 
     /**
-     * The class reference for the {@link FlightNotFoundException} class.
+     * The class reference for the FlightNotFoundException class.
      */
     public static final ClassReference FLIGHT_NOT_FOUND_EXCEPTION = new ClassReference(
         "h08",
@@ -92,7 +84,7 @@ public class ClassReference {
     );
 
     /**
-     * The class reference for the {@link BookingNotFoundException} class.
+     * The class reference for the BookingNotFoundException class.
      */
     public static final ClassReference BOOKING_NOT_FOUND_EXCEPTION = new ClassReference(
         "h08",
@@ -105,7 +97,7 @@ public class ClassReference {
     );
 
     /**
-     * The class reference for the {@link InvalidBookingException} class.
+     * The class reference for the InvalidBookingException class.
      */
     public static final ClassReference INVALID_BOOKING_EXCEPTION = new ClassReference(
         "h08",
@@ -118,7 +110,7 @@ public class ClassReference {
     );
 
     /**
-     * The class reference for the {@link BookingAlreadyCancelledException} class.
+     * The class reference for the BookingAlreadyCancelledException class.
      */
     public static final ClassReference BOOKING_ALREADY_CANCELLED_EXCEPTION = new ClassReference(
         "h08",
@@ -131,7 +123,7 @@ public class ClassReference {
     );
 
     /**
-     * The class reference for the {@link DuplicateBookingException} class.
+     * The class reference for the DuplicateBookingException class.
      */
     public static final ClassReference DUPLICATE_BOOKING_EXCEPTION = new ClassReference(
         "h08",

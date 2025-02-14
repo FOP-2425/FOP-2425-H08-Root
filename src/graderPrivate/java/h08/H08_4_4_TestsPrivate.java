@@ -1,6 +1,7 @@
 package h08;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import h08.assertions.ClassReference;
 import h08.assertions.Links;
 import h08.rubric.context.TestInformation;
 import org.junit.jupiter.api.BeforeAll;
@@ -14,7 +15,6 @@ import org.tudalgo.algoutils.tutor.general.json.JsonParameterSet;
 import org.tudalgo.algoutils.tutor.general.json.JsonParameterSetTest;
 import org.tudalgo.algoutils.tutor.general.reflections.BasicTypeLink;
 import org.tudalgo.algoutils.tutor.general.reflections.MethodLink;
-import org.tudalgo.algoutils.tutor.general.reflections.TypeLink;
 
 import java.util.Map;
 import java.util.function.Function;
@@ -88,8 +88,8 @@ public class H08_4_4_TestsPrivate extends H08_Tests {
     @JsonParameterSetTest(value = "H08_4_4_testCancelBookingException.json", customConverters = CUSTOM_CONVERTERS)
     @SuppressWarnings("unchecked")
     void testCancelBookingException(JsonParameterSet parameters) throws Throwable {
-        TypeLink type = Links.getType("h08.Exceptions", "BookingAlreadyCancelledException");
-        Class<? extends Exception> exceptionType = (Class<? extends Exception>) type.reflection();
+        ClassReference reference = ClassReference.BOOKING_ALREADY_CANCELLED_EXCEPTION;
+        Class<? extends Exception> exceptionType = (Class<? extends Exception>) reference.getLink().reflection();
         TestInformation info = info(parameters)
             .expect(builder -> builder
                 .cause(exceptionType)

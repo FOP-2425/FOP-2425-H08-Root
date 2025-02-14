@@ -1,7 +1,6 @@
 package h08;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import h08.Exceptions.FlightNotFoundException;
 import h08.assertions.ClassReference;
 import h08.assertions.Links;
 import h08.rubric.context.TestInformation;
@@ -103,8 +102,9 @@ public class H08_4_3_TestsPrivate extends H08_Tests {
         TestInformation info = infoBuilder(parameters)
             .expect(builder -> builder.cause(exceptionClass))
             .build();
+
         Throwable throwable = Assertions2.assertThrows(
-            FlightNotFoundException.class,
+            exceptionClass,
             () -> airport.getFlight(flight.getFlightNumber(), isDeparting),
             info,
             comment -> "Invalid depature/destination should cause an exception."

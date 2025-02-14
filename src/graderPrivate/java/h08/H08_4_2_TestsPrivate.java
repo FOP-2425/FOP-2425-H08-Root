@@ -1,7 +1,7 @@
 package h08;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import h08.Exceptions.FlightNotFoundException;
+import h08.assertions.ClassReference;
 import h08.assertions.Links;
 import h08.mocks.FakeAirport;
 import h08.rubric.context.TestInformation;
@@ -102,6 +102,7 @@ public class H08_4_2_TestsPrivate extends H08_Tests {
     @DisplayName("Die Methode wirft korrekt eine FlightNotFoundException, wenn der Flug nicht gefunden wird.")
     @ParameterizedTest
     @JsonParameterSetTest(value = "H08_4_2_testRemoveFlightException.json", customConverters = CUSTOM_CONVERTERS)
+    @SuppressWarnings("unchecked")
     void testRemoveFlightException(JsonParameterSet parameters) throws Throwable {
         Airport preAirport = parameters.get("preAirport");
         Airport postAirport = parameters.get("postAirport");
@@ -111,8 +112,10 @@ public class H08_4_2_TestsPrivate extends H08_Tests {
         TestInformation info = infoBuilder(parameters)
             .expect(builder -> builder.cause(IllegalAccessError.class))
             .build();
+        ClassReference reference = ClassReference.FLIGHT_NOT_FOUND_EXCEPTION;
+        Class<? extends Exception> exceptionClass = (Class<? extends Exception>) reference.getLink().reflection();
         Throwable throwable = Assertions2.assertThrows(
-            FlightNotFoundException.class,
+            exceptionClass,
             () -> preAirport.removeFlight(flightNumber, isDeparting),
             info,
             comment -> "Invalid depature/destination should cause an exception."
