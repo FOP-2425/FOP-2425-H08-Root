@@ -1,0 +1,476 @@
+[
+  {
+    "preAirport": {
+      "airportCode": "FRA",
+      "initialCapacity": 4,
+      "departingFlights": [
+        {
+          "flightNumber": "LH1234",
+          "departure": "FRA",
+          "destination": "ICN",
+          "departureTime": "2025-02-07 13:00",
+          "initialSeats": 100,
+          "availableSeats": 1
+        },
+        {
+          "flightNumber": "LH1235",
+          "departure": "FRA",
+          "destination": "ICN",
+          "departureTime": "2025-02-07 14:00",
+          "initialSeats": 100,
+          "availableSeats": 12
+        },
+        {
+          "flightNumber": "LH1236",
+          "departure": "FRA",
+          "destination": "ICN",
+          "departureTime": "2025-02-07 15:00",
+          "initialSeats": 100,
+          "availableSeats": 20
+        },
+        {
+          "flightNumber": "LH1237",
+          "departure": "FRA",
+          "destination": "ICN",
+          "departureTime": "2025-02-07 16:00",
+          "initialSeats": 100,
+          "availableSeats": 7
+        }
+      ],
+      "arrivingFlights": [],
+      "departingSize": 4,
+      "arrivingSize": 0
+    },
+    "postAirport": {
+      "airportCode": "FRA",
+      "initialCapacity": 4,
+      "departingFlights": [
+        {
+          "flightNumber": "LH1235",
+          "departure": "FRA",
+          "destination": "ICN",
+          "departureTime": "2025-02-07 14:00",
+          "initialSeats": 100,
+          "availableSeats": 12
+        },
+        {
+          "flightNumber": "LH1236",
+          "departure": "FRA",
+          "destination": "ICN",
+          "departureTime": "2025-02-07 15:00",
+          "initialSeats": 100,
+          "availableSeats": 20
+        },
+        {
+          "flightNumber": "LH1237",
+          "departure": "FRA",
+          "destination": "ICN",
+          "departureTime": "2025-02-07 16:00",
+          "initialSeats": 100,
+          "availableSeats": 7
+        },
+        null
+      ],
+      "arrivingFlights": [],
+      "departingSize": 3,
+      "arrivingSize": 0
+    },
+    "flightNumber": "LH1234",
+    "isDeparting": true
+  },
+  {
+    "preAirport": {
+      "airportCode": "FRA",
+      "initialCapacity": 4,
+      "departingFlights": [
+        {
+          "flightNumber": "LH1234",
+          "departure": "FRA",
+          "destination": "ICN",
+          "departureTime": "2025-02-07 13:00",
+          "initialSeats": 100,
+          "availableSeats": 1
+        },
+        {
+          "flightNumber": "LH1235",
+          "departure": "FRA",
+          "destination": "ICN",
+          "departureTime": "2025-02-07 14:00",
+          "initialSeats": 100,
+          "availableSeats": 12
+        },
+        {
+          "flightNumber": "LH1236",
+          "departure": "FRA",
+          "destination": "ICN",
+          "departureTime": "2025-02-07 15:00",
+          "initialSeats": 100,
+          "availableSeats": 20
+        },
+        {
+          "flightNumber": "LH1237",
+          "departure": "FRA",
+          "destination": "ICN",
+          "departureTime": "2025-02-07 16:00",
+          "initialSeats": 100,
+          "availableSeats": 7
+        }
+      ],
+      "arrivingFlights": [],
+      "departingSize": 4,
+      "arrivingSize": 0
+    },
+    "postAirport": {
+      "airportCode": "FRA",
+      "initialCapacity": 4,
+      "departingFlights": [
+        {
+          "flightNumber": "LH1234",
+          "departure": "FRA",
+          "destination": "ICN",
+          "departureTime": "2025-02-07 13:00",
+          "initialSeats": 100,
+          "availableSeats": 1
+        },
+        {
+          "flightNumber": "LH1235",
+          "departure": "FRA",
+          "destination": "ICN",
+          "departureTime": "2025-02-07 14:00",
+          "initialSeats": 100,
+          "availableSeats": 12
+        },
+        {
+          "flightNumber": "LH1237",
+          "departure": "FRA",
+          "destination": "ICN",
+          "departureTime": "2025-02-07 16:00",
+          "initialSeats": 100,
+          "availableSeats": 7
+        },
+        null
+      ],
+      "arrivingFlights": [],
+      "departingSize": 3,
+      "arrivingSize": 0
+    },
+    "flightNumber": "LH1236",
+    "isDeparting": true
+  },
+  {
+    "preAirport": {
+      "airportCode": "FRA",
+      "initialCapacity": 4,
+      "departingFlights": [
+        {
+          "flightNumber": "LH1234",
+          "departure": "FRA",
+          "destination": "ICN",
+          "departureTime": "2025-02-07 13:00",
+          "initialSeats": 100,
+          "availableSeats": 1
+        },
+        {
+          "flightNumber": "LH1235",
+          "departure": "FRA",
+          "destination": "ICN",
+          "departureTime": "2025-02-07 14:00",
+          "initialSeats": 100,
+          "availableSeats": 12
+        },
+        {
+          "flightNumber": "LH1236",
+          "departure": "FRA",
+          "destination": "ICN",
+          "departureTime": "2025-02-07 15:00",
+          "initialSeats": 100,
+          "availableSeats": 20
+        },
+        {
+          "flightNumber": "LH1237",
+          "departure": "FRA",
+          "destination": "ICN",
+          "departureTime": "2025-02-07 16:00",
+          "initialSeats": 100,
+          "availableSeats": 7
+        }
+      ],
+      "arrivingFlights": [],
+      "departingSize": 4,
+      "arrivingSize": 0
+    },
+    "postAirport": {
+      "airportCode": "FRA",
+      "initialCapacity": 4,
+      "departingFlights": [
+        {
+          "flightNumber": "LH1234",
+          "departure": "FRA",
+          "destination": "ICN",
+          "departureTime": "2025-02-07 13:00",
+          "initialSeats": 100,
+          "availableSeats": 1
+        },
+        {
+          "flightNumber": "LH1235",
+          "departure": "FRA",
+          "destination": "ICN",
+          "departureTime": "2025-02-07 14:00",
+          "initialSeats": 100,
+          "availableSeats": 12
+        },
+        {
+          "flightNumber": "LH1236",
+          "departure": "FRA",
+          "destination": "ICN",
+          "departureTime": "2025-02-07 15:00",
+          "initialSeats": 100,
+          "availableSeats": 20
+        },
+        null
+      ],
+      "arrivingFlights": [],
+      "departingSize": 3,
+      "arrivingSize": 0
+    },
+    "flightNumber": "LH1237",
+    "isDeparting": true
+  },
+  {
+    "preAirport": {
+      "airportCode": "FRA",
+      "initialCapacity": 4,
+      "departingFlights": [],
+      "arrivingFlights": [
+        {
+          "flightNumber": "LH1234",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 13:00",
+          "initialSeats": 100,
+          "availableSeats": 1
+        },
+        {
+          "flightNumber": "LH1235",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 14:00",
+          "initialSeats": 100,
+          "availableSeats": 12
+        },
+        {
+          "flightNumber": "LH1236",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 15:00",
+          "initialSeats": 100,
+          "availableSeats": 20
+        },
+        {
+          "flightNumber": "LH1237",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 16:00",
+          "initialSeats": 100,
+          "availableSeats": 7
+        }
+      ],
+      "departingSize": 0,
+      "arrivingSize": 4
+    },
+    "postAirport": {
+      "airportCode": "FRA",
+      "initialCapacity": 4,
+      "departingFlights": [],
+      "arrivingFlights": [
+        {
+          "flightNumber": "LH1235",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 14:00",
+          "initialSeats": 100,
+          "availableSeats": 12
+        },
+        {
+          "flightNumber": "LH1236",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 15:00",
+          "initialSeats": 100,
+          "availableSeats": 20
+        },
+        {
+          "flightNumber": "LH1237",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 16:00",
+          "initialSeats": 100,
+          "availableSeats": 7
+        },
+        null
+      ],
+      "departingSize": 0,
+      "arrivingSize": 3
+    },
+    "flightNumber": "LH1234",
+    "isDeparting": false
+  },
+  {
+    "preAirport": {
+      "airportCode": "FRA",
+      "initialCapacity": 4,
+      "departingFlights": [],
+      "arrivingFlights": [
+        {
+          "flightNumber": "LH1234",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 13:00",
+          "initialSeats": 100,
+          "availableSeats": 1
+        },
+        {
+          "flightNumber": "LH1235",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 14:00",
+          "initialSeats": 100,
+          "availableSeats": 12
+        },
+        {
+          "flightNumber": "LH1236",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 15:00",
+          "initialSeats": 100,
+          "availableSeats": 20
+        },
+        {
+          "flightNumber": "LH1237",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 16:00",
+          "initialSeats": 100,
+          "availableSeats": 7
+        }
+      ],
+      "departingSize": 0,
+      "arrivingSize": 4
+    },
+    "postAirport": {
+      "airportCode": "FRA",
+      "initialCapacity": 4,
+      "departingFlights": [],
+      "arrivingFlights": [
+        {
+          "flightNumber": "LH1234",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 13:00",
+          "initialSeats": 100,
+          "availableSeats": 1
+        },
+        {
+          "flightNumber": "LH1235",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 14:00",
+          "initialSeats": 100,
+          "availableSeats": 12
+        },
+        {
+          "flightNumber": "LH1237",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 16:00",
+          "initialSeats": 100,
+          "availableSeats": 7
+        },
+        null
+      ],
+      "departingSize": 0,
+      "arrivingSize": 3
+    },
+    "flightNumber": "LH1236",
+    "isDeparting": false
+  },
+  {
+    "preAirport": {
+      "airportCode": "FRA",
+      "initialCapacity": 4,
+      "departingFlights": [],
+      "arrivingFlights": [
+        {
+          "flightNumber": "LH1234",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 13:00",
+          "initialSeats": 100,
+          "availableSeats": 1
+        },
+        {
+          "flightNumber": "LH1235",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 14:00",
+          "initialSeats": 100,
+          "availableSeats": 12
+        },
+        {
+          "flightNumber": "LH1236",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 15:00",
+          "initialSeats": 100,
+          "availableSeats": 20
+        },
+        {
+          "flightNumber": "LH1237",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 16:00",
+          "initialSeats": 100,
+          "availableSeats": 7
+        }
+      ],
+      "departingSize": 0,
+      "arrivingSize": 4
+    },
+    "postAirport": {
+      "airportCode": "FRA",
+      "initialCapacity": 4,
+      "departingFlights": [],
+      "arrivingFlights": [
+        {
+          "flightNumber": "LH1234",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 13:00",
+          "initialSeats": 100,
+          "availableSeats": 1
+        },
+        {
+          "flightNumber": "LH1235",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 14:00",
+          "initialSeats": 100,
+          "availableSeats": 12
+        },
+        {
+          "flightNumber": "LH1236",
+          "departure": "ICN",
+          "destination": "FRA",
+          "departureTime": "2025-02-07 15:00",
+          "initialSeats": 100,
+          "availableSeats": 20
+        },
+        null
+      ],
+      "departingSize": 0,
+      "arrivingSize": 3
+    },
+    "flightNumber": "LH1237",
+    "isDeparting": false
+  }
+]

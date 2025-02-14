@@ -1,0 +1,11 @@
+[
+  {
+    "booking": {
+      "bookingId": "iKON",
+      "flightNumber": "2019",
+      "passengerId": "B.I",
+      "isCancelled": false
+    },
+    "isCancelled": false
+  }
+]

@@ -1,6 +1,7 @@
 package h08;
 
-import h08.Exceptions.*;
+import h08.Exceptions.FlightNotFoundException;
+import h08.Exceptions.NoSeatsAvailableException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -27,10 +28,10 @@ public class Main {
         Flight flight4 = new Flight("FR1004", "LAX", "JFK", LocalDateTime.of(2024, 7, 20, 14, 0), 2);
 
         // Add flights to the airport
-        airport1.addFlight(flight1,true);
-        airport1.addFlight(flight2,true);
-        airport2.addFlight(flight3,true);
-        airport2.addFlight(flight4,true);
+        airport1.addFlight(flight1, true);
+        airport1.addFlight(flight2, true);
+        airport2.addFlight(flight3, true);
+        airport2.addFlight(flight4, true);
 
         // Create a FlightManagement instance
         FlightManagement flightManagement = new FlightManagement(2);
@@ -39,10 +40,10 @@ public class Main {
         flightManagement.addAirport(airport2);
 
         // Create passengers
-        Passenger passenger1 = new Passenger("Max", "Mustermann", LocalDate.of(2002,6,6));
-        System.out.println("Passenger1 ID: "+passenger1.getPassengerID());
-        Passenger passenger2 = new Passenger("Erika", "Mustermann ", LocalDate.of(2003,7,9));
-        System.out.println("Passenger2 ID: "+passenger2.getPassengerID());
+        Passenger passenger1 = new Passenger("Max", "Mustermann", LocalDate.of(2002, 6, 6));
+        System.out.println("Passenger1 ID: " + passenger1.getPassengerID());
+        Passenger passenger2 = new Passenger("Erika", "Mustermann ", LocalDate.of(2003, 7, 9));
+        System.out.println("Passenger2 ID: " + passenger2.getPassengerID());
 
         // Create a BookingManagement instance
         BookingManagement bookingManagement = new BookingManagement(2, flightManagement);
@@ -78,8 +79,8 @@ public class Main {
 
         // Remove departing flight
         try {
-            airport1.removeFlight("FR1001",true);
-            airport1.removeFlight("FR1001",true);  // This should throw FlightNotFoundException
+            airport1.removeFlight("FR1001", true);
+            airport1.removeFlight("FR1001", true);  // This should throw FlightNotFoundException
         } catch (FlightNotFoundException e) {
             System.out.println(e.getMessage());
         }

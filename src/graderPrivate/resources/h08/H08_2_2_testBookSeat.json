@@ -1,0 +1,56 @@
+[
+  {
+    "preFlight": {
+      "flightNumber": "LH1234",
+      "departure": "FRA",
+      "destination": "ICN",
+      "departureTime": "2025-02-07 13:00",
+      "initialSeats": 100,
+      "availableSeats": 100
+    },
+    "postFlight": {
+      "flightNumber": "LH1234",
+      "departure": "FRA",
+      "destination": "ICN",
+      "departureTime": "2025-02-07 13:00",
+      "initialSeats": 100,
+      "availableSeats": 99
+    }
+  },
+  {
+    "preFlight": {
+      "flightNumber": "LH1234",
+      "departure": "FRA",
+      "destination": "ICN",
+      "departureTime": "2025-02-07 13:00",
+      "initialSeats": 100,
+      "availableSeats": 67
+    },
+    "postFlight": {
+      "flightNumber": "LH1234",
+      "departure": "FRA",
+      "destination": "ICN",
+      "departureTime": "2025-02-07 13:00",
+      "initialSeats": 100,
+      "availableSeats": 66
+    }
+  },
+  {
+    "preFlight": {
+      "flightNumber": "LH1234",
+      "departure": "FRA",
+      "destination": "ICN",
+      "departureTime": "2025-02-07 13:00",
+      "initialSeats": 100,
+      "availableSeats": 1
+    },
+    "postFlight": {
+      "flightNumber": "LH1234",
+      "departure": "FRA",
+      "destination": "ICN",
+      "departureTime": "2025-02-07 13:00",
+      "initialSeats": 100,
+      "availableSeats": 0
+    }
+  }
+]

@@ -1,0 +1,326 @@
+[
+  {
+    "bookingManagement": {
+      "flightManagement": {
+        "airports": [
+          {
+            "airportCode": "FRA",
+            "initialCapacity": 2,
+            "departingFlights": [
+              {
+                "flightNumber": "VN300",
+                "departure": "FRA",
+                "destination": "SGN",
+                "departureTime": "2025-02-07 13:00",
+                "initialSeats": 100,
+                "availableSeats": 1
+              }
+            ],
+            "arrivingFlights": [
+              {
+                "flightNumber": "VN600",
+                "departure": "SGN",
+                "destination": "FRA",
+                "departureTime": "2025-02-07 13:00",
+                "initialSeats": 100,
+                "availableSeats": 1
+              }
+            ],
+            "departingSize": 1,
+            "arrivingSize": 1
+          }
+        ]
+      },
+      "bookings": [
+        {
+          "bookingId": "B001",
+          "flightNumber": "VN600",
+          "passengerId": "FL123456"
+        },
+        {
+          "bookingId": "B002",
+          "flightNumber": "VN300",
+          "passengerId": "NN700212"
+        },
+        {
+          "bookingId": "B003",
+          "flightNumber": "VN600",
+          "passengerId": "NO020304"
+        }
+      ]
+    },
+    "bookingId": null,
+    "flightNumber": "VN600",
+    "passengerId": "NL123456"
+  },
+  {
+    "bookingManagement": {
+      "flightManagement": {
+        "airports": [
+          {
+            "airportCode": "FRA",
+            "initialCapacity": 2,
+            "departingFlights": [
+              {
+                "flightNumber": "VN300",
+                "departure": "FRA",
+                "destination": "SGN",
+                "departureTime": "2025-02-07 13:00",
+                "initialSeats": 100,
+                "availableSeats": 1
+              }
+            ],
+            "arrivingFlights": [
+              {
+                "flightNumber": "VN600",
+                "departure": "SGN",
+                "destination": "FRA",
+                "departureTime": "2025-02-07 13:00",
+                "initialSeats": 100,
+                "availableSeats": 1
+              }
+            ],
+            "departingSize": 1,
+            "arrivingSize": 1
+          }
+        ]
+      },
+      "bookings": [
+        {
+          "bookingId": "B001",
+          "flightNumber": "VN600",
+          "passengerId": "FL123456"
+        },
+        {
+          "bookingId": "B002",
+          "flightNumber": "VN300",
+          "passengerId": "NN700212"
+        },
+        {
+          "bookingId": "B003",
+          "flightNumber": "VN600",
+          "passengerId": "NO020304"
+        }
+      ]
+    },
+    "bookingId": "",
+    "flightNumber": "VN600",
+    "passengerId": "NL123456"
+  },
+  {
+    "bookingManagement": {
+      "flightManagement": {
+        "airports": [
+          {
+            "airportCode": "FRA",
+            "initialCapacity": 2,
+            "departingFlights": [
+              {
+                "flightNumber": "VN300",
+                "departure": "FRA",
+                "destination": "SGN",
+                "departureTime": "2025-02-07 13:00",
+                "initialSeats": 100,
+                "availableSeats": 1
+              }
+            ],
+            "arrivingFlights": [
+              {
+                "flightNumber": "VN600",
+                "departure": "SGN",
+                "destination": "FRA",
+                "departureTime": "2025-02-07 13:00",
+                "initialSeats": 100,
+                "availableSeats": 1
+              }
+            ],
+            "departingSize": 1,
+            "arrivingSize": 1
+          }
+        ]
+      },
+      "bookings": [
+        {
+          "bookingId": "B001",
+          "flightNumber": "VN600",
+          "passengerId": "FL123456"
+        },
+        {
+          "bookingId": "B002",
+          "flightNumber": "VN300",
+          "passengerId": "NN700212"
+        },
+        {
+          "bookingId": "B003",
+          "flightNumber": "VN600",
+          "passengerId": "NO020304"
+        }
+      ]
+    },
+    "bookingId": "DSA123",
+    "flightNumber": null,
+    "passengerId": "NL123456"
+  },
+  {
+    "bookingManagement": {
+      "flightManagement": {
+        "airports": [
+          {
+            "airportCode": "FRA",
+            "initialCapacity": 2,
+            "departingFlights": [
+              {
+                "flightNumber": "VN300",
+                "departure": "FRA",
+                "destination": "SGN",
+                "departureTime": "2025-02-07 13:00",
+                "initialSeats": 100,
+                "availableSeats": 1
+              }
+            ],
+            "arrivingFlights": [
+              {
+                "flightNumber": "VN600",
+                "departure": "SGN",
+                "destination": "FRA",
+                "departureTime": "2025-02-07 13:00",
+                "initialSeats": 100,
+                "availableSeats": 1
+              }
+            ],
+            "departingSize": 1,
+            "arrivingSize": 1
+          }
+        ]
+      },
+      "bookings": [
+        {
+          "bookingId": "B001",
+          "flightNumber": "VN600",
+          "passengerId": "FL123456"
+        },
+        {
+          "bookingId": "B002",
+          "flightNumber": "VN300",
+          "passengerId": "NN700212"
+        },
+        {
+          "bookingId": "B003",
+          "flightNumber": "VN600",
+          "passengerId": "NO020304"
+        }
+      ]
+    },
+    "bookingId": "DSA123",
+    "flightNumber": "",
+    "passengerId": "NL123456"
+  },
+  {
+    "bookingManagement": {
+      "flightManagement": {
+        "airports": [
+          {
+            "airportCode": "FRA",
+            "initialCapacity": 2,
+            "departingFlights": [
+              {
+                "flightNumber": "VN300",
+                "departure": "FRA",
+                "destination": "SGN",
+                "departureTime": "2025-02-07 13:00",
+                "initialSeats": 100,
+                "availableSeats": 1
+              }
+            ],
+            "arrivingFlights": [
+              {
+                "flightNumber": "VN600",
+                "departure": "SGN",
+                "destination": "FRA",
+                "departureTime": "2025-02-07 13:00",
+                "initialSeats": 100,
+                "availableSeats": 1
+              }
+            ],
+            "departingSize": 1,
+            "arrivingSize": 1
+          }
+        ]
+      },
+      "bookings": [
+        {
+          "bookingId": "B001",
+          "flightNumber": "VN600",
+          "passengerId": "FL123456"
+        },
+        {
+          "bookingId": "B002",
+          "flightNumber": "VN300",
+          "passengerId": "NN700212"
+        },
+        {
+          "bookingId": "B003",
+          "flightNumber": "VN600",
+          "passengerId": "NO020304"
+        }
+      ]
+    },
+    "bookingId": "DSA123",
+    "flightNumber": "VN600",
+    "passengerId": null
+  },
+  {
+    "bookingManagement": {
+      "flightManagement": {
+        "airports": [
+          {
+            "airportCode": "FRA",
+            "initialCapacity": 2,
+            "departingFlights": [
+              {
+                "flightNumber": "VN300",
+                "departure": "FRA",
+                "destination": "SGN",
+                "departureTime": "2025-02-07 13:00",
+                "initialSeats": 100,
+                "availableSeats": 1
+              }
+            ],
+            "arrivingFlights": [
+              {
+                "flightNumber": "VN600",
+                "departure": "SGN",
+                "destination": "FRA",
+                "departureTime": "2025-02-07 13:00",
+                "initialSeats": 100,
+                "availableSeats": 1
+              }
+            ],
+            "departingSize": 1,
+            "arrivingSize": 1
+          }
+        ]
+      },
+      "bookings": [
+        {
+          "bookingId": "B001",
+          "flightNumber": "VN600",
+          "passengerId": "FL123456"
+        },
+        {
+          "bookingId": "B002",
+          "flightNumber": "VN300",
+          "passengerId": "NN700212"
+        },
+        {
+          "bookingId": "B003",
+          "flightNumber": "VN600",
+          "passengerId": "NO020304"
+        }
+      ]
+    },
+    "bookingId": "DSA123",
+    "flightNumber": "VN600",
+    "passengerId": ""
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "flightNumber": "LH1234",
+    "departure": null,
+    "destination": "ICN",
+    "departureTime": "2025-02-07 13:00",
+    "initialSeats": 100
+  },
+  {
+    "flightNumber": "LH1234",
+    "departure": "FRA",
+    "destination": null,
+    "departureTime": "2025-02-07 13:00",
+    "initialSeats": 100
+  },
+  {
+    "flightNumber": "LH1234",
+    "departure": "FRA",
+    "destination": "ICN",
+    "departureTime": null,
+    "initialSeats": 100
+  },
+  {
+    "flightNumber": "LH1234",
+    "departure": "FRA",
+    "destination": "ICN",
+    "departureTime": "2025-02-07 13:00",
+    "initialSeats": -1
+  }
+]

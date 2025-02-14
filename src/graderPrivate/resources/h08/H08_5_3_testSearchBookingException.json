@@ -1,0 +1,30 @@
+[
+  {
+    "bookingManagement": {
+      "bookings": [
+        {
+          "bookingId": "B001",
+          "flightNumber": "TG100",
+          "passengerId": "FL123456"
+        },
+        {
+          "bookingId": "B002",
+          "flightNumber": "LH402",
+          "passengerId": "NN700212"
+        },
+        {
+          "bookingId": "B003",
+          "flightNumber": "KK200",
+          "passengerId": "NO020304"
+        }
+      ]
+    },
+    "booking": {
+      "bookingId": "KX273",
+      "flightNumber": "KK200",
+      "passengerId": "PK123456"
+    },
+    "message": "Booking not found: KX273"
+  }
+]
+

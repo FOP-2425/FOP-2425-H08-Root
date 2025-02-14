@@ -1,0 +1,12 @@
+[
+  {
+    "booking": {
+      "bookingId": "HYBE-20241129",
+      "flightNumber": "NewJeans",
+      "passengerId": "Hanni",
+      "isCancelled": true
+    },
+    "isCancelled": true,
+    "message": "Booking is already cancelled: HYBE-20241129"
+  }
+]

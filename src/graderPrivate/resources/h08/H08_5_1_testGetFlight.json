@@ -1,0 +1,392 @@
+[
+  {
+    "flightManagement": {
+      "airports": [
+        {
+          "airportCode": "FRA",
+          "initialCapacity": 3,
+          "departingFlights": [
+            {
+              "flightNumber": "VN300",
+              "departure": "FRA",
+              "destination": "SGN",
+              "departureTime": "2025-02-07 13:00",
+              "initialSeats": 100,
+              "availableSeats": 1
+            },
+            {
+              "flightNumber": "VN400",
+              "departure": "FRA",
+              "destination": "SGN",
+              "departureTime": "2025-02-07 14:00",
+              "initialSeats": 100,
+              "availableSeats": 12
+            },
+            {
+              "flightNumber": "VN500",
+              "departure": "FRA",
+              "destination": "SGN",
+              "departureTime": "2025-02-07 15:00",
+              "initialSeats": 100,
+              "availableSeats": 2
+            }
+          ],
+          "arrivingFlights": [
+            {
+              "flightNumber": "LH300",
+              "departure": "ICN",
+              "destination": "FRA",
+              "departureTime": "2025-02-07 13:00",
+              "initialSeats": 100,
+              "availableSeats": 1
+            },
+            {
+              "flightNumber": "LH400",
+              "departure": "ICN",
+              "destination": "FRA",
+              "departureTime": "2025-02-07 14:00",
+              "initialSeats": 100,
+              "availableSeats": 12
+            },
+            {
+              "flightNumber": "LH500",
+              "departure": "ICN",
+              "destination": "FRA",
+              "departureTime": "2025-02-07 15:00",
+              "initialSeats": 100,
+              "availableSeats": 2
+            }
+          ],
+          "departingSize": 3,
+          "arrivingSize": 3
+        },
+        {
+          "airportCode": "IATA ",
+          "initialCapacity": 3,
+          "departingFlights": [
+            {
+              "flightNumber": "IH300",
+              "departure": "IATA",
+              "destination": "SGN",
+              "departureTime": "2025-02-07 13:00",
+              "initialSeats": 100,
+              "availableSeats": 1
+            },
+            {
+              "flightNumber": "IN400",
+              "departure": "IATA",
+              "destination": "SGN",
+              "departureTime": "2025-02-07 14:00",
+              "initialSeats": 100,
+              "availableSeats": 12
+            },
+            {
+              "flightNumber": "IN500",
+              "departure": "IATA",
+              "destination": "SGN",
+              "departureTime": "2025-02-07 15:00",
+              "initialSeats": 100,
+              "availableSeats": 2
+            }
+          ],
+          "arrivingFlights": [
+            {
+              "flightNumber": "IH300",
+              "departure": "ICN",
+              "destination": "IATA",
+              "departureTime": "2025-02-07 13:00",
+              "initialSeats": 100,
+              "availableSeats": 1
+            },
+            {
+              "flightNumber": "IH400",
+              "departure": "ICN",
+              "destination": "IATA",
+              "departureTime": "2025-02-07 14:00",
+              "initialSeats": 100,
+              "availableSeats": 12
+            },
+            {
+              "flightNumber": "IH500",
+              "departure": "ICN",
+              "destination": "IATA",
+              "departureTime": "2025-02-07 15:00",
+              "initialSeats": 100,
+              "availableSeats": 2
+            }
+          ],
+          "departingSize": 3,
+          "arrivingSize": 3
+        }
+      ]
+    },
+    "flight": {
+      "flightNumber": "VN500",
+      "departure": "FRA",
+      "destination": "SGN",
+      "departureTime": "2025-02-07 15:00",
+      "initialSeats": 100,
+      "availableSeats": 2
+    }
+  },
+  {
+    "flightManagement": {
+      "airports": [
+        {
+          "airportCode": "FRA",
+          "initialCapacity": 3,
+          "departingFlights": [
+            {
+              "flightNumber": "VN300",
+              "departure": "FRA",
+              "destination": "SGN",
+              "departureTime": "2025-02-07 13:00",
+              "initialSeats": 100,
+              "availableSeats": 1
+            },
+            {
+              "flightNumber": "VN400",
+              "departure": "FRA",
+              "destination": "SGN",
+              "departureTime": "2025-02-07 14:00",
+              "initialSeats": 100,
+              "availableSeats": 12
+            },
+            {
+              "flightNumber": "VN500",
+              "departure": "FRA",
+              "destination": "SGN",
+              "departureTime": "2025-02-07 15:00",
+              "initialSeats": 100,
+              "availableSeats": 2
+            }
+          ],
+          "arrivingFlights": [
+            {
+              "flightNumber": "LH300",
+              "departure": "ICN",
+              "destination": "FRA",
+              "departureTime": "2025-02-07 13:00",
+              "initialSeats": 100,
+              "availableSeats": 1
+            },
+            {
+              "flightNumber": "LH400",
+              "departure": "ICN",
+              "destination": "FRA",
+              "departureTime": "2025-02-07 14:00",
+              "initialSeats": 100,
+              "availableSeats": 12
+            },
+            {
+              "flightNumber": "LH500",
+              "departure": "ICN",
+              "destination": "FRA",
+              "departureTime": "2025-02-07 15:00",
+              "initialSeats": 100,
+              "availableSeats": 2
+            }
+          ],
+          "departingSize": 3,
+          "arrivingSize": 3
+        },
+        {
+          "airportCode": "IATA ",
+          "initialCapacity": 3,
+          "departingFlights": [
+            {
+              "flightNumber": "IH300",
+              "departure": "IATA",
+              "destination": "SGN",
+              "departureTime": "2025-02-07 13:00",
+              "initialSeats": 100,
+              "availableSeats": 1
+            },
+            {
+              "flightNumber": "IN400",
+              "departure": "IATA",
+              "destination": "SGN",
+              "departureTime": "2025-02-07 14:00",
+              "initialSeats": 100,
+              "availableSeats": 12
+            },
+            {
+              "flightNumber": "IN500",
+              "departure": "IATA",
+              "destination": "SGN",
+              "departureTime": "2025-02-07 15:00",
+              "initialSeats": 100,
+              "availableSeats": 2
+            }
+          ],
+          "arrivingFlights": [
+            {
+              "flightNumber": "IH300",
+              "departure": "ICN",
+              "destination": "IATA",
+              "departureTime": "2025-02-07 13:00",
+              "initialSeats": 100,
+              "availableSeats": 1
+            },
+            {
+              "flightNumber": "IH400",
+              "departure": "ICN",
+              "destination": "IATA",
+              "departureTime": "2025-02-07 14:00",
+              "initialSeats": 100,
+              "availableSeats": 12
+            },
+            {
+              "flightNumber": "IH500",
+              "departure": "ICN",
+              "destination": "IATA",
+              "departureTime": "2025-02-07 15:00",
+              "initialSeats": 100,
+              "availableSeats": 2
+            }
+          ],
+          "departingSize": 3,
+          "arrivingSize": 3
+        }
+      ]
+    },
+    "flight": {
+      "flightNumber": "IH400",
+      "departure": "ICN",
+      "destination": "IATA",
+      "departureTime": "2025-02-07 14:00",
+      "initialSeats": 100,
+      "availableSeats": 12
+    }
+  },
+  {
+    "flightManagement": {
+      "airports": [
+        {
+          "airportCode": "FRA",
+          "initialCapacity": 3,
+          "departingFlights": [
+            {
+              "flightNumber": "VN300",
+              "departure": "FRA",
+              "destination": "SGN",
+              "departureTime": "2025-02-07 13:00",
+              "initialSeats": 100,
+              "availableSeats": 1
+            },
+            {
+              "flightNumber": "VN400",
+              "departure": "FRA",
+              "destination": "SGN",
+              "departureTime": "2025-02-07 14:00",
+              "initialSeats": 100,
+              "availableSeats": 12
+            },
+            {
+              "flightNumber": "VN500",
+              "departure": "FRA",
+              "destination": "SGN",
+              "departureTime": "2025-02-07 15:00",
+              "initialSeats": 100,
+              "availableSeats": 2
+            }
+          ],
+          "arrivingFlights": [
+            {
+              "flightNumber": "LH300",
+              "departure": "ICN",
+              "destination": "FRA",
+              "departureTime": "2025-02-07 13:00",
+              "initialSeats": 100,
+              "availableSeats": 1
+            },
+            {
+              "flightNumber": "LH400",
+              "departure": "ICN",
+              "destination": "FRA",
+              "departureTime": "2025-02-07 14:00",
+              "initialSeats": 100,
+              "availableSeats": 12
+            },
+            {
+              "flightNumber": "LH500",
+              "departure": "ICN",
+              "destination": "FRA",
+              "departureTime": "2025-02-07 15:00",
+              "initialSeats": 100,
+              "availableSeats": 2
+            }
+          ],
+          "departingSize": 3,
+          "arrivingSize": 3
+        },
+        {
+          "airportCode": "IATA ",
+          "initialCapacity": 3,
+          "departingFlights": [
+            {
+              "flightNumber": "IH300",
+              "departure": "IATA",
+              "destination": "SGN",
+              "departureTime": "2025-02-07 13:00",
+              "initialSeats": 100,
+              "availableSeats": 1
+            },
+            {
+              "flightNumber": "IN400",
+              "departure": "IATA",
+              "destination": "SGN",
+              "departureTime": "2025-02-07 14:00",
+              "initialSeats": 100,
+              "availableSeats": 12
+            },
+            {
+              "flightNumber": "IN500",
+              "departure": "IATA",
+              "destination": "SGN",
+              "departureTime": "2025-02-07 15:00",
+              "initialSeats": 100,
+              "availableSeats": 2
+            }
+          ],
+          "arrivingFlights": [
+            {
+              "flightNumber": "IH300",
+              "departure": "ICN",
+              "destination": "IATA",
+              "departureTime": "2025-02-07 13:00",
+              "initialSeats": 100,
+              "availableSeats": 1
+            },
+            {
+              "flightNumber": "IH400",
+              "departure": "ICN",
+              "destination": "IATA",
+              "departureTime": "2025-02-07 14:00",
+              "initialSeats": 100,
+              "availableSeats": 12
+            },
+            {
+              "flightNumber": "IH500",
+              "departure": "ICN",
+              "destination": "IATA",
+              "departureTime": "2025-02-07 15:00",
+              "initialSeats": 100,
+              "availableSeats": 2
+            }
+          ],
+          "departingSize": 3,
+          "arrivingSize": 3
+        }
+      ]
+    },
+    "flight": {
+      "flightNumber": "IN500",
+      "departure": "IATA",
+      "destination": "SGN",
+      "departureTime": "2025-02-07 15:00",
+      "initialSeats": 100,
+      "availableSeats": 2
+    }
+  }
+]
